@@ -23,7 +23,7 @@
 //
 var rgxSpaces = /\s+/g;
 var rgxNumber = /\d*\.\d+|\d+/g;
-var rgxTwitter = /\@\w+/g;
+var rgxMention = /\@\w+/g;
 var rgxEmail = /[-!#$%&'*+\/=?^\w{|}~](?:\.?[-!#$%&'*+\/=?^\w`{|}~])*@[a-z0-9](?:-?\.?[a-z0-9])*(?:\.[a-z](?:-?[a-z0-9])*)+/gi;
 var rgxCurrency = /[\$\£\¥\€]/g;
 var rgxPunctuation = /[\’\'\‘\’\`\“\”\"\[\]\(\)\{\}\…\,\.\!\;\?\/\-\:]/g;
@@ -38,7 +38,7 @@ var rgxsMaster = [
   { regex: rgxQuotedPhrase, category: 'quoted_phrase' },
   { regex: rgxURL, category: 'url' },
   { regex: rgxEmail, category: 'email' },
-  { regex: rgxTwitter, category: 'twitter' },
+  { regex: rgxMention, category: 'mention' },
   { regex: rgxEmoji, category: 'emoji' },
   { regex: rgxEmoticon, category: 'emoticon' },
   { regex: rgxTime, category: 'time' },
@@ -48,12 +48,10 @@ var rgxsMaster = [
 ];
 // Used to generate finger print from the tokens.
 var fingerPrintCodes = {
-  twitter: 'b',
   emoticon: 'c',
   email: 'e',
   emoji: 'j',
-  weekday: 'k',
-  month: 'm',
+  mention: 'm',
   number: 'n',
   quoted_phrase: 'q', // eslint-disable-line camelcase
   currency: 'r',
@@ -61,49 +59,6 @@ var fingerPrintCodes = {
   url: 'u',
   word: 'w',
 };
-// Simple in-tokenizer lookup.
-var weekday = 'weekday';
-var month = 'month';
-var lookup = Object.create( null );
-// Setu weekdays.
-lookup.mon = weekday;
-lookup.monday = weekday;
-lookup.tue = weekday;
-lookup.tuesday = weekday;
-lookup.wed = weekday;
-lookup.wednesday = weekday;
-lookup.thu = weekday;
-lookup.thursday = weekday;
-lookup.fri = weekday;
-lookup.friday = weekday;
-lookup.sat = weekday;
-lookup.saturday = weekday;
-lookup.sun = weekday;
-lookup.sunday = weekday;
-// Setup months;
-lookup.jan = month;
-lookup.january = month;
-lookup.feb = month;
-lookup.february = month;
-lookup.mar = month;
-lookup.march = month;
-lookup.apr = month;
-lookup.april = month;
-lookup.may = month;
-lookup.jun = month;
-lookup.june = month;
-lookup.jul = month;
-lookup.july = month;
-lookup.aug = month;
-lookup.august = month;
-lookup.sep = month;
-lookup.september = month;
-lookup.oct = month;
-lookup.october = month;
-lookup.nov = month;
-lookup.november = month;
-lookup.dec = month;
-lookup.december = month;
 
 // ### tokenizer
 /**
@@ -123,7 +78,6 @@ var tokenizer = function () {
   var rgxs = rgxsMaster.slice( 0 );
   // The result of last call to `tokenize()` is retained here.
   var finalTokens = [];
-  var tagPlugins = Object.create( null );
   // Returned!
   var methods = Object.create( null );
 
@@ -191,7 +145,7 @@ var tokenizer = function () {
         sentence.split( /\W/ ).forEach( function ( t ) {
           var tag;
           if ( t ) {
-            tag = lookup[ t.toLowerCase() ];
+            // tag = lookup[ t.toLowerCase() ];
             finalTokens.push( { token: t, tag: ( tag ) ? tag : 'word' } );
           }
         } );
@@ -220,24 +174,31 @@ var tokenizer = function () {
    * of tokens will be detected and tagged automatically.
    *
    * @param {object} config — It defines 0 or more properties from the list of
-   * **10** properties given below. A true value for a property ensures tokenization
-   * for that type of text wheras false value will not attempt tokenization of that
-   * type of text. *An empty config object means only **words** are extracted.* A
+   * **10** properties. A true value for a property ensures tokenization
+   * for that type of text; whereas false value will mean that the tokenization of that
+   * type of text will not be attempted. *An empty config object means only **words** are extracted.* A
    * word can be composed of only **alphabets** and **`_`** character.
-   * @param {boolean} [config.currency=true] such as **$** or **£** symbols
-   * @param {boolean} [config.email=true] for example **john@acme.com** or **superman1@gmail.com**
-   * @param {boolean} [config.emoji=true] any standard unicode emojis e.g. 😊 or 😂 or 🎉
-   * @param {boolean} [config.emoticon=true] common emoticons such as **`:-)`** or **`:D`**
-   * @param {boolean} [config.number=true] any integer or decimal number such as **19** or **2.718**
+   *
+   * The table below gives the name of each property and it's description including
+   * examples. The character with in paranthesis is the [finger print](#gettokensfp) code for the
+   * token of that type.
+   * @param {boolean} [config.currency=true] such as **$** or **£** symbols (**`r`**)
+   * @param {boolean} [config.email=true] for example **john@acme.com** or **superman1@gmail.com** (**`e`**)
+   * @param {boolean} [config.emoji=true] any standard unicode emojis e.g. 😊 or 😂 or 🎉 (**`j`**)
+   * @param {boolean} [config.emoticon=true] common emoticons such as **`:-)`** or **`:D`** (**`c`**)
+   * @param {boolean} [config.number=true] any integer or decimal number such as **19** or **2.718** (**`n`**)
    * @param {boolean} [config.punctuation=true] common punctuation such as **`?`** or **`,`**
-   * @param {boolean} [config.quoted_phrase=true] any **"quoted text"** in the sentence.
-   * @param {boolean} [config.time=true] common representation of time such as **4pm** or **16:00 hours**
-   * @param {boolean} [config.twitter=true] twitter **@handle**
-   * @param {boolean} [config.url=true] URL such as **https://github.com**
+   * ( token becomes fingerprint )
+   * @param {boolean} [config.quoted_phrase=true] any **"quoted text"** in the sentence. (**`q`**)
+   * @param {boolean} [config.time=true] common representation of time such as **4pm** or **16:00 hours** (**`t`**)
+   * @param {boolean} [config.mention=true] **@mention**  as in github or twitter (**`m`**)
+   * @param {boolean} [config.url=true] URL such as **https://github.com** (**`u`**)
+   * @param {boolean} [config.word=true] word such as **faster;** *note: this can never
+   * be set to false* (**`w`**)
    * @return {number} number of properties set to true from the list of above 10.
    * @example
-   * // Do not tokenize & tag twitter handles.
-   * var myTokenizer.defineConfig( { twitter: false } );
+   * // Do not tokenize & tag @mentions.
+   * var myTokenizer.defineConfig( { mention: false } );
    * // -> 9
    * // Only tokenize words as defined above.
    * var myTokenizer.defineConfig( {} );
@@ -268,7 +229,7 @@ var tokenizer = function () {
    * @example
    * var s = '@superman: hit me up on my email r2d2@gmail.com; & we will plan party🎉 tom at 3pm:)';
    * myTokenizer.tokenize( s );
-   * // -> [ { token: '@superman', tag: 'twitter' },
+   * // -> [ { token: '@superman', tag: 'mention' },
    * //      { token: ':', tag: 'punctuation' },
    * //      { token: 'hit', tag: 'word' },
    * //      { token: 'me', tag: 'word' },
@@ -285,7 +246,7 @@ var tokenizer = function () {
    * //      { token: '🎉', tag: 'emoji' },
    * //      { token: 'tom', tag: 'word' },
    * //      { token: 'at', tag: 'word' },
-   * //      { token: '4pm', tag: 'time' },
+   * //      { token: '3pm', tag: 'time' },
    * //      { token: ':)', tag: 'emoticon' } ]
   */
   var tokenize = function ( sentence ) {
@@ -294,7 +255,25 @@ var tokenizer = function () {
     return finalTokens;
   }; // tokenize()
 
-  var getFingerprint = function () {
+  // ### getTokensFP
+  /**
+   *
+   * Returns the finger print of the tokens generated by the last call to
+   * [`tokenize()`](#tokenize). A finger print is a string created by sequentially
+   * joining the unique code of each token's type. Refer to table given under
+   * [`defineConfig()`](#defineconfig) for values of these codes.
+   *
+   * A finger print is extremely useful in spotting patterns present in the sentence
+   * using `regexes`, which is otherwise a complex and time consuming task.
+   *
+   * @return {string} finger print of tokens generated by the last call to `tokenize()`.
+   * @example
+   * // Generate finger print of sentence given in the previous example
+   * // under tokenize().
+   * myTokenizer.getTokensFP();
+   * // -> 'm:wwwwwwe;wwwwjwwtc'
+  */
+  var getTokensFP = function () {
     var fp = [];
     finalTokens.forEach( function ( t ) {
       fp.push( ( fingerPrintCodes[ t.tag ] ) ? fingerPrintCodes[ t.tag ] : t.token );
@@ -302,12 +281,9 @@ var tokenizer = function () {
     return fp.join( '' );
   }; // getFingerprint()
 
-  rgxs.forEach( function ( rgx ) {
-    tagPlugins[ rgx.category ] = false;
-  } );
   methods.defineConfig = defineConfig;
   methods.tokenize = tokenize;
-  methods.getFingerprint = getFingerprint;
+  methods.getTokensFP = getTokensFP;
   return methods;
 };
 

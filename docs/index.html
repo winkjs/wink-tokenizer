@@ -83,6 +83,16 @@
                 
                 </li>
               
+                
+                <li><a
+                  href='#gettokensfp'
+                  class="">
+                  getTokensFP
+                  
+                </a>
+                
+                </li>
+              
             </ul>
           </div>
           <div class='mt1 h6 quiet'>
@@ -258,9 +268,9 @@ of tokens will be detected and tagged automatically.</p>
 	    — It defines 0 or more properties from the list of
 
 <strong>10</strong>
- properties given below. A true value for a property ensures tokenization
-for that type of text wheras false value will not attempt tokenization of that
-type of text. 
+ properties. A true value for a property ensures tokenization
+for that type of text; whereas false value will mean that the tokenization of that
+type of text will not be attempted. 
 <em>An empty config object means only <strong>words</strong> are extracted.</em>
  A
 word can be composed of only 
@@ -268,6 +278,9 @@ word can be composed of only
  and 
 <strong><code>_</code></strong>
  character.
+<p>The table below gives the name of each property and it's description including
+examples. The character with in paranthesis is the <a href="#gettokensfp">finger print</a> code for the
+token of that type.</p>
 
           </div>
           
@@ -293,7 +306,9 @@ word can be composed of only
 <strong>$</strong>
  or 
 <strong>£</strong>
- symbols
+ symbols (
+<strong><code>r</code></strong>
+)
 </span></td>
 </tr>
 
@@ -308,6 +323,9 @@ word can be composed of only
 <strong>john@acme.com</strong>
  or 
 <strong>superman1@gmail.com</strong>
+ (
+<strong><code>e</code></strong>
+)
 </span></td>
 </tr>
 
@@ -318,7 +336,9 @@ word can be composed of only
   
     (default <code>true</code>)
   </td>
-  <td class='break-word'><span>any standard unicode emojis e.g. 😊 or 😂 or 🎉
+  <td class='break-word'><span>any standard unicode emojis e.g. 😊 or 😂 or 🎉 (
+<strong><code>j</code></strong>
+)
 </span></td>
 </tr>
 
@@ -333,6 +353,9 @@ word can be composed of only
 <strong><code>:-)</code></strong>
  or 
 <strong><code>:D</code></strong>
+ (
+<strong><code>c</code></strong>
+)
 </span></td>
 </tr>
 
@@ -347,6 +370,9 @@ word can be composed of only
 <strong>19</strong>
  or 
 <strong>2.718</strong>
+ (
+<strong><code>n</code></strong>
+)
 </span></td>
 </tr>
 
@@ -361,6 +387,8 @@ word can be composed of only
 <strong><code>?</code></strong>
  or 
 <strong><code>,</code></strong>
+
+( token becomes fingerprint )
 </span></td>
 </tr>
 
@@ -373,7 +401,9 @@ word can be composed of only
   </td>
   <td class='break-word'><span>any 
 <strong>"quoted text"</strong>
- in the sentence.
+ in the sentence. (
+<strong><code>q</code></strong>
+)
 </span></td>
 </tr>
 
@@ -388,18 +418,23 @@ word can be composed of only
 <strong>4pm</strong>
  or 
 <strong>16:00 hours</strong>
+ (
+<strong><code>t</code></strong>
+)
 </span></td>
 </tr>
 
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>config.twitter</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  <td class='break-word'><span class='code bold'>config.mention</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
   
     (default <code>true</code>)
   </td>
-  <td class='break-word'><span>twitter 
-<strong>@handle</strong>
+  <td class='break-word'><span><strong>@mention</strong>
+  as in github or twitter (
+<strong><code>m</code></strong>
+)
 </span></td>
 </tr>
 
@@ -412,6 +447,27 @@ word can be composed of only
   </td>
   <td class='break-word'><span>URL such as 
 <strong><a href="https://github.com">https://github.com</a></strong>
+ (
+<strong><code>u</code></strong>
+)
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>config.word</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>word such as 
+<strong>faster;</strong>
+ 
+<em>note: this can never
+be set to false</em>
+ (
+<strong><code>w</code></strong>
+)
 </span></td>
 </tr>
 
@@ -443,8 +499,8 @@ word can be composed of only
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Do not tokenize &amp; tag twitter handles.</span>
-<span class="hljs-keyword">var</span> myTokenizer.defineConfig( { <span class="hljs-attr">twitter</span>: <span class="hljs-literal">false</span> } );
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Do not tokenize &amp; tag @mentions.</span>
+<span class="hljs-keyword">var</span> myTokenizer.defineConfig( { <span class="hljs-attr">mention</span>: <span class="hljs-literal">false</span> } );
 <span class="hljs-comment">// -&gt; 9</span>
 <span class="hljs-comment">// Only tokenize words as defined above.</span>
 <span class="hljs-keyword">var</span> myTokenizer.defineConfig( {} );
@@ -531,7 +587,7 @@ word can be composed of only
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">var</span> s = <span class="hljs-string">'@superman: hit me up on my email r2d2@gmail.com; &amp; we will plan party🎉 tom at 3pm:)'</span>;
 myTokenizer.tokenize( s );
-<span class="hljs-comment">// -&gt; [ { token: '@superman', tag: 'twitter' },</span>
+<span class="hljs-comment">// -&gt; [ { token: '@superman', tag: 'mention' },</span>
 <span class="hljs-comment">//      { token: ':', tag: 'punctuation' },</span>
 <span class="hljs-comment">//      { token: 'hit', tag: 'word' },</span>
 <span class="hljs-comment">//      { token: 'me', tag: 'word' },</span>
@@ -548,8 +604,79 @@ myTokenizer.tokenize( s );
 <span class="hljs-comment">//      { token: '🎉', tag: 'emoji' },</span>
 <span class="hljs-comment">//      { token: 'tom', tag: 'word' },</span>
 <span class="hljs-comment">//      { token: 'at', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: '4pm', tag: 'time' },</span>
+<span class="hljs-comment">//      { token: '3pm', tag: 'time' },</span>
 <span class="hljs-comment">//      { token: ':)', tag: 'emoticon' } ]</span></pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='gettokensfp'>
+      getTokensFP
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Returns the finger print of the tokens generated by the last call to
+<a href="#tokenize"><code>tokenize()</code></a>. A finger print is a string created by sequentially
+joining the unique code of each token's type. Refer to table given under
+<a href="#defineconfig"><code>defineConfig()</code></a> for values of these codes.</p>
+<p>A finger print is extremely useful in spotting patterns present in the sentence
+using <code>regexes</code>, which is otherwise a complex and time consuming task.</p>
+
+
+  <div class='pre p1 fill-light mt0'>getTokensFP(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+        finger print of tokens generated by the last call to 
+<code>tokenize()</code>
+.
+
+      
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Generate finger print of sentence given in the previous example</span>
+<span class="hljs-comment">// under tokenize().</span>
+myTokenizer.getTokensFP();
+<span class="hljs-comment">// -&gt; 'm:wwwwwwe;wwwwjwwtc'</span></pre>
     
   
 
