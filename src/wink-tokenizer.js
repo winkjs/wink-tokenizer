@@ -34,7 +34,7 @@ var rgxEmoticon = /:-?[dps\*\/\[\]\{\}\(\)]|;-?[/(/)d]|<3/gi;
 var rgxTime = /(?:\d|[01]\d|2[0-3]):?(?:[0-5][0-9])?\s?(?:[ap]m|hours|hrs)\b/gi;
 // Regexes and their categories; used for tokenizing via match/split. The
 // sequence is *critical* for correct tokenization.
-var rgxs = [
+var rgxsMaster = [
   { regex: rgxQuotedPhrase, category: 'quoted_phrase' },
   { regex: rgxURL, category: 'url' },
   { regex: rgxEmail, category: 'email' },
@@ -61,7 +61,7 @@ var fingerPrintCodes = {
   url: 'u',
   word: 'w',
 };
-// Simple in-tokeizer lookup.
+// Simple in-tokenizer lookup.
 var weekday = 'weekday';
 var month = 'month';
 var lookup = Object.create( null );
@@ -119,9 +119,12 @@ lookup.december = month;
  * var myTokenizer = tokenizer();
 */
 var tokenizer = function () {
-
+  // Default configuration: most comprehensive tokenization. Make deep copy!
+  var rgxs = rgxsMaster.slice( 0 );
+  // The result of last call to `tokenize()` is retained here.
   var finalTokens = [];
   var tagPlugins = Object.create( null );
+  // Returned!
   var methods = Object.create( null );
 
   // ### tokenizeTextUnit
@@ -225,8 +228,6 @@ var tokenizer = function () {
    * @param {boolean} [config.email=true] for example **john@acme.com** or **superman1@gmail.com**
    * @param {boolean} [config.emoji=true] any standard unicode emojis e.g. 😊 or 😂 or 🎉
    * @param {boolean} [config.emoticon=true] common emoticons such as **`:-)`** or **`:D`**
-   * @param {boolean} [config.month=true] months of the year and their standard
-   * abbreviations such as **March** or **Mar** or **jan**
    * @param {boolean} [config.number=true] any integer or decimal number such as **19** or **2.718**
    * @param {boolean} [config.punctuation=true] common punctuation such as **`?`** or **`,`**
    * @param {boolean} [config.quoted_phrase=true] any **"quoted text"** in the sentence.
@@ -244,7 +245,7 @@ var tokenizer = function () {
   */
   var defineConfig = function ( config ) {
     if ( typeof config === 'object' && Object.keys( config ).length ) {
-      rgxs = rgxs.filter( function ( rgx ) {
+      rgxs = rgxsMaster.filter( function ( rgx ) {
         // Config for the Category of `rgx`.
         var cc = config[ rgx.category ];
         // Means `undefined` & `null` values are taken as true; otherwise
@@ -254,13 +255,6 @@ var tokenizer = function () {
     } else rgxs = [];
     return rgxs.length;
   }; // defineConfig()
-
-  var definePlugin = function ( tag, functions ) {
-    if ( tagPlugins[ tag ] === undefined ) {
-      throw Error( ':(' );
-    }
-    tagPlugins[ tag ] = functions;
-  }; // addPlugin
 
   var tokenize = function ( sentence ) {
     finalTokens = [];
@@ -280,31 +274,9 @@ var tokenizer = function () {
     tagPlugins[ rgx.category ] = false;
   } );
   methods.defineConfig = defineConfig;
-  methods.definePlugin = definePlugin;
   methods.tokenize = tokenize;
   methods.getFingerprint = getFingerprint;
   return methods;
 };
 
 module.exports = tokenizer;
-
-// var t = tokenizer();
-//
-// var pt = t.tokenize;
-//
-// console.log( t.defineConfig( {  } ) );
-//
-// console.time( 'perf' );
-// console.log( pt( '1abc@pappu.org<3 I,    😂😂  23.456713   sanjaya😂 saxena:), sent <3 an $2.5 emails meet at 5:00pm:) to @prtksxna on his id -prtk.Sxna@gmail.com.') );
-// console.timeEnd( 'perf' );
-// console.time( 'perf' );
-// console.log( pt( 'Fix the following 2 issues "fix me", "fix yourself" on http://github.com/winkjs/wink-sentiment/issues:) and then party 🎉' ) );
-// console.timeEnd( 'perf' );
-// console.time( 'perf' );
-// console.log( pt( 'Fix the following 1st January 1992 issue "fix yourself" on 2-mon-ey-13 http://github.com/winkjs/wink-sentiment/issues:) and then party 🎉' ) );
-// console.timeEnd( 'perf' );
-// console.log( t.getFingerprint() );
-//
-// // pt( 'I ate 3 mangos and 4.2bananas3');
-// // pt( 'I ate bananas2.')
-// // pt( '' );
