@@ -256,6 +256,38 @@ var tokenizer = function () {
     return rgxs.length;
   }; // defineConfig()
 
+  // ### tokenize
+  /**
+   *
+   * Tokenizes the input `sentence` using the configuration specified via
+   * [`defineConfig()`](#defineconfig).
+   *
+   * @param {string} sentence — the input sentence.
+   * @return {object[]} of tokens; each one of them is an object with 2-keys viz.
+   * `token` and its `tag` identifying the type of the token.
+   * @example
+   * var s = '@superman: hit me up on my email r2d2@gmail.com; & we will plan party🎉 tom at 3pm:)';
+   * myTokenizer.tokenize( s );
+   * // -> [ { token: '@superman', tag: 'twitter' },
+   * //      { token: ':', tag: 'punctuation' },
+   * //      { token: 'hit', tag: 'word' },
+   * //      { token: 'me', tag: 'word' },
+   * //      { token: 'up', tag: 'word' },
+   * //      { token: 'on', tag: 'word' },
+   * //      { token: 'my', tag: 'word' },
+   * //      { token: 'email', tag: 'word' },
+   * //      { token: 'r2d2@gmail.com', tag: 'email' },
+   * //      { token: ';', tag: 'punctuation' },
+   * //      { token: 'we', tag: 'word' },
+   * //      { token: 'will', tag: 'word' },
+   * //      { token: 'plan', tag: 'word' },
+   * //      { token: 'party', tag: 'word' },
+   * //      { token: '🎉', tag: 'emoji' },
+   * //      { token: 'tom', tag: 'word' },
+   * //      { token: 'at', tag: 'word' },
+   * //      { token: '4pm', tag: 'time' },
+   * //      { token: ':)', tag: 'emoticon' } ]
+  */
   var tokenize = function ( sentence ) {
     finalTokens = [];
     tokenizeTextRecursively( sentence.trim().replace( rgxSpaces, ' ' ), rgxs );

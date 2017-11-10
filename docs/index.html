@@ -73,6 +73,16 @@
                 
                 </li>
               
+                
+                <li><a
+                  href='#tokenize'
+                  class="">
+                  tokenize
+                  
+                </a>
+                
+                </li>
+              
             </ul>
           </div>
           <div class='mt1 h6 quiet'>
@@ -439,6 +449,107 @@ word can be composed of only
 <span class="hljs-comment">// Only tokenize words as defined above.</span>
 <span class="hljs-keyword">var</span> myTokenizer.defineConfig( {} );
 <span class="hljs-comment">// -&gt; 0</span></pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='tokenize'>
+      tokenize
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Tokenizes the input <code>sentence</code> using the configuration specified via
+<a href="#defineconfig"><code>defineConfig()</code></a>.</p>
+
+
+  <div class='pre p1 fill-light mt0'>tokenize(sentence: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>sentence</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    — the input sentence.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>></code>:
+        of tokens; each one of them is an object with 2-keys viz.
+
+<code>token</code>
+ and its 
+<code>tag</code>
+ identifying the type of the token.
+
+      
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">var</span> s = <span class="hljs-string">'@superman: hit me up on my email r2d2@gmail.com; &amp; we will plan party🎉 tom at 3pm:)'</span>;
+myTokenizer.tokenize( s );
+<span class="hljs-comment">// -&gt; [ { token: '@superman', tag: 'twitter' },</span>
+<span class="hljs-comment">//      { token: ':', tag: 'punctuation' },</span>
+<span class="hljs-comment">//      { token: 'hit', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'me', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'up', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'on', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'my', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'email', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'r2d2@gmail.com', tag: 'email' },</span>
+<span class="hljs-comment">//      { token: ';', tag: 'punctuation' },</span>
+<span class="hljs-comment">//      { token: 'we', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'will', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'plan', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'party', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: '🎉', tag: 'emoji' },</span>
+<span class="hljs-comment">//      { token: 'tom', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'at', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: '4pm', tag: 'time' },</span>
+<span class="hljs-comment">//      { token: ':)', tag: 'emoticon' } ]</span></pre>
     
   
 
