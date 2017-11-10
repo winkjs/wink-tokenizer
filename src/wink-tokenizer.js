@@ -24,6 +24,7 @@
 var rgxSpaces = /\s+/g;
 var rgxNumber = /\d*\.\d+|\d+/g;
 var rgxMention = /\@\w+/g;
+var rgxHashtag = /\#[a-z][a-z0-9]*/g;
 var rgxEmail = /[-!#$%&'*+\/=?^\w{|}~](?:\.?[-!#$%&'*+\/=?^\w`{|}~])*@[a-z0-9](?:-?\.?[a-z0-9])*(?:\.[a-z](?:-?[a-z0-9])*)+/gi;
 var rgxCurrency = /[\$\£\¥\€]/g;
 var rgxPunctuation = /[\’\'\‘\’\`\“\”\"\[\]\(\)\{\}\…\,\.\!\;\?\/\-\:]/g;
@@ -39,6 +40,7 @@ var rgxsMaster = [
   { regex: rgxURL, category: 'url' },
   { regex: rgxEmail, category: 'email' },
   { regex: rgxMention, category: 'mention' },
+  { regex: rgxHashtag, category: 'hashtag' },
   { regex: rgxEmoji, category: 'emoji' },
   { regex: rgxEmoticon, category: 'emoticon' },
   { regex: rgxTime, category: 'time' },
@@ -51,6 +53,7 @@ var fingerPrintCodes = {
   emoticon: 'c',
   email: 'e',
   emoji: 'j',
+  hashtag: 'h',
   mention: 'm',
   number: 'n',
   quoted_phrase: 'q', // eslint-disable-line camelcase
