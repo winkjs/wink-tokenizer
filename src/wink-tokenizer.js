@@ -209,6 +209,39 @@ var tokenizer = function () {
     }
   }; // tokenizeTextRecursively()
 
+  // ### defineConfig
+  /**
+   *
+   * Defines the configuration in terms of the types of token that will be
+   * extracted by [`tokenize()`](#tokenize) method. Note by default, all types
+   * of tokens will be detected and tagged automatically.
+   *
+   * @param {object} config — It defines 0 or more properties from the list of
+   * **10** properties given below. A true value for a property ensures tokenization
+   * for that type of text wheras false value will not attempt tokenization of that
+   * type of text. *An empty config object means only **words** are extracted.* A
+   * word can be composed of only **alphabets** and **`_`** character.
+   * @param {boolean} [config.currency=true] such as **$** or **£** symbols
+   * @param {boolean} [config.email=true] for example **john@acme.com** or **superman1@gmail.com**
+   * @param {boolean} [config.emoji=true] any standard unicode emojis e.g. 😊 or 😂 or 🎉
+   * @param {boolean} [config.emoticon=true] common emoticons such as **`:-)`** or **`:D`**
+   * @param {boolean} [config.month=true] months of the year and their standard
+   * abbreviations such as **March** or **Mar** or **jan**
+   * @param {boolean} [config.number=true] any integer or decimal number such as **19** or **2.718**
+   * @param {boolean} [config.punctuation=true] common punctuation such as **`?`** or **`,`**
+   * @param {boolean} [config.quoted_phrase=true] any **"quoted text"** in the sentence.
+   * @param {boolean} [config.time=true] common representation of time such as **4pm** or **16:00 hours**
+   * @param {boolean} [config.twitter=true] twitter **@handle**
+   * @param {boolean} [config.url=true] URL such as **https://github.com**
+   * @return {number} number of properties set to true from the list of above 10.
+   * @example
+   * // Do not tokenize & tag twitter handles.
+   * var myTokenizer.defineConfig( { twitter: false } );
+   * // -> 9
+   * // Only tokenize words as defined above.
+   * var myTokenizer.defineConfig( {} );
+   * // -> 0
+  */
   var defineConfig = function ( config ) {
     if ( typeof config === 'object' && Object.keys( config ).length ) {
       rgxs = rgxs.filter( function ( rgx ) {
@@ -219,6 +252,7 @@ var tokenizer = function () {
         return ( cc === undefined || cc === null || !!cc );
       } );
     } else rgxs = [];
+    return rgxs.length;
   }; // defineConfig()
 
   var definePlugin = function ( tag, functions ) {
@@ -258,8 +292,10 @@ module.exports = tokenizer;
 //
 // var pt = t.tokenize;
 //
+// console.log( t.defineConfig( {  } ) );
+//
 // console.time( 'perf' );
-// console.log( pt( '1abc@pappu.org<3 I,    😂😂     sanjaya😂 saxena:), sent <3 an $2.5 emails meet at 5:00pm:) to @prtksxna on his id -prtk.Sxna@gmail.com.') );
+// console.log( pt( '1abc@pappu.org<3 I,    😂😂  23.456713   sanjaya😂 saxena:), sent <3 an $2.5 emails meet at 5:00pm:) to @prtksxna on his id -prtk.Sxna@gmail.com.') );
 // console.timeEnd( 'perf' );
 // console.time( 'perf' );
 // console.log( pt( 'Fix the following 2 issues "fix me", "fix yourself" on http://github.com/winkjs/wink-sentiment/issues:) and then party 🎉' ) );
@@ -268,7 +304,7 @@ module.exports = tokenizer;
 // console.log( pt( 'Fix the following 1st January 1992 issue "fix yourself" on 2-mon-ey-13 http://github.com/winkjs/wink-sentiment/issues:) and then party 🎉' ) );
 // console.timeEnd( 'perf' );
 // console.log( t.getFingerprint() );
-
-// pt( 'I ate 3 mangos and 4.2bananas3');
-// pt( 'I ate bananas2.')
-// pt( '' );
+//
+// // pt( 'I ate 3 mangos and 4.2bananas3');
+// // pt( 'I ate bananas2.')
+// // pt( '' );

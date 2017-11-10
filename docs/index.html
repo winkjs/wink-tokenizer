@@ -63,6 +63,16 @@
                 
                 </li>
               
+                
+                <li><a
+                  href='#defineconfig'
+                  class="">
+                  defineConfig
+                  
+                </a>
+                
+                </li>
+              
             </ul>
           </div>
           <div class='mt1 h6 quiet'>
@@ -196,6 +206,266 @@ and defining configuration, plugin etc.
   
 </section>
 </div>
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='defineconfig'>
+      defineConfig
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Defines the configuration in terms of the types of token that will be
+extracted by <a href="#tokenize"><code>tokenize()</code></a> method. Note by default, all types
+of tokens will be detected and tagged automatically.</p>
+
+
+  <div class='pre p1 fill-light mt0'>defineConfig(config: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>config</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    — It defines 0 or more properties from the list of
+
+<strong>10</strong>
+ properties given below. A true value for a property ensures tokenization
+for that type of text wheras false value will not attempt tokenization of that
+type of text. 
+<em>An empty config object means only <strong>words</strong> are extracted.</em>
+ A
+word can be composed of only 
+<strong>alphabets</strong>
+ and 
+<strong><code>_</code></strong>
+ character.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>config.currency</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>such as 
+<strong>$</strong>
+ or 
+<strong>£</strong>
+ symbols
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>config.email</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>for example 
+<strong>john@acme.com</strong>
+ or 
+<strong>superman1@gmail.com</strong>
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>config.emoji</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>any standard unicode emojis e.g. 😊 or 😂 or 🎉
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>config.emoticon</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>common emoticons such as 
+<strong><code>:-)</code></strong>
+ or 
+<strong><code>:D</code></strong>
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>config.month</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>months of the year and their standard
+abbreviations such as 
+<strong>March</strong>
+ or 
+<strong>Mar</strong>
+ or 
+<strong>jan</strong>
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>config.number</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>any integer or decimal number such as 
+<strong>19</strong>
+ or 
+<strong>2.718</strong>
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>config.punctuation</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>common punctuation such as 
+<strong><code>?</code></strong>
+ or 
+<strong><code>,</code></strong>
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>config.quoted_phrase</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>any 
+<strong>"quoted text"</strong>
+ in the sentence.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>config.time</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>common representation of time such as 
+<strong>4pm</strong>
+ or 
+<strong>16:00 hours</strong>
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>config.twitter</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>twitter 
+<strong>@handle</strong>
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>config.url</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>URL such as 
+<strong><a href="https://github.com">https://github.com</a></strong>
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
+        number of properties set to true from the list of above 10.
+
+      
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Do not tokenize &amp; tag twitter handles.</span>
+<span class="hljs-keyword">var</span> myTokenizer.defineConfig( { <span class="hljs-attr">twitter</span>: <span class="hljs-literal">false</span> } );
+<span class="hljs-comment">// -&gt; 9</span>
+<span class="hljs-comment">// Only tokenize words as defined above.</span>
+<span class="hljs-keyword">var</span> myTokenizer.defineConfig( {} );
+<span class="hljs-comment">// -&gt; 0</span></pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
           
         
       </div>
