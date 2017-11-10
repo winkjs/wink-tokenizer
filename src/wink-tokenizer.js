@@ -177,10 +177,10 @@ var tokenizer = function () {
    * of tokens will be detected and tagged automatically.
    *
    * @param {object} config — It defines 0 or more properties from the list of
-   * **10** properties. A true value for a property ensures tokenization
+   * **11** properties. A true value for a property ensures tokenization
    * for that type of text; whereas false value will mean that the tokenization of that
    * type of text will not be attempted. *An empty config object means only **words** are extracted.* A
-   * word can be composed of only **alphabets** and **`_`** character.
+   * word can be composed of only **alphabets** and **`_`** character. It is not counted as a property.
    *
    * The table below gives the name of each property and it's description including
    * examples. The character with in paranthesis is the [finger print](#gettokensfp) code for the
@@ -199,11 +199,11 @@ var tokenizer = function () {
    * @param {boolean} [config.url=true] URL such as **https://github.com** (**`u`**)
    * @param {boolean} [config.word=true] word such as **faster;** *note: this can never
    * be set to false* (**`w`**)
-   * @return {number} number of properties set to true from the list of above 10.
+   * @return {number} number of properties set to true from the list of above 11.
    * @example
    * // Do not tokenize & tag @mentions.
    * var myTokenizer.defineConfig( { mention: false } );
-   * // -> 9
+   * // -> 10
    * // Only tokenize words as defined above.
    * var myTokenizer.defineConfig( {} );
    * // -> 0
@@ -292,3 +292,10 @@ var tokenizer = function () {
 };
 
 module.exports = tokenizer;
+//
+// var t = tokenizer();
+//
+// var pt = t.tokenize;
+// t.defineConfig( {} );
+// console.log( pt('@superman: hit me up on my email r2d2@gmail.com; & we will plan party🎉 tom at 3pm:)') );
+// console.log( t.getTokensFP() );

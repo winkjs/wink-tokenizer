@@ -267,7 +267,7 @@ of tokens will be detected and tagged automatically.</p>
             <span class='code bold'>config</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
 	    — It defines 0 or more properties from the list of
 
-<strong>10</strong>
+<strong>11</strong>
  properties. A true value for a property ensures tokenization
 for that type of text; whereas false value will mean that the tokenization of that
 type of text will not be attempted. 
@@ -277,7 +277,7 @@ word can be composed of only
 <strong>alphabets</strong>
  and 
 <strong><code>_</code></strong>
- character.
+ character. It is not counted as a property.
 <p>The table below gives the name of each property and it's description including
 examples. The character with in paranthesis is the <a href="#gettokensfp">finger print</a> code for the
 token of that type.</p>
@@ -504,7 +504,7 @@ be set to false</em>
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
-        number of properties set to true from the list of above 10.
+        number of properties set to true from the list of above 11.
 
       
     
@@ -518,7 +518,7 @@ be set to false</em>
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Do not tokenize &amp; tag @mentions.</span>
 <span class="hljs-keyword">var</span> myTokenizer.defineConfig( { <span class="hljs-attr">mention</span>: <span class="hljs-literal">false</span> } );
-<span class="hljs-comment">// -&gt; 9</span>
+<span class="hljs-comment">// -&gt; 10</span>
 <span class="hljs-comment">// Only tokenize words as defined above.</span>
 <span class="hljs-keyword">var</span> myTokenizer.defineConfig( {} );
 <span class="hljs-comment">// -&gt; 0</span></pre>
