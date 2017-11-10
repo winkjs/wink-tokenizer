@@ -189,6 +189,7 @@ var tokenizer = function () {
    * @param {boolean} [config.email=true] for example **john@acme.com** or **superman1@gmail.com** (**`e`**)
    * @param {boolean} [config.emoji=true] any standard unicode emojis e.g. 😊 or 😂 or 🎉 (**`j`**)
    * @param {boolean} [config.emoticon=true] common emoticons such as **`:-)`** or **`:D`** (**`c`**)
+   * @param {boolean} [config.hashtag=true] hash tags such as **`#happy`** or **`#followme`** (**`h`**)
    * @param {boolean} [config.number=true] any integer or decimal number such as **19** or **2.718** (**`n`**)
    * @param {boolean} [config.punctuation=true] common punctuation such as **`?`** or **`,`**
    * ( token becomes fingerprint )
