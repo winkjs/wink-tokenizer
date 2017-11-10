@@ -165,12 +165,25 @@ var tokenizer = function () {
     return ( tokens );
   }; // tokenizeTextUnit()
 
-
+  // ### tokenizeTextRecursively
+  /**
+   *
+   * Tokenizes the input text recursively using the array of `regexes` and then
+   * the `tokenizeTextUnit()` function. If (or whenever) the `regexes` becomes
+   * empty, it simply splits the text on non-word characters instead of using
+   * the `tokenizeTextUnit()` function.
+   *
+   * @param {string} text — unit that is to be tokenized.
+   * @param {object} regexes — object containing the regex and it's category.
+   * @return {undefined} nothing!
+   * @private
+  */
 var tokenizeTextRecursively = function ( text, regexes ) {
   var sentence = text.trim();
   var tokens = [];
   var i, imax;
   if ( !regexes.length ) {
+    // Empty `regexes` array, split on non-word characters.
     if ( sentence ) {
       sentence.split( /\W/ ).forEach( function ( t ) {
         var tag;
@@ -188,6 +201,7 @@ var tokenizeTextRecursively = function ( text, regexes ) {
 
   for ( i = 0, imax = tokens.length; i < imax; i += 1 ) {
     if ( typeof tokens[ i ] === 'string' ) {
+      // Strings become candidates for further tokenization.
       tokenizeTextRecursively( tokens[ i ], regexes.slice( 1 ) );
     } else {
       finalTokens.push( tokens[ i ] );
@@ -243,7 +257,7 @@ module.exports = tokenizer;
 // var t = tokenizer();
 //
 // var pt = t.tokenize;
-
+//
 // console.time( 'perf' );
 // console.log( pt( '1abc@pappu.org<3 I,    😂😂     sanjaya😂 saxena:), sent <3 an $2.5 emails meet at 5:00pm:) to @prtksxna on his id -prtk.Sxna@gmail.com.') );
 // console.timeEnd( 'perf' );
