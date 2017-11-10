@@ -178,39 +178,39 @@ var tokenizer = function () {
    * @return {undefined} nothing!
    * @private
   */
-var tokenizeTextRecursively = function ( text, regexes ) {
-  var sentence = text.trim();
-  var tokens = [];
-  var i, imax;
-  if ( !regexes.length ) {
-    // Empty `regexes` array, split on non-word characters.
-    if ( sentence ) {
-      sentence.split( /\W/ ).forEach( function ( t ) {
-        var tag;
-        if ( t ) {
-          tag = lookup[ t.toLowerCase() ];
-          finalTokens.push( { token: t, tag: ( tag ) ? tag : 'word' } );
-        }
-      } );
+  var tokenizeTextRecursively = function ( text, regexes ) {
+    var sentence = text.trim();
+    var tokens = [];
+    var i, imax;
+    if ( !regexes.length ) {
+      // Empty `regexes` array, split on non-word characters.
+      if ( sentence ) {
+        sentence.split( /\W/ ).forEach( function ( t ) {
+          var tag;
+          if ( t ) {
+            tag = lookup[ t.toLowerCase() ];
+            finalTokens.push( { token: t, tag: ( tag ) ? tag : 'word' } );
+          }
+        } );
+      }
+      return;
     }
-    return;
-  }
 
-  var rgx = regexes[ 0 ];
-  tokens = tokenizeTextUnit( sentence, rgx );
+    var rgx = regexes[ 0 ];
+    tokens = tokenizeTextUnit( sentence, rgx );
 
-  for ( i = 0, imax = tokens.length; i < imax; i += 1 ) {
-    if ( typeof tokens[ i ] === 'string' ) {
-      // Strings become candidates for further tokenization.
-      tokenizeTextRecursively( tokens[ i ], regexes.slice( 1 ) );
-    } else {
-      finalTokens.push( tokens[ i ] );
+    for ( i = 0, imax = tokens.length; i < imax; i += 1 ) {
+      if ( typeof tokens[ i ] === 'string' ) {
+        // Strings become candidates for further tokenization.
+        tokenizeTextRecursively( tokens[ i ], regexes.slice( 1 ) );
+      } else {
+        finalTokens.push( tokens[ i ] );
+      }
     }
-  }
-};
+  }; // tokenizeTextRecursively()
 
   var defineConfig = function ( config ) {
-    if ( Object.keys( config ).length ) {
+    if ( typeof config === 'object' && Object.keys( config ).length ) {
       rgxs = rgxs.filter( function ( rgx ) {
         // Config for the Category of `rgx`.
         var cc = config[ rgx.category ];
