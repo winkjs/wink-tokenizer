@@ -14,6 +14,37 @@ Use [npm](https://www.npmjs.com/package/wink-tokenizer) to install:
 
     npm install wink-tokenizer --save
 
+### Example
+```javascript 
+// Load tokenizer.
+var tokenizer = require( 'wink-tokenizer' );
+// Create it's instance.
+var myTokenizer = tokenizer();
+// Just tokenize the sentence...
+var s = '@superman: hit me up on my email r2d2@gmail.com, 2 of us plan party🎉 tom at 3pm:) #fun';
+myTokenizer.tokenize( s );
+// -> [ { token: '@superman', tag: 'mention' },
+//      { token: ':', tag: 'punctuation' },
+//      { token: 'hit', tag: 'word' },
+//      { token: 'me', tag: 'word' },
+//      { token: 'up', tag: 'word' },
+//      { token: 'on', tag: 'word' },
+//      { token: 'my', tag: 'word' },
+//      { token: 'email', tag: 'word' },
+//      { token: 'r2d2@gmail.com', tag: 'email' },
+//      { token: ',', tag: 'punctuation' },
+//      { token: '2', tag: 'number' },
+//      { token: 'of', tag: 'word' },
+//      { token: 'us', tag: 'word' },
+//      { token: 'plan', tag: 'word' },
+//      { token: 'party', tag: 'word' },
+//      { token: '🎉', tag: 'emoji' },
+//      { token: 'tom', tag: 'word' },
+//      { token: 'at', tag: 'word' },
+//      { token: '3pm', tag: 'time' },
+//      { token: ':)', tag: 'emoticon' },
+//      { token: '#fun', tag: 'hashtag' } ]
+```
 
 ### Documentation
 For detailed API docs, check out http://winkjs.org/wink-tokenizer/ URL!

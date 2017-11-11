@@ -119,6 +119,35 @@
 <p>Use <a href="https://www.npmjs.com/package/wink-tokenizer">npm</a> to install:</p>
 <pre><code>npm install wink-tokenizer --save
 </code></pre>
+<h3>Example</h3>
+<pre class='hljs'><span class="hljs-comment">// Load tokenizer.</span>
+<span class="hljs-keyword">var</span> tokenizer = <span class="hljs-built_in">require</span>( <span class="hljs-string">'wink-tokenizer'</span> );
+<span class="hljs-comment">// Create it's instance.</span>
+<span class="hljs-keyword">var</span> myTokenizer = tokenizer();
+<span class="hljs-comment">// Just tokenize the sentence...</span>
+<span class="hljs-keyword">var</span> s = <span class="hljs-string">'@superman: hit me up on my email r2d2@gmail.com, 2 of us plan party🎉 tom at 3pm:) #fun'</span>;
+myTokenizer.tokenize( s );
+<span class="hljs-comment">// -&gt; [ { token: '@superman', tag: 'mention' },</span>
+<span class="hljs-comment">//      { token: ':', tag: 'punctuation' },</span>
+<span class="hljs-comment">//      { token: 'hit', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'me', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'up', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'on', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'my', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'email', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'r2d2@gmail.com', tag: 'email' },</span>
+<span class="hljs-comment">//      { token: ',', tag: 'punctuation' },</span>
+<span class="hljs-comment">//      { token: '2', tag: 'number' },</span>
+<span class="hljs-comment">//      { token: 'of', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'us', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'plan', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'party', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: '🎉', tag: 'emoji' },</span>
+<span class="hljs-comment">//      { token: 'tom', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: 'at', tag: 'word' },</span>
+<span class="hljs-comment">//      { token: '3pm', tag: 'time' },</span>
+<span class="hljs-comment">//      { token: ':)', tag: 'emoticon' },</span>
+<span class="hljs-comment">//      { token: '#fun', tag: 'hashtag' } ]</span></pre>
 <h3>Documentation</h3>
 <p>For detailed API docs, check out <a href="http://winkjs.org/wink-tokenizer/">http://winkjs.org/wink-tokenizer/</a> URL!</p>
 <h3>Need Help?</h3>
@@ -271,7 +300,7 @@ of tokens will be detected and tagged automatically.</p>
  properties. A true value for a property ensures tokenization
 for that type of text; whereas false value will mean that the tokenization of that
 type of text will not be attempted.
-<p><em>An empty config object is equivalent of splitting on spaces. Whatever tokens
+<p><em>An empty config object is equivalent to splitting on spaces. Whatever tokens
 are created like this are tagged as <strong>unknown</strong> and <strong><code>z</code></strong> is the
 <a href="#gettokensfp">finger print</a> code of this token type.</em></p>
 <p>The table below gives the name of each property and it's description including
