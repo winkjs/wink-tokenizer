@@ -179,8 +179,11 @@ var tokenizer = function () {
    * @param {object} config — It defines 0 or more properties from the list of
    * **12** properties. A true value for a property ensures tokenization
    * for that type of text; whereas false value will mean that the tokenization of that
-   * type of text will not be attempted. *An empty config object means only **words** are extracted.* A
-   * word can be composed of only **alphabets** and **`_`** character. It is not counted as a property.
+   * type of text will not be attempted.
+   *
+   * *An empty config object is equivalent to splitting on spaces. Whatever tokens
+   * are created like this are tagged as **unknown** and **`z`** is the
+   * [finger print](#gettokensfp) code of this token type.*
    *
    * The table below gives the name of each property and it's description including
    * examples. The character with in paranthesis is the [finger print](#gettokensfp) code for the
@@ -197,8 +200,7 @@ var tokenizer = function () {
    * @param {boolean} [config.time=true] common representation of time such as **4pm** or **16:00 hours** (**`t`**)
    * @param {boolean} [config.mention=true] **@mention**  as in github or twitter (**`m`**)
    * @param {boolean} [config.url=true] URL such as **https://github.com** (**`u`**)
-   * @param {boolean} [config.word=true] word such as **faster;** *note: this can never
-   * be set to false* (**`w`**)
+   * @param {boolean} [config.word=true] word such as **faster** or **dog's** or **cats'** (**`w`**)
    * @return {number} number of properties set to true from the list of above 12.
    * @example
    * // Do not tokenize & tag @mentions.

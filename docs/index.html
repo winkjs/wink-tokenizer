@@ -270,14 +270,10 @@ of tokens will be detected and tagged automatically.</p>
 <strong>12</strong>
  properties. A true value for a property ensures tokenization
 for that type of text; whereas false value will mean that the tokenization of that
-type of text will not be attempted. 
-<em>An empty config object means only <strong>words</strong> are extracted.</em>
- A
-word can be composed of only 
-<strong>alphabets</strong>
- and 
-<strong><code>_</code></strong>
- character. It is not counted as a property.
+type of text will not be attempted.
+<p><em>An empty config object is equivalent of splitting on spaces. Whatever tokens
+are created like this are tagged as <strong>unknown</strong> and <strong><code>z</code></strong> is the
+<a href="#gettokensfp">finger print</a> code of this token type.</em></p>
 <p>The table below gives the name of each property and it's description including
 examples. The character with in paranthesis is the <a href="#gettokensfp">finger print</a> code for the
 token of that type.</p>
@@ -478,10 +474,11 @@ token of that type.</p>
     (default <code>true</code>)
   </td>
   <td class='break-word'><span>word such as 
-<strong>faster;</strong>
- 
-<em>note: this can never
-be set to false</em>
+<strong>faster</strong>
+ or 
+<strong>dog's</strong>
+ or 
+<strong>cats'</strong>
  (
 <strong><code>w</code></strong>
 )
