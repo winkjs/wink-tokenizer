@@ -33,6 +33,7 @@ var rgxURL = /(?:https?:\/\/)(?:[\da-z\.-]+)\.(?:[a-z\.]{2,6})(?:[\/\w\.\-\?#=]*
 var rgxEmoji = /[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u26FF]|[\u2700-\u27BF]/g;
 var rgxEmoticon = /:-?[dps\*\/\[\]\{\}\(\)]|;-?[/(/)d]|<3/gi;
 var rgxTime = /(?:\d|[01]\d|2[0-3]):?(?:[0-5][0-9])?\s?(?:[ap]m|hours|hrs)\b/gi;
+var rgxWord = /[a-z]+\'[a-z]{1,2}|[a-z]+s\'|[a-z]+/gi;
 // Regexes and their categories; used for tokenizing via match/split. The
 // sequence is *critical* for correct tokenization.
 var rgxsMaster = [
@@ -46,6 +47,7 @@ var rgxsMaster = [
   { regex: rgxTime, category: 'time' },
   { regex: rgxNumber, category: 'number' },
   { regex: rgxCurrency, category: 'currency' },
+  { regex: rgxWord, category: 'word' },
   { regex: rgxPunctuation, category: 'punctuation' }
 ];
 // Used to generate finger print from the tokens.
@@ -61,6 +63,7 @@ var fingerPrintCodes = {
   time: 't',
   url: 'u',
   word: 'w',
+  unknown: 'z'
 };
 
 // ### tokenizer
@@ -106,6 +109,8 @@ var tokenizer = function () {
     var balance = text.split( rgxSplit.regex );
     // The result, in form of combination of tokens & matches, is captured here.
     var tokens = [];
+    // The tag;
+    var tag = rgxSplit.category;
     // Helper variables.
     var i,
         imax,
@@ -118,7 +123,7 @@ var tokenizer = function () {
       t = balance[ i ];
       t = t.trim();
       if ( t ) tokens.push( t );
-      if ( k < matches.length ) tokens.push( { token: matches[ k ], tag: rgxSplit.category } );
+      if ( k < matches.length ) tokens.push( { token: matches[ k ], tag: tag } );
       k += 1;
     }
 
@@ -142,17 +147,12 @@ var tokenizer = function () {
     var sentence = text.trim();
     var tokens = [];
     var i, imax;
+
     if ( !regexes.length ) {
-      // Empty `regexes` array, split on non-word characters.
-      if ( sentence ) {
-        sentence.split( /\W/ ).forEach( function ( t ) {
-          var tag;
-          if ( t ) {
-            // tag = lookup[ t.toLowerCase() ];
-            finalTokens.push( { token: t, tag: ( tag ) ? tag : 'word' } );
-          }
-        } );
-      }
+      // No regex left, split on `spaces` and tag every token as **unknown**.
+      text.split( rgxSpaces ).forEach( function ( tkn ) {
+        finalTokens.push( { token: tkn.trim(), tag: 'unknown' } );
+      } );
       return;
     }
 
@@ -177,7 +177,7 @@ var tokenizer = function () {
    * of tokens will be detected and tagged automatically.
    *
    * @param {object} config — It defines 0 or more properties from the list of
-   * **11** properties. A true value for a property ensures tokenization
+   * **12** properties. A true value for a property ensures tokenization
    * for that type of text; whereas false value will mean that the tokenization of that
    * type of text will not be attempted. *An empty config object means only **words** are extracted.* A
    * word can be composed of only **alphabets** and **`_`** character. It is not counted as a property.
@@ -199,11 +199,11 @@ var tokenizer = function () {
    * @param {boolean} [config.url=true] URL such as **https://github.com** (**`u`**)
    * @param {boolean} [config.word=true] word such as **faster;** *note: this can never
    * be set to false* (**`w`**)
-   * @return {number} number of properties set to true from the list of above 11.
+   * @return {number} number of properties set to true from the list of above 12.
    * @example
    * // Do not tokenize & tag @mentions.
    * var myTokenizer.defineConfig( { mention: false } );
-   * // -> 10
+   * // -> 11
    * // Only tokenize words as defined above.
    * var myTokenizer.defineConfig( {} );
    * // -> 0
@@ -243,6 +243,7 @@ var tokenizer = function () {
    * //      { token: 'email', tag: 'word' },
    * //      { token: 'r2d2@gmail.com', tag: 'email' },
    * //      { token: ';', tag: 'punctuation' },
+   * //      { token: '&', tag: 'unknown' },
    * //      { token: 'we', tag: 'word' },
    * //      { token: 'will', tag: 'word' },
    * //      { token: 'plan', tag: 'word' },
@@ -275,7 +276,7 @@ var tokenizer = function () {
    * // Generate finger print of sentence given in the previous example
    * // under tokenize().
    * myTokenizer.getTokensFP();
-   * // -> 'm:wwwwwwe;wwwwjwwtc'
+   * // -> 'm:wwwwwwe;zwwwwjwwtc'
   */
   var getTokensFP = function () {
     var fp = [];
@@ -292,10 +293,3 @@ var tokenizer = function () {
 };
 
 module.exports = tokenizer;
-//
-// var t = tokenizer();
-//
-// var pt = t.tokenize;
-// t.defineConfig( {} );
-// console.log( pt('@superman: hit me up on my email r2d2@gmail.com; & we will plan party🎉 tom at 3pm:)') );
-// console.log( t.getTokensFP() );

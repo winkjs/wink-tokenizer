@@ -267,7 +267,7 @@ of tokens will be detected and tagged automatically.</p>
             <span class='code bold'>config</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
 	    — It defines 0 or more properties from the list of
 
-<strong>11</strong>
+<strong>12</strong>
  properties. A true value for a property ensures tokenization
 for that type of text; whereas false value will mean that the tokenization of that
 type of text will not be attempted. 
@@ -504,7 +504,7 @@ be set to false</em>
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
-        number of properties set to true from the list of above 11.
+        number of properties set to true from the list of above 12.
 
       
     
@@ -518,7 +518,7 @@ be set to false</em>
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Do not tokenize &amp; tag @mentions.</span>
 <span class="hljs-keyword">var</span> myTokenizer.defineConfig( { <span class="hljs-attr">mention</span>: <span class="hljs-literal">false</span> } );
-<span class="hljs-comment">// -&gt; 10</span>
+<span class="hljs-comment">// -&gt; 11</span>
 <span class="hljs-comment">// Only tokenize words as defined above.</span>
 <span class="hljs-keyword">var</span> myTokenizer.defineConfig( {} );
 <span class="hljs-comment">// -&gt; 0</span></pre>
@@ -614,6 +614,7 @@ myTokenizer.tokenize( s );
 <span class="hljs-comment">//      { token: 'email', tag: 'word' },</span>
 <span class="hljs-comment">//      { token: 'r2d2@gmail.com', tag: 'email' },</span>
 <span class="hljs-comment">//      { token: ';', tag: 'punctuation' },</span>
+<span class="hljs-comment">//      { token: '&amp;', tag: 'unknown' },</span>
 <span class="hljs-comment">//      { token: 'we', tag: 'word' },</span>
 <span class="hljs-comment">//      { token: 'will', tag: 'word' },</span>
 <span class="hljs-comment">//      { token: 'plan', tag: 'word' },</span>
@@ -693,7 +694,7 @@ using <code>regexes</code>, which is otherwise a complex and time consuming task
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Generate finger print of sentence given in the previous example</span>
 <span class="hljs-comment">// under tokenize().</span>
 myTokenizer.getTokensFP();
-<span class="hljs-comment">// -&gt; 'm:wwwwwwe;wwwwjwwtc'</span></pre>
+<span class="hljs-comment">// -&gt; 'm:wwwwwwe;zwwwwjwwtc'</span></pre>
     
   
 
