@@ -124,11 +124,24 @@ describe( 'basic test cycle', function () {
                    { token: 'home', tag: 'word' },
                    { token: 'and', tag: 'word' },
                    { token: 'wild', tag: 'word' },
-                   { token: 'cats\'', tag: 'word' },
+                   { token: 'cats', tag: 'word' },
+                   { token: '\'', tag: 'word' },
                    { token: 'ate', tag: 'word' },
                    { token: 'her', tag: 'word' },
-                   { token: 'dog\'s', tag: 'word' },
+                   { token: 'dog', tag: 'word' },
+                   { token: '\'s', tag: 'word' },
                    { token: 'food', tag: 'word' } ];
     expect( t().tokenize( 'She wasn\'t at home and wild cats\' ate her dog\'s food' ) ).to.deep.equal( output );
+  } );
+
+  it( 'should tokenize a sentence with pmultiple contractions', function () {
+    var output = [ { token: 'I', tag: 'word' },
+                   { token: '\'ll', tag: 'word' },
+                   { token: 'eat', tag: 'word' },
+                   { token: 'John', tag: 'word' },
+                   { token: '\'s', tag: 'word' },
+                   { token: 'food', tag: 'word' },
+                   { token: 'today', tag: 'word' } ];
+    expect( t().tokenize( 'I\'ll eat John\'s food today' ) ).to.deep.equal( output );
   } );
 } );

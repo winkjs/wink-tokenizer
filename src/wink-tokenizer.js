@@ -117,7 +117,7 @@ var tokenizer = function () {
     var i,
         imax,
         k = 0,
-        t;
+        t, words;
 
     // Combine tokens & matches in the following pattern [ b0 m0 b1 m1 ... ]
     matches = ( matches ) ? matches : [];
@@ -125,7 +125,20 @@ var tokenizer = function () {
       t = balance[ i ];
       t = t.trim();
       if ( t ) tokens.push( t );
-      if ( k < matches.length ) tokens.push( { token: matches[ k ], tag: tag } );
+      if ( k < matches.length ) {
+        if ( tag === 'word' ) {
+          // Tag type `word` token may have a contraction.
+          words = matches[ k ].split( '\'' );
+          if ( words.length === 1 ) {
+            // Means there is no contraction.
+            tokens.push( { token: matches[ k ], tag: tag } );
+          } else {
+            // Manage contraction! Split it in to 2 tokens.
+            tokens.push( { token: words[ 0 ], tag: tag } );
+            tokens.push( { token: '\'' + words[ 1 ], tag: tag } );
+          }
+        } else tokens.push( { token: matches[ k ], tag: tag } );
+      }
       k += 1;
     }
 
