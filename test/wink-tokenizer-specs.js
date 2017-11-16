@@ -118,7 +118,8 @@ describe( 'basic test cycle', function () {
 
   it( 'should tokenize a complex sentence with possessive & aposrtophy stuff', function () {
     var output = [ { token: 'She', tag: 'word' },
-                   { token: 'wasn\'t', tag: 'word' },
+                   { token: 'was', tag: 'word' },
+                   { token: 'not', tag: 'word' },
                    { token: 'at', tag: 'word' },
                    { token: 'home', tag: 'word' },
                    { token: 'and', tag: 'word' },

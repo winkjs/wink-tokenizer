@@ -34,6 +34,8 @@ var rgxEmoji = /[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u26FF]|[\u2700-\u27BF]/g
 var rgxEmoticon = /:-?[dps\*\/\[\]\{\}\(\)]|;-?[/(/)d]|<3/gi;
 var rgxTime = /(?:\d|[01]\d|2[0-3]):?(?:[0-5][0-9])?\s?(?:[ap]m|hours|hrs)\b/gi;
 var rgxWord = /[a-z]+\'[a-z]{1,2}|[a-z]+s\'|[a-z]+/gi;
+// Special regex to handle not elisions at sentence level itself.
+var rgxNotElision = /([a-z])(n\'t)\b/gi;
 // Regexes and their categories; used for tokenizing via match/split. The
 // sequence is *critical* for correct tokenization.
 var rgxsMaster = [
@@ -258,7 +260,8 @@ var tokenizer = function () {
   */
   var tokenize = function ( sentence ) {
     finalTokens = [];
-    tokenizeTextRecursively( sentence.trim().replace( rgxSpaces, ' ' ), rgxs );
+    // Preprocess: trim -> remove extra spaces -> expant **n't** contractions (if any).
+    tokenizeTextRecursively( sentence.trim().replace( rgxSpaces, ' ' ).replace( rgxNotElision, '$1 not' ), rgxs );
     return finalTokens;
   }; // tokenize()
 
