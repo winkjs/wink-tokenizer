@@ -242,10 +242,10 @@ var tokenizer = function () {
   /**
    *
    * Tokenizes the input `sentence` using the configuration specified via
-   * [`defineConfig()`](#defineconfig). All the negation contractions, if any,
-   * are expanded before tokenization; for example **wasn't** will expand to **was not**.
+   * [`defineConfig()`](#defineconfig). All the negative contractions in the input `sentence`,
+   * if any, are expanded before tokenization; for example **wasn't** expands to **was not**.
    * Other contractions and possessive nouns are split into 2 separate tokens;
-   * for example **I'll** will be split as `'I'` and `'\'ll'`.
+   * for example **I'll** splits as `'I'` and `'\'ll'`.
    *
    * @param {string} sentence — the input sentence.
    * @return {object[]} of tokens; each one of them is an object with 2-keys viz.
