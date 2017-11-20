@@ -251,7 +251,7 @@ var tokenizer = function () {
    * @return {object[]} of tokens; each one of them is an object with 2-keys viz.
    * `value` and its `tag` identifying the type of the token.
    * @example
-   * var s = 'For detailed API docs, check out http://wink.org.in/wink-nlp-utils/ URL!';
+   * var s = 'For detailed API docs, check out http://winkjs.org/wink-regression-tree/ URL!';
    * myTokenizer.tokenize( s );
    * // -> [ { value: 'For', tag: 'word' },
    * //      { value: 'detailed', tag: 'word' },
@@ -260,7 +260,7 @@ var tokenizer = function () {
    * //      { value: ',', tag: 'punctuation' },
    * //      { value: 'check', tag: 'word' },
    * //      { value: 'out', tag: 'word' },
-   * //      { value: 'http://wink.org.in/wink-nlp-utils/', tag: 'url' },
+   * //      { value: 'http://winkjs.org/wink-regression-tree/', tag: 'url' },
    * //      { value: 'URL', tag: 'word' },
    * //      { value: '!', tag: 'punctuation' } ]
   */
@@ -287,7 +287,7 @@ var tokenizer = function () {
    * // Generate finger print of sentence given in the previous example
    * // under tokenize().
    * myTokenizer.getTokensFP();
-   * // -> 'm:wwwwwwe;zwwwwjwwtc'
+   * // -> 'wwww,wwuw!'
   */
   var getTokensFP = function () {
     var fp = [];

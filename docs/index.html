@@ -631,7 +631,7 @@ for example <strong>I'll</strong> splits as <code>'I'</code> and <code>'\'ll'</c
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">var</span> s = <span class="hljs-string">'For detailed API docs, check out http://wink.org.in/wink-nlp-utils/ URL!'</span>;
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">var</span> s = <span class="hljs-string">'For detailed API docs, check out http://winkjs.org/wink-regression-tree/ URL!'</span>;
 myTokenizer.tokenize( s );
 <span class="hljs-comment">// -&gt; [ { value: 'For', tag: 'word' },</span>
 <span class="hljs-comment">//      { value: 'detailed', tag: 'word' },</span>
@@ -640,7 +640,7 @@ myTokenizer.tokenize( s );
 <span class="hljs-comment">//      { value: ',', tag: 'punctuation' },</span>
 <span class="hljs-comment">//      { value: 'check', tag: 'word' },</span>
 <span class="hljs-comment">//      { value: 'out', tag: 'word' },</span>
-<span class="hljs-comment">//      { value: 'http://wink.org.in/wink-nlp-utils/', tag: 'url' },</span>
+<span class="hljs-comment">//      { value: 'http://winkjs.org/wink-regression-tree/', tag: 'url' },</span>
 <span class="hljs-comment">//      { value: 'URL', tag: 'word' },</span>
 <span class="hljs-comment">//      { value: '!', tag: 'punctuation' } ]</span></pre>
     
@@ -713,7 +713,7 @@ using <code>regexes</code>, which is otherwise a complex and time consuming task
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Generate finger print of sentence given in the previous example</span>
 <span class="hljs-comment">// under tokenize().</span>
 myTokenizer.getTokensFP();
-<span class="hljs-comment">// -&gt; 'm:wwwwwwe;zwwwwjwwtc'</span></pre>
+<span class="hljs-comment">// -&gt; 'wwww,wwuw!'</span></pre>
     
   
 
