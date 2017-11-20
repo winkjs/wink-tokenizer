@@ -114,7 +114,7 @@
 <p>Versatile tokenizer that automatically tags each token with its type</p>
 <h3><a href="https://travis-ci.org/winkjs/wink-tokenizer"><img src="https://api.travis-ci.org/winkjs/wink-tokenizer.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/winkjs/wink-tokenizer?branch=master"><img src="https://coveralls.io/repos/github/winkjs/wink-tokenizer/badge.svg?branch=master" alt="Coverage Status"></a> <a href="https://david-dm.org/winkjs/wink-tokenizer?type=dev"><img src="https://david-dm.org/winkjs/wink-tokenizer/dev-status.svg" alt="devDependencies Status"></a></h3>
 <p><a href="http://winkjs.org/"><img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" ></a></p>
-<p>Tokenize sentences and also automatically tag each token as either word, email, twitter handle, or more using <strong><code>wink-tokenizer</code></strong>. It is a part of <em><a href="http://winkjs.org/">wink</a></em> — a growing family of high quality packages for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.</p>
+<p>Tokenize sentences and also automatically tag each token as either word, email, twitter handle, or more using <strong><code>wink-tokenizer</code></strong>. It is a part of <a href="http://winkjs.org/">wink</a> — a growing family of high quality packages for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.</p>
 <h3>Installation</h3>
 <p>Use <a href="https://www.npmjs.com/package/wink-tokenizer">npm</a> to install:</p>
 <pre><code>npm install wink-tokenizer --save
@@ -127,29 +127,29 @@
 <span class="hljs-comment">// Just tokenize the sentence...</span>
 <span class="hljs-keyword">var</span> s = <span class="hljs-string">'@superman: hit me up on my email r2d2@gmail.com, 2 of us plan party🎉 tom at 3pm:) #fun'</span>;
 myTokenizer.tokenize( s );
-<span class="hljs-comment">// -&gt; [ { token: '@superman', tag: 'mention' },</span>
-<span class="hljs-comment">//      { token: ':', tag: 'punctuation' },</span>
-<span class="hljs-comment">//      { token: 'hit', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'me', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'up', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'on', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'my', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'email', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'r2d2@gmail.com', tag: 'email' },</span>
-<span class="hljs-comment">//      { token: ',', tag: 'punctuation' },</span>
-<span class="hljs-comment">//      { token: '2', tag: 'number' },</span>
-<span class="hljs-comment">//      { token: 'of', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'us', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'plan', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'party', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: '🎉', tag: 'emoji' },</span>
-<span class="hljs-comment">//      { token: 'tom', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'at', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: '3pm', tag: 'time' },</span>
-<span class="hljs-comment">//      { token: ':)', tag: 'emoticon' },</span>
-<span class="hljs-comment">//      { token: '#fun', tag: 'hashtag' } ]</span></pre>
+<span class="hljs-comment">// -&gt; [ { value: '@superman', tag: 'mention' },</span>
+<span class="hljs-comment">//      { value: ':', tag: 'punctuation' },</span>
+<span class="hljs-comment">//      { value: 'hit', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'me', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'up', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'on', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'my', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'email', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'r2d2@gmail.com', tag: 'email' },</span>
+<span class="hljs-comment">//      { value: ',', tag: 'punctuation' },</span>
+<span class="hljs-comment">//      { value: '2', tag: 'number' },</span>
+<span class="hljs-comment">//      { value: 'of', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'us', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'plan', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'party', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: '🎉', tag: 'emoji' },</span>
+<span class="hljs-comment">//      { value: 'tom', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'at', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: '3pm', tag: 'time' },</span>
+<span class="hljs-comment">//      { value: ':)', tag: 'emoticon' },</span>
+<span class="hljs-comment">//      { value: '#fun', tag: 'hashtag' } ]</span></pre>
 <h3>Documentation</h3>
-<p>For detailed API docs, check out <a href="http://winkjs.org/wink-tokenizer/">http://winkjs.org/wink-tokenizer/</a> URL!</p>
+<p>Check out the <a href="http://winkjs.org/wink-tokenizer/">tokenizer API documentation</a> to learn more.</p>
 <h3>Need Help?</h3>
 <p>If you spot a bug and the same has not yet been reported, raise a new <a href="https://github.com/winkjs/wink-tokenizer/issues">issue</a> or consider fixing it and sending a pull request.</p>
 <h3>Copyright &#x26; License</h3>
@@ -616,7 +616,7 @@ for example <strong>I'll</strong> splits as <code>'I'</code> and <code>'\'ll'</c
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>></code>:
         of tokens; each one of them is an object with 2-keys viz.
 
-<code>token</code>
+<code>value</code>
  and its 
 <code>tag</code>
  identifying the type of the token.
@@ -631,28 +631,18 @@ for example <strong>I'll</strong> splits as <code>'I'</code> and <code>'\'ll'</c
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">var</span> s = <span class="hljs-string">'@superman: hit me up on my email r2d2@gmail.com; &amp; we will plan party🎉 tom at 3pm:)'</span>;
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">var</span> s = <span class="hljs-string">'For detailed API docs, check out http://wink.org.in/wink-nlp-utils/ URL!'</span>;
 myTokenizer.tokenize( s );
-<span class="hljs-comment">// -&gt; [ { token: '@superman', tag: 'mention' },</span>
-<span class="hljs-comment">//      { token: ':', tag: 'punctuation' },</span>
-<span class="hljs-comment">//      { token: 'hit', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'me', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'up', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'on', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'my', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'email', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'r2d2@gmail.com', tag: 'email' },</span>
-<span class="hljs-comment">//      { token: ';', tag: 'punctuation' },</span>
-<span class="hljs-comment">//      { token: '&amp;', tag: 'unknown' },</span>
-<span class="hljs-comment">//      { token: 'we', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'will', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'plan', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'party', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: '🎉', tag: 'emoji' },</span>
-<span class="hljs-comment">//      { token: 'tom', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: 'at', tag: 'word' },</span>
-<span class="hljs-comment">//      { token: '3pm', tag: 'time' },</span>
-<span class="hljs-comment">//      { token: ':)', tag: 'emoticon' } ]</span></pre>
+<span class="hljs-comment">// -&gt; [ { value: 'For', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'detailed', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'API', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'docs', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: ',', tag: 'punctuation' },</span>
+<span class="hljs-comment">//      { value: 'check', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'out', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'http://wink.org.in/wink-nlp-utils/', tag: 'url' },</span>
+<span class="hljs-comment">//      { value: 'URL', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: '!', tag: 'punctuation' } ]</span></pre>
     
   
 

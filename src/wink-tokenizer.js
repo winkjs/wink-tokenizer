@@ -131,13 +131,13 @@ var tokenizer = function () {
           words = matches[ k ].split( '\'' );
           if ( words.length === 1 ) {
             // Means there is no contraction.
-            tokens.push( { token: matches[ k ], tag: tag } );
+            tokens.push( { value: matches[ k ], tag: tag } );
           } else {
             // Manage contraction! Split it in to 2 tokens.
-            tokens.push( { token: words[ 0 ], tag: tag } );
-            tokens.push( { token: '\'' + words[ 1 ], tag: tag } );
+            tokens.push( { value: words[ 0 ], tag: tag } );
+            tokens.push( { value: '\'' + words[ 1 ], tag: tag } );
           }
-        } else tokens.push( { token: matches[ k ], tag: tag } );
+        } else tokens.push( { value: matches[ k ], tag: tag } );
       }
       k += 1;
     }
@@ -166,7 +166,7 @@ var tokenizer = function () {
     if ( !regexes.length ) {
       // No regex left, split on `spaces` and tag every token as **unknown**.
       text.split( rgxSpaces ).forEach( function ( tkn ) {
-        finalTokens.push( { token: tkn.trim(), tag: 'unknown' } );
+        finalTokens.push( { value: tkn.trim(), tag: 'unknown' } );
       } );
       return;
     }
@@ -249,30 +249,20 @@ var tokenizer = function () {
    *
    * @param {string} sentence — the input sentence.
    * @return {object[]} of tokens; each one of them is an object with 2-keys viz.
-   * `token` and its `tag` identifying the type of the token.
+   * `value` and its `tag` identifying the type of the token.
    * @example
-   * var s = '@superman: hit me up on my email r2d2@gmail.com; & we will plan party🎉 tom at 3pm:)';
+   * var s = 'For detailed API docs, check out http://wink.org.in/wink-nlp-utils/ URL!';
    * myTokenizer.tokenize( s );
-   * // -> [ { token: '@superman', tag: 'mention' },
-   * //      { token: ':', tag: 'punctuation' },
-   * //      { token: 'hit', tag: 'word' },
-   * //      { token: 'me', tag: 'word' },
-   * //      { token: 'up', tag: 'word' },
-   * //      { token: 'on', tag: 'word' },
-   * //      { token: 'my', tag: 'word' },
-   * //      { token: 'email', tag: 'word' },
-   * //      { token: 'r2d2@gmail.com', tag: 'email' },
-   * //      { token: ';', tag: 'punctuation' },
-   * //      { token: '&', tag: 'unknown' },
-   * //      { token: 'we', tag: 'word' },
-   * //      { token: 'will', tag: 'word' },
-   * //      { token: 'plan', tag: 'word' },
-   * //      { token: 'party', tag: 'word' },
-   * //      { token: '🎉', tag: 'emoji' },
-   * //      { token: 'tom', tag: 'word' },
-   * //      { token: 'at', tag: 'word' },
-   * //      { token: '3pm', tag: 'time' },
-   * //      { token: ':)', tag: 'emoticon' } ]
+   * // -> [ { value: 'For', tag: 'word' },
+   * //      { value: 'detailed', tag: 'word' },
+   * //      { value: 'API', tag: 'word' },
+   * //      { value: 'docs', tag: 'word' },
+   * //      { value: ',', tag: 'punctuation' },
+   * //      { value: 'check', tag: 'word' },
+   * //      { value: 'out', tag: 'word' },
+   * //      { value: 'http://wink.org.in/wink-nlp-utils/', tag: 'url' },
+   * //      { value: 'URL', tag: 'word' },
+   * //      { value: '!', tag: 'punctuation' } ]
   */
   var tokenize = function ( sentence ) {
     finalTokens = [];
@@ -302,7 +292,7 @@ var tokenizer = function () {
   var getTokensFP = function () {
     var fp = [];
     finalTokens.forEach( function ( t ) {
-      fp.push( ( fingerPrintCodes[ t.tag ] ) ? fingerPrintCodes[ t.tag ] : t.token );
+      fp.push( ( fingerPrintCodes[ t.tag ] ) ? fingerPrintCodes[ t.tag ] : t.value );
     } );
     return fp.join( '' );
   }; // getFingerprint()

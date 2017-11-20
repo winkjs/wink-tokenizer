@@ -13,35 +13,35 @@ describe( 'basic test cycle', function () {
   var fp = tokenizer.getTokensFP;
 
   it( 'should tokenize a very complex sentence', function () {
-    var output = [ { token: '@superman', tag: 'mention' },
-                   { token: ':', tag: 'punctuation' },
-                   { token: 'hit', tag: 'word' },
-                   { token: 'me', tag: 'word' },
-                   { token: 'up', tag: 'word' },
-                   { token: 'on', tag: 'word' },
-                   { token: 'my', tag: 'word' },
-                   { token: 'email', tag: 'word' },
-                   { token: 'r2d2@gmail.com', tag: 'email' },
-                   { token: ';', tag: 'punctuation' },
-                   { token: '&', tag: 'unknown' },
-                   { token: 'we', tag: 'word' },
-                   { token: 'will', tag: 'word' },
-                   { token: 'plan', tag: 'word' },
-                   { token: 'party', tag: 'word' },
-                   { token: '🎉', tag: 'emoji' },
-                   { token: '🎉', tag: 'emoji' },
-                   { token: '🎉', tag: 'emoji' },
-                   { token: '🎉', tag: 'emoji' },
-                   { token: '<3', tag: 'emoticon' },
-                   { token: '4pm', tag: 'time' },
-                   { token: ':D', tag: 'emoticon' },
-                   { token: '🎉', tag: 'emoji' },
-                   { token: 'tom', tag: 'word' },
-                   { token: 'at', tag: 'word' },
-                   { token: '3pm', tag: 'time' },
-                   { token: ':)', tag: 'emoticon' },
-                   { token: ':)', tag: 'emoticon' },
-                   { token: '#fun', tag: 'hashtag' } ];
+    var output = [ { value: '@superman', tag: 'mention' },
+                   { value: ':', tag: 'punctuation' },
+                   { value: 'hit', tag: 'word' },
+                   { value: 'me', tag: 'word' },
+                   { value: 'up', tag: 'word' },
+                   { value: 'on', tag: 'word' },
+                   { value: 'my', tag: 'word' },
+                   { value: 'email', tag: 'word' },
+                   { value: 'r2d2@gmail.com', tag: 'email' },
+                   { value: ';', tag: 'punctuation' },
+                   { value: '&', tag: 'unknown' },
+                   { value: 'we', tag: 'word' },
+                   { value: 'will', tag: 'word' },
+                   { value: 'plan', tag: 'word' },
+                   { value: 'party', tag: 'word' },
+                   { value: '🎉', tag: 'emoji' },
+                   { value: '🎉', tag: 'emoji' },
+                   { value: '🎉', tag: 'emoji' },
+                   { value: '🎉', tag: 'emoji' },
+                   { value: '<3', tag: 'emoticon' },
+                   { value: '4pm', tag: 'time' },
+                   { value: ':D', tag: 'emoticon' },
+                   { value: '🎉', tag: 'emoji' },
+                   { value: 'tom', tag: 'word' },
+                   { value: 'at', tag: 'word' },
+                   { value: '3pm', tag: 'time' },
+                   { value: ':)', tag: 'emoticon' },
+                   { value: ':)', tag: 'emoticon' },
+                   { value: '#fun', tag: 'hashtag' } ];
     expect( tokenize( '@superman: hit me up on my email r2d2@gmail.com; & we will plan party🎉🎉🎉 🎉  <34pm:D    🎉 tom at 3pm:):) #fun' ) ).to.deep.equal( output );
   } );
 
@@ -55,7 +55,7 @@ describe( 'basic test cycle', function () {
   } );
 
   it( 'should tokenize a simple sentence', function () {
-    expect( tokenize( 'feeling good #fun' ) ).to.deep.equal( [ { token: 'feeling', tag: 'word' }, { token: 'good', tag: 'word' }, { token: '#fun', tag: 'hashtag' } ] );
+    expect( tokenize( 'feeling good #fun' ) ).to.deep.equal( [ { value: 'feeling', tag: 'word' }, { value: 'good', tag: 'word' }, { value: '#fun', tag: 'hashtag' } ] );
   } );
 
   it( 'should gnerate the finger print correctly', function () {
@@ -64,30 +64,30 @@ describe( 'basic test cycle', function () {
 
   it( 'should tokenize a simple sentence with hashtag off', function () {
     expect( tokenizer.defineConfig( { hashtag: false } ) ).to.equal( 11 );
-    expect( tokenize( 'feeling good #fun' ) ).to.deep.equal( [ { token: 'feeling', tag: 'word' }, { token: 'good', tag: 'word' }, { token: '#', tag: 'unknown' }, { token: 'fun', tag: 'word' } ] );
+    expect( tokenize( 'feeling good #fun' ) ).to.deep.equal( [ { value: 'feeling', tag: 'word' }, { value: 'good', tag: 'word' }, { value: '#', tag: 'unknown' }, { value: 'fun', tag: 'word' } ] );
   } );
 
   it( 'should tokenize a complex sentence with full config', function () {
-    var output = [ { token: '@superman', tag: 'mention' },
-                   { token: ':', tag: 'punctuation' },
-                   { token: 'hit', tag: 'word' },
-                   { token: 'me', tag: 'word' },
-                   { token: 'up', tag: 'word' },
-                   { token: 'on', tag: 'word' },
-                   { token: 'my', tag: 'word' },
-                   { token: 'email', tag: 'word' },
-                   { token: 'r2d2@gmail.com', tag: 'email' },
-                   { token: ';', tag: 'punctuation' },
-                   { token: '&', tag: 'unknown' },
-                   { token: 'we', tag: 'word' },
-                   { token: 'will', tag: 'word' },
-                   { token: 'plan', tag: 'word' },
-                   { token: 'party', tag: 'word' },
-                   { token: '🎉', tag: 'emoji' },
-                   { token: 'tom', tag: 'word' },
-                   { token: 'at', tag: 'word' },
-                   { token: '3pm', tag: 'time' },
-                   { token: ':)', tag: 'emoticon' } ];
+    var output = [ { value: '@superman', tag: 'mention' },
+                   { value: ':', tag: 'punctuation' },
+                   { value: 'hit', tag: 'word' },
+                   { value: 'me', tag: 'word' },
+                   { value: 'up', tag: 'word' },
+                   { value: 'on', tag: 'word' },
+                   { value: 'my', tag: 'word' },
+                   { value: 'email', tag: 'word' },
+                   { value: 'r2d2@gmail.com', tag: 'email' },
+                   { value: ';', tag: 'punctuation' },
+                   { value: '&', tag: 'unknown' },
+                   { value: 'we', tag: 'word' },
+                   { value: 'will', tag: 'word' },
+                   { value: 'plan', tag: 'word' },
+                   { value: 'party', tag: 'word' },
+                   { value: '🎉', tag: 'emoji' },
+                   { value: 'tom', tag: 'word' },
+                   { value: 'at', tag: 'word' },
+                   { value: '3pm', tag: 'time' },
+                   { value: ':)', tag: 'emoticon' } ];
     expect( tokenize( '@superman: hit me up on my email r2d2@gmail.com; & we will plan party🎉 tom at 3pm:)' ) ).to.deep.equal( output );
   } );
 
@@ -96,52 +96,52 @@ describe( 'basic test cycle', function () {
   } );
 
   it( 'should tokenize a complex sentence with empty config', function () {
-    var output = [ { token: '@superman:', tag: 'unknown' },
-                   { token: 'hit', tag: 'unknown' },
-                   { token: 'me', tag: 'unknown' },
-                   { token: 'up', tag: 'unknown' },
-                   { token: 'on', tag: 'unknown' },
-                   { token: 'my', tag: 'unknown' },
-                   { token: 'email', tag: 'unknown' },
-                   { token: 'r2d2@gmail.com;', tag: 'unknown' },
-                   { token: '&', tag: 'unknown' },
-                   { token: 'we', tag: 'unknown' },
-                   { token: 'will', tag: 'unknown' },
-                   { token: 'plan', tag: 'unknown' },
-                   { token: 'party🎉', tag: 'unknown' },
-                   { token: 'tom', tag: 'unknown' },
-                   { token: 'at', tag: 'unknown' },
-                   { token: '3pm:)', tag: 'unknown' } ];
+    var output = [ { value: '@superman:', tag: 'unknown' },
+                   { value: 'hit', tag: 'unknown' },
+                   { value: 'me', tag: 'unknown' },
+                   { value: 'up', tag: 'unknown' },
+                   { value: 'on', tag: 'unknown' },
+                   { value: 'my', tag: 'unknown' },
+                   { value: 'email', tag: 'unknown' },
+                   { value: 'r2d2@gmail.com;', tag: 'unknown' },
+                   { value: '&', tag: 'unknown' },
+                   { value: 'we', tag: 'unknown' },
+                   { value: 'will', tag: 'unknown' },
+                   { value: 'plan', tag: 'unknown' },
+                   { value: 'party🎉', tag: 'unknown' },
+                   { value: 'tom', tag: 'unknown' },
+                   { value: 'at', tag: 'unknown' },
+                   { value: '3pm:)', tag: 'unknown' } ];
     expect( tokenizer.defineConfig( {} ) ).to.equal( 0 );
     expect( tokenize( '@superman: hit me up on my email r2d2@gmail.com;  & we will plan party🎉 tom at 3pm:)' ) ).to.deep.equal( output );
   } );
 
   it( 'should tokenize a complex sentence with possessive & aposrtophy stuff', function () {
-    var output = [ { token: 'She', tag: 'word' },
-                   { token: 'was', tag: 'word' },
-                   { token: 'not', tag: 'word' },
-                   { token: 'at', tag: 'word' },
-                   { token: 'home', tag: 'word' },
-                   { token: 'and', tag: 'word' },
-                   { token: 'wild', tag: 'word' },
-                   { token: 'cats', tag: 'word' },
-                   { token: '\'', tag: 'word' },
-                   { token: 'ate', tag: 'word' },
-                   { token: 'her', tag: 'word' },
-                   { token: 'dog', tag: 'word' },
-                   { token: '\'s', tag: 'word' },
-                   { token: 'food', tag: 'word' } ];
+    var output = [ { value: 'She', tag: 'word' },
+                   { value: 'was', tag: 'word' },
+                   { value: 'not', tag: 'word' },
+                   { value: 'at', tag: 'word' },
+                   { value: 'home', tag: 'word' },
+                   { value: 'and', tag: 'word' },
+                   { value: 'wild', tag: 'word' },
+                   { value: 'cats', tag: 'word' },
+                   { value: '\'', tag: 'word' },
+                   { value: 'ate', tag: 'word' },
+                   { value: 'her', tag: 'word' },
+                   { value: 'dog', tag: 'word' },
+                   { value: '\'s', tag: 'word' },
+                   { value: 'food', tag: 'word' } ];
     expect( t().tokenize( 'She wasn\'t at home and wild cats\' ate her dog\'s food' ) ).to.deep.equal( output );
   } );
 
   it( 'should tokenize a sentence with pmultiple contractions', function () {
-    var output = [ { token: 'I', tag: 'word' },
-                   { token: '\'ll', tag: 'word' },
-                   { token: 'eat', tag: 'word' },
-                   { token: 'John', tag: 'word' },
-                   { token: '\'s', tag: 'word' },
-                   { token: 'food', tag: 'word' },
-                   { token: 'today', tag: 'word' } ];
+    var output = [ { value: 'I', tag: 'word' },
+                   { value: '\'ll', tag: 'word' },
+                   { value: 'eat', tag: 'word' },
+                   { value: 'John', tag: 'word' },
+                   { value: '\'s', tag: 'word' },
+                   { value: 'food', tag: 'word' },
+                   { value: 'today', tag: 'word' } ];
     expect( t().tokenize( 'I\'ll eat John\'s food today' ) ).to.deep.equal( output );
   } );
 } );

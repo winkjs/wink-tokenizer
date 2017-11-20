@@ -6,7 +6,7 @@ Versatile tokenizer that automatically tags each token with its type
 
 [<img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" >](http://winkjs.org/)
 
-Tokenize sentences and also automatically tag each token as either word, email, twitter handle, or more using **`wink-tokenizer`**. It is a part of _[wink](http://winkjs.org/)_ — a growing family of high quality packages for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.
+Tokenize sentences and also automatically tag each token as either word, email, twitter handle, or more using **`wink-tokenizer`**. It is a part of [wink](http://winkjs.org/) — a growing family of high quality packages for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.
 
 ### Installation
 
@@ -15,7 +15,7 @@ Use [npm](https://www.npmjs.com/package/wink-tokenizer) to install:
     npm install wink-tokenizer --save
 
 ### Example
-```javascript 
+```javascript
 // Load tokenizer.
 var tokenizer = require( 'wink-tokenizer' );
 // Create it's instance.
@@ -23,31 +23,31 @@ var myTokenizer = tokenizer();
 // Just tokenize the sentence...
 var s = '@superman: hit me up on my email r2d2@gmail.com, 2 of us plan party🎉 tom at 3pm:) #fun';
 myTokenizer.tokenize( s );
-// -> [ { token: '@superman', tag: 'mention' },
-//      { token: ':', tag: 'punctuation' },
-//      { token: 'hit', tag: 'word' },
-//      { token: 'me', tag: 'word' },
-//      { token: 'up', tag: 'word' },
-//      { token: 'on', tag: 'word' },
-//      { token: 'my', tag: 'word' },
-//      { token: 'email', tag: 'word' },
-//      { token: 'r2d2@gmail.com', tag: 'email' },
-//      { token: ',', tag: 'punctuation' },
-//      { token: '2', tag: 'number' },
-//      { token: 'of', tag: 'word' },
-//      { token: 'us', tag: 'word' },
-//      { token: 'plan', tag: 'word' },
-//      { token: 'party', tag: 'word' },
-//      { token: '🎉', tag: 'emoji' },
-//      { token: 'tom', tag: 'word' },
-//      { token: 'at', tag: 'word' },
-//      { token: '3pm', tag: 'time' },
-//      { token: ':)', tag: 'emoticon' },
-//      { token: '#fun', tag: 'hashtag' } ]
+// -> [ { value: '@superman', tag: 'mention' },
+//      { value: ':', tag: 'punctuation' },
+//      { value: 'hit', tag: 'word' },
+//      { value: 'me', tag: 'word' },
+//      { value: 'up', tag: 'word' },
+//      { value: 'on', tag: 'word' },
+//      { value: 'my', tag: 'word' },
+//      { value: 'email', tag: 'word' },
+//      { value: 'r2d2@gmail.com', tag: 'email' },
+//      { value: ',', tag: 'punctuation' },
+//      { value: '2', tag: 'number' },
+//      { value: 'of', tag: 'word' },
+//      { value: 'us', tag: 'word' },
+//      { value: 'plan', tag: 'word' },
+//      { value: 'party', tag: 'word' },
+//      { value: '🎉', tag: 'emoji' },
+//      { value: 'tom', tag: 'word' },
+//      { value: 'at', tag: 'word' },
+//      { value: '3pm', tag: 'time' },
+//      { value: ':)', tag: 'emoticon' },
+//      { value: '#fun', tag: 'hashtag' } ]
 ```
 
 ### Documentation
-For detailed API docs, check out http://winkjs.org/wink-tokenizer/ URL!
+Check out the [tokenizer API documentation](http://winkjs.org/wink-tokenizer/) to learn more.
 
 ### Need Help?
 
