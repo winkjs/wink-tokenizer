@@ -134,7 +134,7 @@ describe( 'basic test cycle', function () {
     expect( t().tokenize( 'She wasn\'t at home and wild cats\' ate her dog\'s food' ) ).to.deep.equal( output );
   } );
 
-  it( 'should tokenize a sentence with pmultiple contractions', function () {
+  it( 'should tokenize a sentence with multiple contractions', function () {
     var output = [ { value: 'I', tag: 'word' },
                    { value: '\'ll', tag: 'word' },
                    { value: 'eat', tag: 'word' },
@@ -143,5 +143,71 @@ describe( 'basic test cycle', function () {
                    { value: 'food', tag: 'word' },
                    { value: 'today', tag: 'word' } ];
     expect( t().tokenize( 'I\'ll eat John\'s food today' ) ).to.deep.equal( output );
+  } );
+
+  it( 'should tokenize a sentence with words with diacritical marks', function () {
+    var output = [ { value: 'Zoë', tag: 'word' },
+                   { value: 'submitted', tag: 'word' },
+                   { value: 'her', tag: 'word' },
+                   { value: 'résumé', tag: 'word' },
+                   { value: '🎉', tag: 'emoji' },
+                   { value: 'in', tag: 'word' },
+                   { value: 'Nestlé', tag: 'word' },
+                   { value: ':-)', tag: 'emoticon' } ];
+    expect( t().tokenize( 'Zoë submitted her résumé🎉 in Nestlé:-)' ) ).to.deep.equal( output );
+  } );
+
+  it( 'should tokenize a sentence in french', function () {
+    var output = [ { value: 'Petit', tag: 'word' },
+                   { value: 'a', tag: 'word' },
+                   { value: 'petit', tag: 'word' },
+                   { value: ',', tag: 'punctuation' },
+                   { value: 'l', tag: 'word' },
+                   { value: '’', tag: 'punctuation' },
+                   { value: 'oiseau', tag: 'word' },
+                   { value: 'fait', tag: 'word' },
+                   { value: 'son', tag: 'word' },
+                   { value: 'nid', tag: 'word' } ];
+    expect( t().tokenize( 'Petit a petit, l’oiseau fait son nid' ) ).to.deep.equal( output );
+  } );
+
+  it( 'should tokenize another sentence in french', function () {
+    var output = [ { value: 'Mieux', tag: 'word' },
+                   { value: 'vaut', tag: 'word' },
+                   { value: 'prévenir', tag: 'word' },
+                   { value: 'que', tag: 'word' },
+                   { value: 'guérir', tag: 'word' },
+                   { value: ':)', tag: 'emoticon' } ];
+    expect( t().tokenize( 'Mieux vaut prévenir que guérir:)' ) ).to.deep.equal( output );
+  } );
+
+  it( 'should tokenize a sentence in german', function () {
+    var output = [ { value: 'Übung', tag: 'word' },
+                   { value: 'macht', tag: 'word' },
+                   { value: 'den', tag: 'word' },
+                   { value: 'Meister', tag: 'word' },
+                   { value: '.', tag: 'punctuation' } ];
+    expect( t().tokenize( 'Übung macht den Meister.' ) ).to.deep.equal( output );
+  } );
+
+  it( 'should tokenize a sentence in spanish', function () {
+    var output = [ { value: 'Donde', tag: 'word' },
+                   { value: 'hay', tag: 'word' },
+                   { value: 'gana', tag: 'word' },
+                   { value: ',', tag: 'punctuation' },
+                   { value: 'hay', tag: 'word' },
+                   { value: 'maña', tag: 'word' },
+                   { value: '.', tag: 'punctuation' } ];
+    expect( t().tokenize( 'Donde hay gana, hay maña.' ) ).to.deep.equal( output );
+  } );
+
+  it( 'should tokenize a sentence in icelandic', function () {
+    var output = [ { value: 'Vinr', tag: 'word' },
+                   { value: 'er', tag: 'word' },
+                   { value: 'sás', tag: 'word' },
+                   { value: 'vörnuð', tag: 'word' },
+                   { value: 'býðr', tag: 'word' },
+                   { value: '.', tag: 'punctuation' } ];
+    expect( t().tokenize( 'Vinr er sás vörnuð býðr.' ) ).to.deep.equal( output );
   } );
 } );
