@@ -1,7 +1,7 @@
 {
   "name": "wink-tokenizer",
-  "version": "2.0.1",
-  "description": "Versatile tokenizer that automatically tags each token with its type",
+  "version": "2.1.0",
+  "description": "Multilingual tokenizer that automatically tags each token with its type",
   "keywords": [
     "Tokenizer",
     "Tokenize",
@@ -13,6 +13,11 @@
     "URL",
     "Emoji",
     "Emoticon",
+    "Multilingual",
+    "French",
+    "German",
+    "Spanish",
+    "Icelandic",
     "wink"
   ],
   "main": "src/wink-tokenizer.js",
