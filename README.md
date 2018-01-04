@@ -1,12 +1,14 @@
 # wink-tokenizer
 
-Versatile tokenizer that automatically tags each token with its type
+Multilingual tokenizer that automatically tags each token with its type
 
-### [![Build Status](https://api.travis-ci.org/winkjs/wink-tokenizer.svg?branch=master)](https://travis-ci.org/winkjs/wink-tokenizer) [![Coverage Status](https://coveralls.io/repos/github/winkjs/wink-tokenizer/badge.svg?branch=master)](https://coveralls.io/github/winkjs/wink-tokenizer?branch=master) [![devDependencies Status](https://david-dm.org/winkjs/wink-tokenizer/dev-status.svg)](https://david-dm.org/winkjs/wink-tokenizer?type=dev)
+### [![Build Status](https://api.travis-ci.org/winkjs/wink-tokenizer.svg?branch=master)](https://travis-ci.org/winkjs/wink-tokenizer) [![Coverage Status](https://coveralls.io/repos/github/winkjs/wink-tokenizer/badge.svg?branch=master)](https://coveralls.io/github/winkjs/wink-tokenizer?branch=master) [![Inline docs](http://inch-ci.org/github/winkjs/wink-tokenizer.svg?branch=master)](http://inch-ci.org/github/winkjs/wink-tokenizer) [![devDependencies Status](https://david-dm.org/winkjs/wink-tokenizer/dev-status.svg)](https://david-dm.org/winkjs/wink-tokenizer?type=dev)
 
 [<img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" >](http://winkjs.org/)
 
-Tokenize sentences and also automatically tag each token as either word, email, twitter handle, or more using **`wink-tokenizer`**. It is a part of [wink](http://winkjs.org/) — a growing family of high quality packages for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.
+Tokenize sentences in English, French, German, Spanish, and Icelandic using **`wink-tokenizer`**. It is a part of [wink](http://winkjs.org/) — a growing family of high quality packages for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.
+
+It automatically tags each token as either word, email, twitter handle, or more.
 
 ### Installation
 
@@ -14,13 +16,14 @@ Use [npm](https://www.npmjs.com/package/wink-tokenizer) to install:
 
     npm install wink-tokenizer --save
 
-### Example
+### Getting Started
 ```javascript
 // Load tokenizer.
 var tokenizer = require( 'wink-tokenizer' );
 // Create it's instance.
 var myTokenizer = tokenizer();
-// Just tokenize the sentence...
+
+// Tokenize a tweet.
 var s = '@superman: hit me up on my email r2d2@gmail.com, 2 of us plan party🎉 tom at 3pm:) #fun';
 myTokenizer.tokenize( s );
 // -> [ { value: '@superman', tag: 'mention' },
@@ -44,6 +47,16 @@ myTokenizer.tokenize( s );
 //      { value: '3pm', tag: 'time' },
 //      { value: ':)', tag: 'emoticon' },
 //      { value: '#fun', tag: 'hashtag' } ]
+
+// Tokenize a french sentence.
+s = 'Mieux vaut prévenir que guérir:-)';
+myTokenizer.tokenize( s );
+// -> [ { value: 'Mieux', tag: 'word' },
+//      { value: 'vaut', tag: 'word' },
+//      { value: 'prévenir', tag: 'word' },
+//      { value: 'que', tag: 'word' },
+//      { value: 'guérir', tag: 'word' },
+//      { value: ':-)', tag: 'emoticon' } ]
 ```
 
 ### Documentation
