@@ -1,7 +1,7 @@
 //     wink-tokenizer
 //     Multilingual tokenizer that automatically tags each token with its type.
 //
-//     Copyright (C) 2017  GRAYPE Systems Private Limited
+//     Copyright (C) 2017-18  GRAYPE Systems Private Limited
 //
 //     This file is part of “wink-sentiment”.
 //
@@ -306,6 +306,3 @@ var tokenizer = function () {
 };
 
 module.exports = tokenizer;
-//
-// var t = tokenizer().tokenize;
-// console.log( t('I have$200.0 ₿2.0 ₽100₹200₨300 $10000.00 £2 ¥0.5 €1.2₩1:-)') );
