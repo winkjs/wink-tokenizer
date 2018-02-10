@@ -1,6 +1,6 @@
 {
   "name": "wink-tokenizer",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Multilingual tokenizer that automatically tags each token with its type",
   "keywords": [
     "Tokenizer",
