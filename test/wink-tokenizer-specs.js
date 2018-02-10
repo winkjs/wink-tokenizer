@@ -233,4 +233,31 @@ describe( 'basic test cycle', function () {
                    { value: '.', tag: 'punctuation' } ];
     expect( t().tokenize( 'Vinr er sás vörnuð býðr.' ) ).to.deep.equal( output );
   } );
+
+  it( 'should tokenize a currency symbols', function () {
+    var output = [ { value: 'I', tag: 'word' },
+                   { value: 'have', tag: 'word' },
+                   { value: '$', tag: 'currency' },
+                   { value: '200.0', tag: 'number' },
+                   { value: '₿', tag: 'currency' },
+                   { value: '2.0', tag: 'number' },
+                   { value: '₽', tag: 'currency' },
+                   { value: '100', tag: 'number' },
+                   { value: '₹', tag: 'currency' },
+                   { value: '200', tag: 'number' },
+                   { value: '₨', tag: 'currency' },
+                   { value: '300', tag: 'number' },
+                   { value: '$', tag: 'currency' },
+                   { value: '10000.00', tag: 'number' },
+                   { value: '£', tag: 'currency' },
+                   { value: '2', tag: 'number' },
+                   { value: '¥', tag: 'currency' },
+                   { value: '0.5', tag: 'number' },
+                   { value: '€', tag: 'currency' },
+                   { value: '1.2', tag: 'number' },
+                   { value: '₩', tag: 'currency' },
+                   { value: '1', tag: 'number' },
+                   { value: ':-)', tag: 'emoticon' } ];
+    expect( t().tokenize( 'I have$200.0 ₿2.0 ₽100₹200₨300 $10000.00 £2 ¥0.5 €1.2₩1:-)' ) ).to.deep.equal( output );
+  } );
 } );

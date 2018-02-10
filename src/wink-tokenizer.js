@@ -26,7 +26,8 @@ var rgxNumber = /\d*\.\d+|\d+/g;
 var rgxMention = /\@\w+/g;
 var rgxHashtag = /\#[a-z][a-z0-9]*/g;
 var rgxEmail = /[-!#$%&'*+\/=?^\w{|}~](?:\.?[-!#$%&'*+\/=?^\w`{|}~])*@[a-z0-9](?:-?\.?[a-z0-9])*(?:\.[a-z](?:-?[a-z0-9])*)+/gi;
-var rgxCurrency = /[\$\£\¥\€]/g;
+// Bitcoin, Ruble, Indian Rupee, Other Rupee, Dollar, Pound, Yen, Euro, Wong.
+var rgxCurrency = /[\₿\₽\₹\₨\$\£\¥\€\₩]/g;
 var rgxPunctuation = /[\’\'\‘\’\`\“\”\"\[\]\(\)\{\}\…\,\.\!\;\?\/\-\:]/g;
 var rgxQuotedPhrase = /\"[^\"]*\"/g;
 var rgxURL = /(?:https?:\/\/)(?:[\da-z\.-]+)\.(?:[a-z\.]{2,6})(?:[\/\w\.\-\?#=]*)*\/?/gi;
@@ -305,3 +306,6 @@ var tokenizer = function () {
 };
 
 module.exports = tokenizer;
+//
+// var t = tokenizer().tokenize;
+// console.log( t('I have$200.0 ₿2.0 ₽100₹200₨300 $10000.00 £2 ¥0.5 €1.2₩1:-)') );
