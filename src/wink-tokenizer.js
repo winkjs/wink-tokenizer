@@ -198,7 +198,7 @@ var tokenizer = function () {
    * of tokens will be detected and tagged automatically.
    *
    * @param {object} config — It defines 0 or more properties from the list of
-   * **12** properties. A true value for a property ensures tokenization
+   * **13** properties. A true value for a property ensures tokenization
    * for that type of text; whereas false value will mean that the tokenization of that
    * type of text will not be attempted.
    *
@@ -218,15 +218,16 @@ var tokenizer = function () {
    * @param {boolean} [config.punctuation=true] common punctuation such as **`?`** or **`,`**
    * ( token becomes fingerprint )
    * @param {boolean} [config.quoted_phrase=true] any **"quoted text"** in the sentence. (**`q`**)
+   * @param {boolean} [config.symbol=true] for example **`~`** or **`+`** or **`&`** or **`%`** (**`s`**)
    * @param {boolean} [config.time=true] common representation of time such as **4pm** or **16:00 hours** (**`t`**)
    * @param {boolean} [config.mention=true] **@mention**  as in github or twitter (**`m`**)
    * @param {boolean} [config.url=true] URL such as **https://github.com** (**`u`**)
-   * @param {boolean} [config.word=true] word such as **faster** or **dog's** or **cats'** (**`w`**)
-   * @return {number} number of properties set to true from the list of above 12.
+   * @param {boolean} [config.word=true] word such as **faster** or **résumé** or **prévenir** (**`w`**)
+   * @return {number} number of properties set to true from the list of above 13.
    * @example
    * // Do not tokenize & tag @mentions.
    * var myTokenizer.defineConfig( { mention: false } );
-   * // -> 11
+   * // -> 12
    * // Only tokenize words as defined above.
    * var myTokenizer.defineConfig( {} );
    * // -> 0

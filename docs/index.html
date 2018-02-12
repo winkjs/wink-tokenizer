@@ -308,7 +308,7 @@ of tokens will be detected and tagged automatically.</p>
             <span class='code bold'>config</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
 	    — It defines 0 or more properties from the list of
 
-<strong>12</strong>
+<strong>13</strong>
  properties. A true value for a property ensures tokenization
 for that type of text; whereas false value will mean that the tokenization of that
 type of text will not be attempted.
@@ -464,6 +464,27 @@ token of that type.</p>
 
               
                 <tr>
+  <td class='break-word'><span class='code bold'>config.symbol</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>for example 
+<strong><code>~</code></strong>
+ or 
+<strong><code>+</code></strong>
+ or 
+<strong><code>&#x26;</code></strong>
+ or 
+<strong><code>%</code></strong>
+ (
+<strong><code>s</code></strong>
+)
+</span></td>
+</tr>
+
+
+              
+                <tr>
   <td class='break-word'><span class='code bold'>config.time</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
   
     (default <code>true</code>)
@@ -517,9 +538,9 @@ token of that type.</p>
   <td class='break-word'><span>word such as 
 <strong>faster</strong>
  or 
-<strong>dog's</strong>
+<strong>résumé</strong>
  or 
-<strong>cats'</strong>
+<strong>prévenir</strong>
  (
 <strong><code>w</code></strong>
 )
@@ -542,7 +563,7 @@ token of that type.</p>
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
-        number of properties set to true from the list of above 12.
+        number of properties set to true from the list of above 13.
 
       
     
