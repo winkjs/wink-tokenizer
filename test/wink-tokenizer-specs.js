@@ -46,7 +46,7 @@ describe( 'basic test cycle', function () {
                    { value: 'email', tag: 'word' },
                    { value: 'r2d2@gmail.com', tag: 'email' },
                    { value: ';', tag: 'punctuation' },
-                   { value: '&', tag: 'unknown' },
+                   { value: '&', tag: 'symbol' },
                    { value: 'we', tag: 'word' },
                    { value: 'will', tag: 'word' },
                    { value: 'plan', tag: 'word' },
@@ -69,7 +69,7 @@ describe( 'basic test cycle', function () {
   } );
 
   it( 'should gnerate the finger print correctly', function () {
-    expect( fp() ).to.equal( 'm:wwwwwwe;zwwwwjjjjctcjwwtcch' );
+    expect( fp() ).to.equal( 'm:wwwwwwe;swwwwjjjjctcjwwtcch' );
   } );
 
   it( 'should return an empty array with blank sentence', function () {
@@ -86,8 +86,8 @@ describe( 'basic test cycle', function () {
   } );
 
   it( 'should tokenize a simple sentence with hashtag off', function () {
-    expect( tokenizer.defineConfig( { hashtag: false } ) ).to.equal( 11 );
-    expect( tokenize( 'feeling good #fun' ) ).to.deep.equal( [ { value: 'feeling', tag: 'word' }, { value: 'good', tag: 'word' }, { value: '#', tag: 'unknown' }, { value: 'fun', tag: 'word' } ] );
+    expect( tokenizer.defineConfig( { hashtag: false } ) ).to.equal( 12 );
+    expect( tokenize( 'feeling good #fun' ) ).to.deep.equal( [ { value: 'feeling', tag: 'word' }, { value: 'good', tag: 'word' }, { value: '#', tag: 'symbol' }, { value: 'fun', tag: 'word' } ] );
   } );
 
   it( 'should tokenize a complex sentence with full config', function () {
@@ -101,7 +101,7 @@ describe( 'basic test cycle', function () {
                    { value: 'email', tag: 'word' },
                    { value: 'r2d2@gmail.com', tag: 'email' },
                    { value: ';', tag: 'punctuation' },
-                   { value: '&', tag: 'unknown' },
+                   { value: '&', tag: 'symbol' },
                    { value: 'we', tag: 'word' },
                    { value: 'will', tag: 'word' },
                    { value: 'plan', tag: 'word' },
@@ -111,11 +111,11 @@ describe( 'basic test cycle', function () {
                    { value: 'at', tag: 'word' },
                    { value: '3pm', tag: 'time' },
                    { value: ':)', tag: 'emoticon' } ];
-    expect( tokenize( '@superman: hit me up on my email r2d2@gmail.com; & we will plan party🎉 tom at 3pm:)' ) ).to.deep.equal( output );
+    expect( tokenize( '@superman: hit me up on my email r2d2@gmail.com;& we will plan party🎉 tom at 3pm:)' ) ).to.deep.equal( output );
   } );
 
   it( 'should gnerate the finger print correctly for complex sentence', function () {
-    expect( fp() ).to.equal( 'm:wwwwwwe;zwwwwjwwtc' );
+    expect( fp() ).to.equal( 'm:wwwwwwe;swwwwjwwtc' );
   } );
 
   it( 'should tokenize a complex sentence with empty config', function () {

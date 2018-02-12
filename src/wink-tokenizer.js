@@ -36,6 +36,8 @@ var rgxEmoticon = /:-?[dps\*\/\[\]\{\}\(\)]|;-?[/(/)d]|<3/gi;
 var rgxTime = /(?:\d|[01]\d|2[0-3]):?(?:[0-5][0-9])?\s?(?:[ap]m|hours|hrs)\b/gi;
 // Inlcude [Latin-1 Supplement Unicode Block](https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block))
 var rgxWord = /[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]+\'[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]{1,2}|[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]+s\'|[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]+/gi;
+// Symbols go here.
+var rgxSymbol = /[\~\@\#\%\^\+\=\*\|<>&]/g;
 // Special regex to handle not elisions at sentence level itself.
 var rgxNotElision = /([a-z])(n\'t)\b/gi;
 // Regexes and their categories; used for tokenizing via match/split. The
@@ -52,7 +54,8 @@ var rgxsMaster = [
   { regex: rgxNumber, category: 'number' },
   { regex: rgxCurrency, category: 'currency' },
   { regex: rgxWord, category: 'word' },
-  { regex: rgxPunctuation, category: 'punctuation' }
+  { regex: rgxPunctuation, category: 'punctuation' },
+  { regex: rgxSymbol, category: 'symbol' }
 ];
 // Used to generate finger print from the tokens.
 var fingerPrintCodes = {
@@ -64,6 +67,7 @@ var fingerPrintCodes = {
   number: 'n',
   quoted_phrase: 'q', // eslint-disable-line camelcase
   currency: 'r',
+  symbol: 's',
   time: 't',
   url: 'u',
   word: 'w',
