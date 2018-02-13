@@ -241,14 +241,22 @@ describe( 'basic test cycle', function () {
                    { value: '200.0', tag: 'number' },
                    { value: '₿', tag: 'currency' },
                    { value: '2.0', tag: 'number' },
+                   { value: 'is', tag: 'word' },
+                   { value: '1', tag: 'number' },
+                   { value: '%', tag: 'symbol' },
+                   { value: ';', tag: 'punctuation' },
                    { value: '₽', tag: 'currency' },
                    { value: '100', tag: 'number' },
                    { value: '₹', tag: 'currency' },
                    { value: '200', tag: 'number' },
                    { value: '₨', tag: 'currency' },
                    { value: '300', tag: 'number' },
+                   { value: '>', tag: 'symbol' },
+                   { value: '>', tag: 'symbol' },
                    { value: '$', tag: 'currency' },
                    { value: '10000.00', tag: 'number' },
+                   { value: ';', tag: 'punctuation' },
+                   { value: '&', tag: 'symbol' },
                    { value: '£', tag: 'currency' },
                    { value: '2', tag: 'number' },
                    { value: '¥', tag: 'currency' },
@@ -258,6 +266,6 @@ describe( 'basic test cycle', function () {
                    { value: '₩', tag: 'currency' },
                    { value: '1', tag: 'number' },
                    { value: ':-)', tag: 'emoticon' } ];
-    expect( t().tokenize( 'I have$200.0 ₿2.0 ₽100₹200₨300 $10000.00 £2 ¥0.5 €1.2₩1:-)' ) ).to.deep.equal( output );
+    expect( t().tokenize( 'I have$200.0 ₿2.0 is 1%; ₽100₹200₨300 >> $10000.00; & £2 ¥0.5 €1.2₩1:-)' ) ).to.deep.equal( output );
   } );
 } );
