@@ -69,7 +69,7 @@ describe( 'basic test cycle', function () {
   } );
 
   it( 'should gnerate the finger print correctly', function () {
-    expect( fp() ).to.equal( 'm:wwwwwwe;swwwwjjjjctcjwwtcch' );
+    expect( fp() ).to.equal( 'm:wwwwwwe;&wwwwjjjjctcjwwtcch' );
   } );
 
   it( 'should return an empty array with blank sentence', function () {
@@ -115,7 +115,7 @@ describe( 'basic test cycle', function () {
   } );
 
   it( 'should gnerate the finger print correctly for complex sentence', function () {
-    expect( fp() ).to.equal( 'm:wwwwwwe;swwwwjwwtc' );
+    expect( fp() ).to.equal( 'm:wwwwwwe;&wwwwjwwtc' );
   } );
 
   it( 'should tokenize a complex sentence with empty config', function () {
