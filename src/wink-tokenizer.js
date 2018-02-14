@@ -24,7 +24,7 @@
 var rgxSpaces = /\s+/g;
 var rgxNumber = /\d*\.\d+|\d+/g;
 var rgxMention = /\@\w+/g;
-var rgxHashtag = /\#[a-z][a-z0-9]*/g;
+var rgxHashtag = /\#[a-z][a-z0-9]*/gi;
 var rgxEmail = /[-!#$%&'*+\/=?^\w{|}~](?:\.?[-!#$%&'*+\/=?^\w`{|}~])*@[a-z0-9](?:-?\.?[a-z0-9])*(?:\.[a-z](?:-?[a-z0-9])*)+/gi;
 // Bitcoin, Ruble, Indian Rupee, Other Rupee, Dollar, Pound, Yen, Euro, Wong.
 var rgxCurrency = /[\₿\₽\₹\₨\$\£\¥\€\₩]/g;

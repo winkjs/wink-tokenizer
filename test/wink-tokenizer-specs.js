@@ -78,7 +78,7 @@ describe( 'basic test cycle', function () {
   } );
 
   it( 'should tokenize a simple sentence', function () {
-    expect( tokenize( 'feeling good #fun' ) ).to.deep.equal( [ { value: 'feeling', tag: 'word' }, { value: 'good', tag: 'word' }, { value: '#fun', tag: 'hashtag' } ] );
+    expect( tokenize( 'feeling good #FunTime' ) ).to.deep.equal( [ { value: 'feeling', tag: 'word' }, { value: 'good', tag: 'word' }, { value: '#FunTime', tag: 'hashtag' } ] );
   } );
 
   it( 'should gnerate the finger print correctly', function () {
