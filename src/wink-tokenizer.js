@@ -22,23 +22,34 @@
 
 //
 var rgxSpaces = /\s+/g;
-var rgxNumber = /\d*\.\d+|\d+/g;
+// Latin-1 Numbers.
+var rgxNumberL1 = /\d*\.\d+|\d+/g;
+// Devanagari Numbers.
+var rgxNumberDV = /[\u0966-\u096F]*\.[\u0966-\u096F]+|[\u0966-\u096F]+/g;
 var rgxMention = /\@\w+/g;
-var rgxHashtag = /\#[a-z][a-z0-9]*/gi;
+// Latin-1 Hashtags.
+var rgxHashtagL1 = /\#[a-z][a-z0-9]*/gi;
+// Devanagari Hashtags; include Latin-1 as well.
+var rgxHashtagDV = /\#[\u0900-\u0963\u0970-\u097F][\u0900-\u0963\u0970-\u097F\u0966-\u096F0-9]*/gi;
+// EMail is EN character set.
 var rgxEmail = /[-!#$%&'*+\/=?^\w{|}~](?:\.?[-!#$%&'*+\/=?^\w`{|}~])*@[a-z0-9](?:-?\.?[a-z0-9])*(?:\.[a-z](?:-?[a-z0-9])*)+/gi;
 // Bitcoin, Ruble, Indian Rupee, Other Rupee, Dollar, Pound, Yen, Euro, Wong.
 var rgxCurrency = /[\₿\₽\₹\₨\$\£\¥\€\₩]/g;
-var rgxPunctuation = /[\’\'\‘\’\`\“\”\"\[\]\(\)\{\}\…\,\.\!\;\?\/\-\:]/g;
+// These include both the punctuations: Latin-1 & Devanagari.
+var rgxPunctuation = /[\’\'\‘\’\`\“\”\"\[\]\(\)\{\}\…\,\.\!\;\?\/\-\:\u0964\u0965]/g;
 var rgxQuotedPhrase = /\"[^\"]*\"/g;
+// NOTE: URL will support only EN character set for now.
 var rgxURL = /(?:https?:\/\/)(?:[\da-z\.-]+)\.(?:[a-z\.]{2,6})(?:[\/\w\.\-\?#=]*)*\/?/gi;
 var rgxEmoji = /[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u26FF]|[\u2700-\u27BF]/g;
 var rgxEmoticon = /:-?[dps\*\/\[\]\{\}\(\)]|;-?[/(/)d]|<3/gi;
 var rgxTime = /(?:\d|[01]\d|2[0-3]):?(?:[0-5][0-9])?\s?(?:[ap]m|hours|hrs)\b/gi;
 // Inlcude [Latin-1 Supplement Unicode Block](https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block))
-var rgxWord = /[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]+\'[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]{1,2}|[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]+s\'|[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]+/gi;
-// Symbols go here.
-var rgxSymbol = /[\~\@\#\%\^\+\=\*\|<>&]/g;
-// Special regex to handle not elisions at sentence level itself.
+var rgxWordL1 = /[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]+\'[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]{1,2}|[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]+s\'|[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]+/gi;
+// Define [Devanagari Unicode Block](https://unicode.org/charts/PDF/U0900.pdf)
+var rgxWordDV = /[\u0900-\u094F\u0951-\u0963\u0970-\u097F]+/gi;
+// Symbols go here; including Om.
+var rgxSymbol = /[\u0950\~\@\#\%\^\+\=\*\|<>&]/g;
+// Special regex to handle not elisions at sentence level itself. Applies to English only.
 var rgxNotElision = /([a-z])(n\'t)\b/gi;
 // Regexes and their categories; used for tokenizing via match/split. The
 // sequence is *critical* for correct tokenization.
@@ -47,13 +58,16 @@ var rgxsMaster = [
   { regex: rgxURL, category: 'url' },
   { regex: rgxEmail, category: 'email' },
   { regex: rgxMention, category: 'mention' },
-  { regex: rgxHashtag, category: 'hashtag' },
+  { regex: rgxHashtagL1, category: 'hashtag' },
+  { regex: rgxHashtagDV, category: 'hashtag' },
   { regex: rgxEmoji, category: 'emoji' },
   { regex: rgxEmoticon, category: 'emoticon' },
   { regex: rgxTime, category: 'time' },
-  { regex: rgxNumber, category: 'number' },
+  { regex: rgxNumberL1, category: 'number' },
+  { regex: rgxNumberDV, category: 'number' },
   { regex: rgxCurrency, category: 'currency' },
-  { regex: rgxWord, category: 'word' },
+  { regex: rgxWordL1, category: 'word' },
+  { regex: rgxWordDV, category: 'word' },
   { regex: rgxPunctuation, category: 'punctuation' },
   { regex: rgxSymbol, category: 'symbol' }
 ];
@@ -71,7 +85,7 @@ var fingerPrintCodes = {
   time: 't',
   url: 'u',
   word: 'w',
-  unknown: 'z'
+  alien: 'z'
 };
 
 // ### tokenizer
@@ -170,9 +184,9 @@ var tokenizer = function () {
     var i, imax;
 
     if ( !regexes.length ) {
-      // No regex left, split on `spaces` and tag every token as **unknown**.
+      // No regex left, split on `spaces` and tag every token as **alien**.
       text.split( rgxSpaces ).forEach( function ( tkn ) {
-        finalTokens.push( { value: tkn.trim(), tag: 'unknown' } );
+        finalTokens.push( { value: tkn.trim(), tag: 'alien' } );
       } );
       return;
     }
@@ -203,7 +217,7 @@ var tokenizer = function () {
    * type of text will not be attempted.
    *
    * *An empty config object is equivalent to splitting on spaces. Whatever tokens
-   * are created like this are tagged as **unknown** and **`z`** is the
+   * are created like this are tagged as **alien** and **`z`** is the
    * [finger print](#gettokensfp) code of this token type.*
    *
    * The table below gives the name of each property and it's description including
@@ -242,7 +256,12 @@ var tokenizer = function () {
         return ( cc === undefined || cc === null || !!cc );
       } );
     } else rgxs = [];
-    return rgxs.length;
+    // Count normalized length i.e. ignore multi-script entries.
+    const uniqueCats = Object.create( null );
+    rgxs.forEach( function ( rgx ) {
+      uniqueCats[ rgx.category ] = true;
+    } );
+    return ( ( Object.keys( uniqueCats ) ).length );
   }; // defineConfig()
 
   // ### tokenize

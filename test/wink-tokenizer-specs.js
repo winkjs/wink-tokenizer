@@ -30,7 +30,7 @@ var describe = mocha.describe;
 var it = mocha.it;
 
 // NOTE: Sequence of test cases is important.
-describe( 'basic test cycle', function () {
+describe( 'wink tokenizer', function () {
   var tokenizer = t();
   var tokenize = tokenizer.tokenize;
   var fp = tokenizer.getTokensFP;
@@ -119,22 +119,22 @@ describe( 'basic test cycle', function () {
   } );
 
   it( 'should tokenize a complex sentence with empty config', function () {
-    var output = [ { value: '@superman:', tag: 'unknown' },
-                   { value: 'hit', tag: 'unknown' },
-                   { value: 'me', tag: 'unknown' },
-                   { value: 'up', tag: 'unknown' },
-                   { value: 'on', tag: 'unknown' },
-                   { value: 'my', tag: 'unknown' },
-                   { value: 'email', tag: 'unknown' },
-                   { value: 'r2d2@gmail.com;', tag: 'unknown' },
-                   { value: '&', tag: 'unknown' },
-                   { value: 'we', tag: 'unknown' },
-                   { value: 'will', tag: 'unknown' },
-                   { value: 'plan', tag: 'unknown' },
-                   { value: 'party🎉', tag: 'unknown' },
-                   { value: 'tom', tag: 'unknown' },
-                   { value: 'at', tag: 'unknown' },
-                   { value: '3pm:)', tag: 'unknown' } ];
+    var output = [ { value: '@superman:', tag: 'alien' },
+                   { value: 'hit', tag: 'alien' },
+                   { value: 'me', tag: 'alien' },
+                   { value: 'up', tag: 'alien' },
+                   { value: 'on', tag: 'alien' },
+                   { value: 'my', tag: 'alien' },
+                   { value: 'email', tag: 'alien' },
+                   { value: 'r2d2@gmail.com;', tag: 'alien' },
+                   { value: '&', tag: 'alien' },
+                   { value: 'we', tag: 'alien' },
+                   { value: 'will', tag: 'alien' },
+                   { value: 'plan', tag: 'alien' },
+                   { value: 'party🎉', tag: 'alien' },
+                   { value: 'tom', tag: 'alien' },
+                   { value: 'at', tag: 'alien' },
+                   { value: '3pm:)', tag: 'alien' } ];
     expect( tokenizer.defineConfig( {} ) ).to.equal( 0 );
     expect( tokenize( '@superman: hit me up on my email r2d2@gmail.com;  & we will plan party🎉 tom at 3pm:)' ) ).to.deep.equal( output );
   } );
@@ -234,7 +234,7 @@ describe( 'basic test cycle', function () {
     expect( t().tokenize( 'Vinr er sás vörnuð býðr.' ) ).to.deep.equal( output );
   } );
 
-  it( 'should tokenize a currency symbols', function () {
+  it( 'should tokenize a sentence containing lots of currency symbols', function () {
     var output = [ { value: 'I', tag: 'word' },
                    { value: 'have', tag: 'word' },
                    { value: '$', tag: 'currency' },
@@ -267,5 +267,73 @@ describe( 'basic test cycle', function () {
                    { value: '1', tag: 'number' },
                    { value: ':-)', tag: 'emoticon' } ];
     expect( t().tokenize( 'I have$200.0 ₿2.0 is 1%; ₽100₹200₨300 >> $10000.00; & £2 ¥0.5 €1.2₩1:-)' ) ).to.deep.equal( output );
+  } );
+  it( 'should tokenize multi-script complex sentence', function () {
+    var output = [ { value: 'दिग्गज', tag: 'word' },
+                   { value: 'शायर', tag: 'word' },
+                   { value: 'मिर्ज़ा', tag: 'word' },
+                   { value: '#Ghalib', tag: 'hashtag' },
+                   { value: 'की', tag: 'word' },
+                   { value: 'पुण्यतिथि', tag: 'word' },
+                   { value: '(', tag: 'punctuation' },
+                   { value: '27', tag: 'number' },
+                   { value: 'December', tag: 'word' },
+                   { value: '१७९७', tag: 'number' },
+                   { value: ')', tag: 'punctuation' },
+                   { value: 'पर', tag: 'word' },
+                   { value: 'उनका', tag: 'word' },
+                   { value: 'किरदार', tag: 'word' },
+                   { value: 'अदा', tag: 'word' },
+                   { value: 'करने', tag: 'word' },
+                   { value: 'वाले', tag: 'word' },
+                   { value: '@NaseerudinShah', tag: 'mention' },
+                   { value: 'ने', tag: 'word' },
+                   { value: 'क्या', tag: 'word' },
+                   { value: 'कहा', tag: 'word' },
+                   { value: ',', tag: 'punctuation' },
+                   { value: 'आप', tag: 'word' },
+                   { value: 'भी', tag: 'word' },
+                   { value: 'सुनिए', tag: 'word' },
+                   { value: '👂', tag: 'emoji' },
+                   { value: '।', tag: 'punctuation' },
+                   { value: ':p', tag: 'emoticon' } ];
+    expect( t().tokenize( 'दिग्गज शायर मिर्ज़ा #Ghalib की पुण्यतिथि (27 December १७९७) पर उनका किरदार अदा करने वाले @NaseerudinShah ने क्या कहा, आप भी सुनिए👂।:p' ) ).to.deep.equal( output );
+  } );
+
+  it( 'should tokenize sanskrit gayatri mantra', function () {
+    var output = [ { value: 'ॐ', tag: 'symbol' },
+                   { value: 'भूर्भुवः', tag: 'word' },
+                   { value: 'स्वः', tag: 'word' },
+                   { value: '।', tag: 'punctuation' },
+                   { value: 'तत्स॑वि॒तुर्वरेण्यं॒', tag: 'word' },
+                   { value: 'भर्गो॑', tag: 'word' },
+                   { value: 'दे॒वस्य॑धीमहि', tag: 'word' },
+                   { value: '।', tag: 'punctuation' },
+                   { value: 'धियो॒', tag: 'word' },
+                   { value: 'यो', tag: 'word' },
+                   { value: 'नः॑', tag: 'word' },
+                   { value: 'प्रचो॒दया॑त्', tag: 'word' },
+                   { value: '॥', tag: 'punctuation' } ];
+    expect( t().tokenize( 'ॐ भूर्भुवः स्वः । तत्स॑वि॒तुर्वरेण्यं॒ भर्गो॑ दे॒वस्य॑धीमहि । धियो॒ यो नः॑ प्रचो॒दया॑त् ॥' ) ).to.deep.equal( output );
+  } );
+
+  it( 'should tokenize a marathi tweet', function () {
+    var output = [ { value: 'आजचे', tag: 'word' },
+                   { value: '#ट्विटव्याख्यान', tag: 'hashtag' },
+                   { value: '#ट्विटरसंमेलन', tag: 'hashtag' },
+                   { value: 'विषय', tag: 'word' },
+                   { value: ':', tag: 'punctuation' },
+                   { value: '"छंद: एक आयुष्याची शैली"', tag: 'quoted_phrase' },
+                   { value: 'वेळ', tag: 'word' },
+                   { value: ':', tag: 'punctuation' },
+                   { value: 'रात्री', tag: 'word' },
+                   { value: '.', tag: 'punctuation' },
+                   { value: '९.००', tag: 'number' },
+                   { value: 'ते', tag: 'word' },
+                   { value: '१०.००', tag: 'number' },
+                   { value: 'वक्ते', tag: 'word' },
+                   { value: ':', tag: 'punctuation' },
+                   { value: '@hifrom_vinit', tag: 'mention' } ];
+    expect( t().tokenize( 'आजचे #ट्विटव्याख्यान #ट्विटरसंमेलन विषय: "छंद: एक आयुष्याची शैली" वेळ: रात्री. ९.०० ते १०.०० वक्ते: @hifrom_vinit' ) ).to.deep.equal( output );
   } );
 } );

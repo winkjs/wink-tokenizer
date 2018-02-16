@@ -6,7 +6,7 @@ Multilingual tokenizer that automatically tags each token with its type
 
 [<img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" >](http://winkjs.org/)
 
-Tokenize sentences in English, French, German, Spanish, and Icelandic using **`wink-tokenizer`**. It is a part of [wink](http://winkjs.org/) — a growing family of high quality packages for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.
+Tokenize sentences in English, French, German, Spanish, Icelandic, Hindi, Sanskrit, and Marathi using **`wink-tokenizer`**. It is a part of [wink](http://winkjs.org/) — a growing family of high quality packages for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.
 
 It automatically tags each token as either word, email, twitter handle, or more.
 
