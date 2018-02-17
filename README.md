@@ -6,9 +6,17 @@ Multilingual tokenizer that automatically tags each token with its type
 
 [<img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" >](http://winkjs.org/)
 
-Tokenize sentences in English, French, German, Spanish, Icelandic, Hindi, Sanskrit, and Marathi using **`wink-tokenizer`**. It is a part of [wink](http://winkjs.org/) — a growing family of high quality packages for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.
+Tokenize sentences in Latin and Devanagari scripts using **`wink-tokenizer`**. It is a part of [wink](http://winkjs.org/) — a growing family of high quality packages for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.
 
-It automatically tags each token as either word, email, twitter handle, or more.
+Some of it's top feature are:
+
+1. Support for English, French, German, Hindi, Sanskrit, Marathi and many more.
+
+1. Intelligent tokenization of sentence containing words in more than one language.
+
+1. Automatic detection & tagging of token's feature;
+     - These include word, punctuation, email, mention, hashtag, emoticon, and emoji etc.
+
 
 ### Installation
 
@@ -48,7 +56,7 @@ myTokenizer.tokenize( s );
 //      { value: ':)', tag: 'emoticon' },
 //      { value: '#fun', tag: 'hashtag' } ]
 
-// Tokenize a french sentence.
+// Tokenize a French sentence.
 s = 'Mieux vaut prévenir que guérir:-)';
 myTokenizer.tokenize( s );
 // -> [ { value: 'Mieux', tag: 'word' },
@@ -57,6 +65,25 @@ myTokenizer.tokenize( s );
 //      { value: 'que', tag: 'word' },
 //      { value: 'guérir', tag: 'word' },
 //      { value: ':-)', tag: 'emoticon' } ]
+
+// Tokenize a sentence containing Hindi and English.
+s = 'द्रविड़ ने टेस्ट में ३६ शतक जमाए, उनमें 21 विदेशी playground पर हैं।';
+myTokenizer.tokenize( s );
+// -> [ { value: 'द्रविड़', tag: 'word' },
+//      { value: 'ने', tag: 'word' },
+//      { value: 'टेस्ट', tag: 'word' },
+//      { value: 'में', tag: 'word' },
+//      { value: '३६', tag: 'number' },
+//      { value: 'शतक', tag: 'word' },
+//      { value: 'जमाए', tag: 'word' },
+//      { value: ',', tag: 'punctuation' },
+//      { value: 'उनमें', tag: 'word' },
+//      { value: '21', tag: 'number' },
+//      { value: 'विदेशी', tag: 'word' },
+//      { value: 'playground', tag: 'word' },
+//      { value: 'पर', tag: 'word' },
+//      { value: 'हैं', tag: 'word' },
+//      { value: '।', tag: 'punctuation' } ]
 ```
 
 ### Documentation

@@ -114,8 +114,22 @@
 <p>Multilingual tokenizer that automatically tags each token with its type</p>
 <h3><a href="https://travis-ci.org/winkjs/wink-tokenizer"><img src="https://api.travis-ci.org/winkjs/wink-tokenizer.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/winkjs/wink-tokenizer?branch=master"><img src="https://coveralls.io/repos/github/winkjs/wink-tokenizer/badge.svg?branch=master" alt="Coverage Status"></a> <a href="http://inch-ci.org/github/winkjs/wink-tokenizer"><img src="http://inch-ci.org/github/winkjs/wink-tokenizer.svg?branch=master" alt="Inline docs"></a> <a href="https://david-dm.org/winkjs/wink-tokenizer?type=dev"><img src="https://david-dm.org/winkjs/wink-tokenizer/dev-status.svg" alt="devDependencies Status"></a></h3>
 <p><a href="http://winkjs.org/"><img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" ></a></p>
-<p>Tokenize sentences in English, French, German, Spanish, Icelandic, Hindi, Sanskrit, and Marathi using <strong><code>wink-tokenizer</code></strong>. It is a part of <a href="http://winkjs.org/">wink</a> — a growing family of high quality packages for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.</p>
-<p>It automatically tags each token as either word, email, twitter handle, or more.</p>
+<p>Tokenize sentences in Latin and Devanagari scripts using <strong><code>wink-tokenizer</code></strong>. It is a part of <a href="http://winkjs.org/">wink</a> — a growing family of high quality packages for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.</p>
+<p>Some of it's top feature are:</p>
+<ol>
+<li>
+<p>Support for English, French, German, Hindi, Sanskrit, Marathi and many more.</p>
+</li>
+<li>
+<p>Intelligent tokenization of sentence containing words in more than one language.</p>
+</li>
+<li>
+<p>Automatic detection &#x26; tagging of token's feature;</p>
+<ul>
+<li>These include word, punctuation, email, mention, hashtag, emoticon, and emoji etc.</li>
+</ul>
+</li>
+</ol>
 <h3>Installation</h3>
 <p>Use <a href="https://www.npmjs.com/package/wink-tokenizer">npm</a> to install:</p>
 <pre><code>npm install wink-tokenizer --save
@@ -151,7 +165,7 @@ myTokenizer.tokenize( s );
 <span class="hljs-comment">//      { value: ':)', tag: 'emoticon' },</span>
 <span class="hljs-comment">//      { value: '#fun', tag: 'hashtag' } ]</span>
 
-<span class="hljs-comment">// Tokenize a french sentence.</span>
+<span class="hljs-comment">// Tokenize a French sentence.</span>
 s = <span class="hljs-string">'Mieux vaut prévenir que guérir:-)'</span>;
 myTokenizer.tokenize( s );
 <span class="hljs-comment">// -&gt; [ { value: 'Mieux', tag: 'word' },</span>
@@ -159,7 +173,26 @@ myTokenizer.tokenize( s );
 <span class="hljs-comment">//      { value: 'prévenir', tag: 'word' },</span>
 <span class="hljs-comment">//      { value: 'que', tag: 'word' },</span>
 <span class="hljs-comment">//      { value: 'guérir', tag: 'word' },</span>
-<span class="hljs-comment">//      { value: ':-)', tag: 'emoticon' } ]</span></pre>
+<span class="hljs-comment">//      { value: ':-)', tag: 'emoticon' } ]</span>
+
+<span class="hljs-comment">// Tokenize a sentence containing Hindi and English.</span>
+s = <span class="hljs-string">'द्रविड़ ने टेस्ट में ३६ शतक जमाए, उनमें 21 विदेशी playground पर हैं।'</span>;
+myTokenizer.tokenize( s );
+<span class="hljs-comment">// -&gt; [ { value: 'द्रविड़', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'ने', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'टेस्ट', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'में', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: '३६', tag: 'number' },</span>
+<span class="hljs-comment">//      { value: 'शतक', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'जमाए', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: ',', tag: 'punctuation' },</span>
+<span class="hljs-comment">//      { value: 'उनमें', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: '21', tag: 'number' },</span>
+<span class="hljs-comment">//      { value: 'विदेशी', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'playground', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'पर', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'हैं', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: '।', tag: 'punctuation' } ]</span></pre>
 <h3>Documentation</h3>
 <p>Check out the <a href="http://winkjs.org/wink-tokenizer/">tokenizer API documentation</a> to learn more.</p>
 <h3>Need Help?</h3>
