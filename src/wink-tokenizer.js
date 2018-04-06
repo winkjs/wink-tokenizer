@@ -22,10 +22,14 @@
 
 //
 var rgxSpaces = /\s+/g;
+// Apart from detecting pure integers or decimals, also detect numbers containing
+// `. - / ,` so that dates, ip address, fractions and things like codes or part
+// numbers are also detected as numbers only. These regex will therefore detected
+// 8.8.8.8 or 12-12-1924 or 1,1,1,1.00 or 1/4 or 1/4/66/777 as numbers.
 // Latin-1 Numbers.
-var rgxNumberL1 = /\d*\.\d+|\d+/g;
+var rgxNumberL1 = /\d+\/\d+|\d(?:[\.\,\-\/]?\d)*(?:\.\d+)?/g;
 // Devanagari Numbers.
-var rgxNumberDV = /[\u0966-\u096F]*\.[\u0966-\u096F]+|[\u0966-\u096F]+/g;
+var rgxNumberDV = /[\u0966-\u096F]+\/[\u0966-\u096F]+|[\u0966-\u096F](?:[\.\,\-\/]?[\u0966-\u096F])*(?:\.[\u0966-\u096F]+)?/g;
 var rgxMention = /\@\w+/g;
 // Latin-1 Hashtags.
 var rgxHashtagL1 = /\#[a-z][a-z0-9]*/gi;
@@ -228,7 +232,8 @@ var tokenizer = function () {
    * @param {boolean} [config.emoji=true] any standard unicode emojis e.g. 😊 or 😂 or 🎉 (**`j`**)
    * @param {boolean} [config.emoticon=true] common emoticons such as **`:-)`** or **`:D`** (**`c`**)
    * @param {boolean} [config.hashtag=true] hash tags such as **`#happy`** or **`#followme`** (**`h`**)
-   * @param {boolean} [config.number=true] any integer or decimal number such as **19** or **2.718** (**`n`**)
+   * @param {boolean} [config.number=true] any integer, decimal number, fractions such as **19**, **2.718**
+   * or **1/4** and numerals containing "**`, - / .`**", for example 12-12-1924 (**`n`**)
    * @param {boolean} [config.punctuation=true] common punctuation such as **`?`** or **`,`**
    * ( token becomes fingerprint )
    * @param {boolean} [config.quoted_phrase=true] any **"quoted text"** in the sentence. (**`q`**)

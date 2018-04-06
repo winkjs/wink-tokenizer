@@ -336,4 +336,19 @@ describe( 'wink tokenizer', function () {
                    { value: '@hifrom_vinit', tag: 'mention' } ];
     expect( t().tokenize( 'आजचे #ट्विटव्याख्यान #ट्विटरसंमेलन विषय: "छंद: एक आयुष्याची शैली" वेळ: रात्री. ९.०० ते १०.०० वक्ते: @hifrom_vinit' ) ).to.deep.equal( output );
   } );
+
+  it( 'should tokenize different number formats', function () {
+    var output = [ { value: '९.००', tag: 'number' },
+                   { value: 'ते', tag: 'word' },
+                   { value: '१०.००', tag: 'number' },
+                   { value: '३,१२.४५६-७', tag: 'number' },
+                   { value: 'funny', tag: 'word' },
+                   { value: 'format', tag: 'word' },
+                   { value: '!', tag: 'punctuation' },
+                   { value: 'my', tag: 'word' },
+                   { value: 'ip', tag: 'word' },
+                   { value: 'is', tag: 'word' },
+                   { value: '8,8.8-8', tag: 'number' } ];
+    expect( t().tokenize( '९.०० ते १०.०० ३,१२.४५६-७funny format! my ip is 8,8.8-8' ) ).to.deep.equal( output );
+  } );
 } );
