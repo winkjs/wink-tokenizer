@@ -341,7 +341,7 @@ of tokens will be detected and tagged automatically.</p>
             <span class='code bold'>config</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
 	    — It defines 0 or more properties from the list of
 
-<strong>13</strong>
+<strong>14</strong>
  properties. A true value for a property ensures tokenization
 for that type of text; whereas false value will mean that the tokenization of that
 type of text will not be attempted.
@@ -464,6 +464,31 @@ or
 <strong><code>, - / .</code></strong>
 ", for example 12-12-1924 (
 <strong><code>n</code></strong>
+)
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>config.ordinal</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>ordinals like 
+<strong>1st</strong>
+, 
+<strong>2nd</strong>
+, 
+<strong>3rd</strong>
+, 
+<strong>4th</strong>
+ or 
+<strong>12th</strong>
+ or 
+<strong>91st</strong>
+ (
+<strong><code>o</code></strong>
 )
 </span></td>
 </tr>
@@ -613,7 +638,7 @@ or
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Do not tokenize &amp; tag @mentions.</span>
 <span class="hljs-keyword">var</span> myTokenizer.defineConfig( { <span class="hljs-attr">mention</span>: <span class="hljs-literal">false</span> } );
-<span class="hljs-comment">// -&gt; 12</span>
+<span class="hljs-comment">// -&gt; 13</span>
 <span class="hljs-comment">// Only tokenize words as defined above.</span>
 <span class="hljs-keyword">var</span> myTokenizer.defineConfig( {} );
 <span class="hljs-comment">// -&gt; 0</span></pre>

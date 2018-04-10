@@ -22,6 +22,7 @@
 
 //
 var rgxSpaces = /\s+/g;
+// Ordinals only for Latin like 1st, 2nd or 12th or 33rd.
 var rgxOrdinalL1 = /1\dth|[04-9]th|1st|2nd|3rd|[02-9]1st|[02-9]2nd|[02-9]3rd|[02-9][04-9]th|\d+\d[04-9]th|\d+\d1st|\d+\d2nd|\d+\d3rd/g;
 // Apart from detecting pure integers or decimals, also detect numbers containing
 // `. - / ,` so that dates, ip address, fractions and things like codes or part
@@ -219,7 +220,7 @@ var tokenizer = function () {
    * of tokens will be detected and tagged automatically.
    *
    * @param {object} config — It defines 0 or more properties from the list of
-   * **13** properties. A true value for a property ensures tokenization
+   * **14** properties. A true value for a property ensures tokenization
    * for that type of text; whereas false value will mean that the tokenization of that
    * type of text will not be attempted.
    *
@@ -237,6 +238,7 @@ var tokenizer = function () {
    * @param {boolean} [config.hashtag=true] hash tags such as **`#happy`** or **`#followme`** (**`h`**)
    * @param {boolean} [config.number=true] any integer, decimal number, fractions such as **19**, **2.718**
    * or **1/4** and numerals containing "**`, - / .`**", for example 12-12-1924 (**`n`**)
+   * @param {boolean} [config.ordinal=true] ordinals like **1st**, **2nd**, **3rd**, **4th** or **12th** or **91st** (**`o`**)
    * @param {boolean} [config.punctuation=true] common punctuation such as **`?`** or **`,`**
    * ( token becomes fingerprint )
    * @param {boolean} [config.quoted_phrase=true] any **"quoted text"** in the sentence. (**`q`**)
@@ -249,7 +251,7 @@ var tokenizer = function () {
    * @example
    * // Do not tokenize & tag @mentions.
    * var myTokenizer.defineConfig( { mention: false } );
-   * // -> 12
+   * // -> 13
    * // Only tokenize words as defined above.
    * var myTokenizer.defineConfig( {} );
    * // -> 0
