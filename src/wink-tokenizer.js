@@ -22,6 +22,7 @@
 
 //
 var rgxSpaces = /\s+/g;
+var rgxOrdinalL1 = /1\dth|[04-9]th|1st|2nd|3rd|[02-9]1st|[02-9]2nd|[02-9]3rd|[02-9][04-9]th|\d+\d[04-9]th|\d+\d1st|\d+\d2nd|\d+\d3rd/g;
 // Apart from detecting pure integers or decimals, also detect numbers containing
 // `. - / ,` so that dates, ip address, fractions and things like codes or part
 // numbers are also detected as numbers only. These regex will therefore detected
@@ -67,6 +68,7 @@ var rgxsMaster = [
   { regex: rgxEmoji, category: 'emoji' },
   { regex: rgxEmoticon, category: 'emoticon' },
   { regex: rgxTime, category: 'time' },
+  { regex: rgxOrdinalL1, category: 'ordinal' },
   { regex: rgxNumberL1, category: 'number' },
   { regex: rgxNumberDV, category: 'number' },
   { regex: rgxCurrency, category: 'currency' },
@@ -83,6 +85,7 @@ var fingerPrintCodes = {
   hashtag: 'h',
   mention: 'm',
   number: 'n',
+  ordinal: 'o',
   quoted_phrase: 'q', // eslint-disable-line camelcase
   currency: 'r',
   // symbol: 's',
