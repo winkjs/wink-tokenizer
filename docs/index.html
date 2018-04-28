@@ -669,10 +669,10 @@ or
   
 
   <p>Tokenizes the input <code>sentence</code> using the configuration specified via
-<a href="#defineconfig"><code>defineConfig()</code></a>. All the negative contractions in the input <code>sentence</code>,
-if any, are expanded before tokenization; for example <strong>wasn't</strong> expands to <strong>was not</strong>.
-Other contractions and possessive nouns are split into 2 separate tokens;
-for example <strong>I'll</strong> splits as <code>'I'</code> and <code>'\'ll'</code>.</p>
+<a href="#defineconfig"><code>defineConfig()</code></a>.
+Common contractions and possessive nouns are split into 2 separate tokens;
+for example <strong>I'll</strong> splits as <code>'I'</code> and <code>'\'ll'</code> or <strong>won't</strong> splits as
+<code>'wo'</code> and <code>'n\'t'</code>.</p>
 
 
   <div class='pre p1 fill-light mt0'>tokenize(sentence: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>></div>

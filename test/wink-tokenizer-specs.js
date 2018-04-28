@@ -3,21 +3,21 @@
 //
 //     Copyright (C) 2017-18  GRAYPE Systems Private Limited
 //
-//     This file is part of “wink-sentiment”.
+//     This file is part of “wink-tokenizer”.
 //
-//     “wink-sentiment” is free software: you can redistribute
+//     “wink-tokenizer” is free software: you can redistribute
 //     it and/or modify it under the terms of the GNU Affero
 //     General Public License as published by the Free
 //     Software Foundation, version 3 of the License.
 //
-//     “wink-sentiment” is distributed in the hope that it will
+//     “wink-tokenizer” is distributed in the hope that it will
 //     be useful, but WITHOUT ANY WARRANTY; without even
 //     the implied warranty of MERCHANTABILITY or FITNESS
 //     FOR A PARTICULAR PURPOSE.  See the GNU Affero General
 //     Public License for more details.
 //
 //     You should have received a copy of the GNU Affero
-//     General Public License along with “wink-sentiment”.
+//     General Public License along with “wink-tokenizer”.
 //     If not, see <http://www.gnu.org/licenses/>.
 
 //
@@ -142,7 +142,7 @@ describe( 'wink tokenizer', function () {
   it( 'should tokenize a complex sentence with possessive & aposrtophy stuff', function () {
     var output = [ { value: 'She', tag: 'word' },
                    { value: 'was', tag: 'word' },
-                   { value: 'not', tag: 'word' },
+                   { value: 'n\'t', tag: 'word' },
                    { value: 'at', tag: 'word' },
                    { value: 'home', tag: 'word' },
                    { value: 'and', tag: 'word' },
@@ -157,15 +157,17 @@ describe( 'wink tokenizer', function () {
     expect( t().tokenize( 'She wasn\'t at home and wild cats\' ate her dog\'s food' ) ).to.deep.equal( output );
   } );
 
-  it( 'should tokenize a sentence with multiple contractions', function () {
+  it( 'should tokenize a sentence with multiple contractions & containing extra spaces', function () {
     var output = [ { value: 'I', tag: 'word' },
                    { value: '\'ll', tag: 'word' },
                    { value: 'eat', tag: 'word' },
                    { value: 'John', tag: 'word' },
                    { value: '\'s', tag: 'word' },
                    { value: 'food', tag: 'word' },
-                   { value: 'today', tag: 'word' } ];
-    expect( t().tokenize( 'I\'ll eat John\'s food today' ) ).to.deep.equal( output );
+                   { value: 'today', tag: 'word' },
+                   { value: 'with', tag: 'word' },
+                   { value: 'O\'kelly', tag: 'word' } ];
+    expect( t().tokenize( '     I\'ll eat      John\'s food today with O\'kelly  ' ) ).to.deep.equal( output );
   } );
 
   it( 'should tokenize a sentence with words with diacritical marks', function () {
@@ -360,5 +362,22 @@ describe( 'wink tokenizer', function () {
                    { value: 'is', tag: 'word' },
                    { value: '8,8.8-8', tag: 'number' } ];
     expect( t().tokenize( '९.०० ते १०.०० ३,१२.४५६-७funny format! 2nd 33th 12nd 11th 93rd. my 1st ever ip is 8,8.8-8' ) ).to.deep.equal( output );
+  } );
+
+  it( 'should tokenize a contractions (pronoun, verb & name) heavy sentence', function () {
+    var output = [ { value: 'We', tag: 'word' },
+                   { value: '\'ll', tag: 'word' },
+                   { value: 'help', tag: 'word' },
+                   { value: 'you', tag: 'word' },
+                   { value: 'if', tag: 'word' },
+                   { value: 'you', tag: 'word' },
+                   { value: 'wo', tag: 'word' },
+                   { value: 'n\'t', tag: 'word' },
+                   { value: 'create', tag: 'word' },
+                   { value: 'trouble', tag: 'word' },
+                   { value: ',', tag: 'punctuation' },
+                   { value: 'Jamie', tag: 'word' },
+                   { value: 'O\'Hara', tag: 'word' } ];
+    expect( t().tokenize( 'We\'ll help you if you won\'t create trouble, Jamie O\'Hara' ) ).to.deep.equal( output );
   } );
 } );

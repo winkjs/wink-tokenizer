@@ -3,24 +3,25 @@
 //
 //     Copyright (C) 2017-18  GRAYPE Systems Private Limited
 //
-//     This file is part of “wink-sentiment”.
+//     This file is part of “wink-tokenizer”.
 //
-//     “wink-sentiment” is free software: you can redistribute
+//     “wink-tokenizer” is free software: you can redistribute
 //     it and/or modify it under the terms of the GNU Affero
 //     General Public License as published by the Free
 //     Software Foundation, version 3 of the License.
 //
-//     “wink-sentiment” is distributed in the hope that it will
+//     “wink-tokenizer” is distributed in the hope that it will
 //     be useful, but WITHOUT ANY WARRANTY; without even
 //     the implied warranty of MERCHANTABILITY or FITNESS
 //     FOR A PARTICULAR PURPOSE.  See the GNU Affero General
 //     Public License for more details.
 //
 //     You should have received a copy of the GNU Affero
-//     General Public License along with “wink-sentiment”.
+//     General Public License along with “wink-tokenizer”.
 //     If not, see <http://www.gnu.org/licenses/>.
 
 //
+var contractions = require( './eng-contractions.js' );
 var rgxSpaces = /\s+/g;
 // Ordinals only for Latin like 1st, 2nd or 12th or 33rd.
 var rgxOrdinalL1 = /1\dth|[04-9]th|1st|2nd|3rd|[02-9]1st|[02-9]2nd|[02-9]3rd|[02-9][04-9]th|\d+\d[04-9]th|\d+\d1st|\d+\d2nd|\d+\d3rd/g;
@@ -48,15 +49,18 @@ var rgxQuotedPhrase = /\"[^\"]*\"/g;
 var rgxURL = /(?:https?:\/\/)(?:[\da-z\.-]+)\.(?:[a-z\.]{2,6})(?:[\/\w\.\-\?#=]*)*\/?/gi;
 var rgxEmoji = /[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u26FF]|[\u2700-\u27BF]/g;
 var rgxEmoticon = /:-?[dps\*\/\[\]\{\}\(\)]|;-?[/(/)d]|<3/gi;
-var rgxTime = /(?:\d|[01]\d|2[0-3]):?(?:[0-5][0-9])?\s?(?:[ap]m|hours|hrs)\b/gi;
+var rgxTime = /(?:\d|[01]\d|2[0-3]):?(?:[0-5][0-9])?\s?(?:[ap]\.?m\.?|hours|hrs)/gi;
 // Inlcude [Latin-1 Supplement Unicode Block](https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block))
-var rgxWordL1 = /[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]+\'[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]{1,2}|[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]+s\'|[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]+/gi;
+var rgxWordL1 = /[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF][a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\']*/gi;
 // Define [Devanagari Unicode Block](https://unicode.org/charts/PDF/U0900.pdf)
 var rgxWordDV = /[\u0900-\u094F\u0951-\u0963\u0970-\u097F]+/gi;
 // Symbols go here; including Om.
 var rgxSymbol = /[\u0950\~\@\#\%\^\+\=\*\|<>&]/g;
-// Special regex to handle not elisions at sentence level itself. Applies to English only.
-var rgxNotElision = /([a-z])(n\'t)\b/gi;
+// For detecting if the word is a potential contraction.
+var rgxContraction = /\'/;
+// Singular & Plural possessive
+var rgxPosSingular = /([a-z]+)(\'s)$/i;
+var rgxPosPlural = /([a-z]+s)(\')$/i;
 // Regexes and their categories; used for tokenizing via match/split. The
 // sequence is *critical* for correct tokenization.
 var rgxsMaster = [
@@ -117,6 +121,43 @@ var tokenizer = function () {
   // Returned!
   var methods = Object.create( null );
 
+  // ### manageContraction
+  /**
+   *
+   * Splits a contractions into words by first trying a lookup in strandard
+   * `contractions`; if the lookup fails, it checks for possessive in `'s` or
+   * `s'` forms and separates the possesive part from the word. Otherwise the
+   * contraction is treated as a normal word and no splitting occurs.
+   *
+   * @param {string} word — that could be a potential conraction.
+   * @param {object[]} tokens — where the outcome is pushed.
+   * @return {object[]} updated tokens according to the `word.`
+   * @private
+  */
+  var manageContraction = function ( word, tokens ) {
+    var ct = contractions[ word ];
+    var matches;
+    if ( ct === undefined ) {
+      // Try possesive of sigular & plural forms
+      matches = word.match( rgxPosSingular );
+      if ( matches ) {
+        tokens.push( { value: matches[ 1 ], tag: 'word' } );
+        tokens.push( { value: matches[ 2 ], tag: 'word' } );
+      } else {
+        matches = word.match( rgxPosPlural );
+        if ( matches ) {
+          tokens.push( { value: matches[ 1 ], tag: 'word' } );
+          tokens.push( { value: matches[ 2 ], tag: 'word' } );
+        } else tokens.push( { value: word, tag: 'word' } );
+      }
+    } else {
+      // Manage via lookup; ensure cloning!
+      tokens.push( Object.assign( {}, ct[ 0 ] ) );
+      tokens.push( Object.assign( {}, ct[ 1 ] ) );
+    }
+    return tokens;
+  }; // manageContraction()
+
   // ### tokenizeTextUnit
   /**
    *
@@ -142,10 +183,11 @@ var tokenizer = function () {
     // The tag;
     var tag = rgxSplit.category;
     // Helper variables.
-    var i,
+    var aword,
+        i,
         imax,
         k = 0,
-        t, words;
+        t;
 
     // Combine tokens & matches in the following pattern [ b0 m0 b1 m1 ... ]
     matches = ( matches ) ? matches : [];
@@ -156,14 +198,12 @@ var tokenizer = function () {
       if ( k < matches.length ) {
         if ( tag === 'word' ) {
           // Tag type `word` token may have a contraction.
-          words = matches[ k ].split( '\'' );
-          if ( words.length === 1 ) {
-            // Means there is no contraction.
-            tokens.push( { value: matches[ k ], tag: tag } );
+          aword = matches[ k ];
+          if ( rgxContraction.test( aword ) ) {
+            tokens = manageContraction( aword, tokens );
           } else {
-            // Manage contraction! Split it in to 2 tokens.
-            tokens.push( { value: words[ 0 ], tag: tag } );
-            tokens.push( { value: '\'' + words[ 1 ], tag: tag } );
+            // Means there is no contraction.
+            tokens.push( { value: aword, tag: tag } );
           }
         } else tokens.push( { value: matches[ k ], tag: tag } );
       }
@@ -278,10 +318,10 @@ var tokenizer = function () {
   /**
    *
    * Tokenizes the input `sentence` using the configuration specified via
-   * [`defineConfig()`](#defineconfig). All the negative contractions in the input `sentence`,
-   * if any, are expanded before tokenization; for example **wasn't** expands to **was not**.
-   * Other contractions and possessive nouns are split into 2 separate tokens;
-   * for example **I'll** splits as `'I'` and `'\'ll'`.
+   * [`defineConfig()`](#defineconfig).
+   * Common contractions and possessive nouns are split into 2 separate tokens;
+   * for example **I'll** splits as `'I'` and `'\'ll'` or **won't** splits as
+   * `'wo'` and `'n\'t'`.
    *
    * @param {string} sentence — the input sentence.
    * @return {object[]} of tokens; each one of them is an object with 2-keys viz.
@@ -302,8 +342,7 @@ var tokenizer = function () {
   */
   var tokenize = function ( sentence ) {
     finalTokens = [];
-    // Preprocess: trim -> remove extra spaces -> expant **n't** contractions (if any).
-    tokenizeTextRecursively( sentence.trim().replace( rgxSpaces, ' ' ).replace( rgxNotElision, '$1 not' ), rgxs );
+    tokenizeTextRecursively( sentence, rgxs );
     return finalTokens;
   }; // tokenize()
 
