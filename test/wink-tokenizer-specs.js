@@ -118,6 +118,55 @@ describe( 'wink tokenizer', function () {
     expect( fp() ).to.equal( 'm:wwwwwwe;&wwwwjwwtc' );
   } );
 
+  it( 'should tokenize a complex sentence when adding a custom regex', function () {
+    var output = [ { value: '@superman', tag: 'mention' },
+                   { value: ':', tag: 'punctuation' },
+                   { value: 'come', tag: 'word' },
+                   { value: 'help', tag: 'word' },
+                   { value: 'me', tag: 'word' },
+                   { value: 'out', tag: 'word' },
+                   { value: 'I', tag: 'word' },
+                   { value: '\'m', tag: 'word' },
+                   { value: 'sick', tag: 'word' },
+                   { value: '+o(', tag: 'emoticon' },
+                   { value: ';', tag: 'punctuation' },
+                   { value: '(oo)', tag: 'emoticon' },
+                   { value: '<-', tag: 'emoticon' }
+                  ];
+
+    tokenizer.addRegex(/:\||O\.O|:`\(|\+o\(|\(oo\)|:%|:\$|>\|<|<-/gi, 'emoticon');
+    expect( tokenizer.tokenize( '@superman: come help me out I\'m sick +o(; (oo) <-' ) ).to.deep.equal( output );
+  } );
+
+  it( 'should throw an error when adding a regex with an inexisting tag', function () {
+    expect( function () {
+      tokenizer.addRegex(/\(oo\)/gi, 'pig');
+    } ).to.throw('Tag pig doesn\'t exist; Provide a \'fingerprintCode\' to add it as a tag.');
+  } );
+
+  it( 'should throw an error when adding a tag that already exists', function () {
+    expect( function () {
+      tokenizer.addTag('emoticon', 8);
+    } ).to.throw('Tag emoticon already exists');
+  } );
+
+  it( 'should tokenize a complex sentence when adding a custom regex with a new tag', function () {
+    var output = [ { value: 'I', tag: 'word' },
+                   { value: '\'m', tag: 'word' },
+                   { value: 'thinking', tag: 'word' },
+                   { value: 'why', tag: 'word' },
+                   { value: 'superman', tag: 'superman' },
+                   { value: '\'', tag: 'punctuation' },
+                   { value: 's', tag: 'word' },
+                   { value: 'dead', tag: 'word' },
+                   { value: '?', tag: 'punctuation' },
+                   { value: '!', tag: 'punctuation' }
+                  ];
+
+    tokenizer.addRegex(/superman/gi, 'superman', 's');
+    expect( tokenizer.tokenize( 'I\'m thinking why superman\'s dead ?!' ) ).to.deep.equal( output );
+  } );
+
   it( 'should tokenize a complex sentence with empty config', function () {
     var output = [ { value: '@superman:', tag: 'alien' },
                    { value: 'hit', tag: 'alien' },

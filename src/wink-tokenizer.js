@@ -82,6 +82,7 @@ var rgxsMaster = [
   { regex: rgxPunctuation, category: 'punctuation' },
   { regex: rgxSymbol, category: 'symbol' }
 ];
+
 // Used to generate finger print from the tokens.
 var fingerPrintCodes = {
   emoticon: 'c',
@@ -372,9 +373,48 @@ var tokenizer = function () {
     return fp.join( '' );
   }; // getFingerprint()
 
+  var addTag = function (name, fingerprintCode) {
+    if (fingerPrintCodes[name]) {
+      throw new Error( 'Tag ' + name + ' already exists' );
+    }
+
+    fingerPrintCodes[name] = fingerprintCode;
+  };
+
+  // ### addRegex
+  /**
+   * Allows to add a new regex that will map to a existing
+   * or new tag
+   * @param {RegExp} regex — The new regex.
+   * @param {string} tag — The tag that the new regex will match to.
+   * @param {string} [fingerprintCode] — Used if adding a new tag. Ignored if using an existing tag.
+   * @return {void}
+   * @example
+   * // Adding a regex for an existing tag
+   * myTokenizer.addRegex(/\(oo\)/gi, 'emoticon');
+   * myTokenizer.tokenize('(oo)')
+   * // -> [ { value: '(oo)', tag: 'emoticon' } ]
+   * // Adding a regex that will match to a new tag
+   * myTokenizer.addRegex(//gi, 'custom', 'q);
+   * myTokenizer.tokenize('(oo)')
+   * // -> [ { value: '(oo)', tag: 'emoticon' } ]
+  */
+
+  var addRegex = function (regex, tag, fingerprintCode) {
+    if (!fingerPrintCodes[tag] && !fingerprintCode) {
+      throw new Error( 'Tag ' + tag + ' doesn\'t exist; Provide a \'fingerprintCode\' to add it as a tag.' );
+    } else if (!fingerPrintCodes[tag]) {
+      addTag(tag, fingerprintCode);
+    }
+
+    rgxs.unshift( { regex: regex, category: tag } );
+  };
+
   methods.defineConfig = defineConfig;
   methods.tokenize = tokenize;
   methods.getTokensFP = getTokensFP;
+  methods.addTag = addTag;
+  methods.addRegex = addRegex;
   return methods;
 };
 
