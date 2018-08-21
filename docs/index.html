@@ -93,6 +93,16 @@
                 
                 </li>
               
+                
+                <li><a
+                  href='#addregex'
+                  class="">
+                  addRegex
+                  
+                </a>
+                
+                </li>
+              
             </ul>
           </div>
           <div class='mt1 h6 quiet'>
@@ -112,7 +122,7 @@
   
     <h1>wink-tokenizer</h1>
 <p>Multilingual tokenizer that automatically tags each token with its type</p>
-<h3><a href="https://travis-ci.org/winkjs/wink-tokenizer"><img src="https://api.travis-ci.org/winkjs/wink-tokenizer.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/winkjs/wink-tokenizer?branch=master"><img src="https://coveralls.io/repos/github/winkjs/wink-tokenizer/badge.svg?branch=master" alt="Coverage Status"></a> <a href="http://inch-ci.org/github/winkjs/wink-tokenizer"><img src="http://inch-ci.org/github/winkjs/wink-tokenizer.svg?branch=master" alt="Inline docs"></a> <a href="https://david-dm.org/winkjs/wink-tokenizer?type=dev"><img src="https://david-dm.org/winkjs/wink-tokenizer/dev-status.svg" alt="devDependencies Status"></a></h3>
+<h3><a href="https://travis-ci.org/winkjs/wink-tokenizer"><img src="https://api.travis-ci.org/winkjs/wink-tokenizer.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/winkjs/wink-tokenizer?branch=master"><img src="https://coveralls.io/repos/github/winkjs/wink-tokenizer/badge.svg?branch=master" alt="Coverage Status"></a> <a href="http://inch-ci.org/github/winkjs/wink-tokenizer"><img src="http://inch-ci.org/github/winkjs/wink-tokenizer.svg?branch=master" alt="Inline docs"></a> <a href="https://david-dm.org/winkjs/wink-tokenizer?type=dev"><img src="https://david-dm.org/winkjs/wink-tokenizer/dev-status.svg" alt="devDependencies Status"></a> <a href="https://gitter.im/winkjs/Lobby"><img src="https://img.shields.io/gitter/room/nwjs/nw.js.svg" alt="Gitter"></a></h3>
 <p><a href="http://winkjs.org/"><img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" ></a></p>
 <p>Tokenize sentences in Latin and Devanagari scripts using <strong><code>wink-tokenizer</code></strong>. It is a part of <a href="http://winkjs.org/">wink</a> — a growing family of high quality packages for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.</p>
 <p>Some of it's top feature are:</p>
@@ -808,6 +818,107 @@ using <code>regexes</code>, which is otherwise a complex and time consuming task
 <span class="hljs-comment">// under tokenize().</span>
 myTokenizer.getTokensFP();
 <span class="hljs-comment">// -&gt; 'wwww,wwuw!'</span></pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='addregex'>
+      addRegex
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Allows to add a new regex that will map to a existing
+or new tag</p>
+
+
+  <div class='pre p1 fill-light mt0'>addRegex(regex: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/RegExp">RegExp</a>, tag: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, fingerprintCode: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?): void</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>regex</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/RegExp">RegExp</a>)</code>
+	    — The new regex.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>tag</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    — The tag that the new regex will match to.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fingerprintCode</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</code>
+	    — Used if adding a new tag. Ignored if using an existing tag.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+
+      
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Adding a regex for an existing tag</span>
+myTokenizer.addRegex(<span class="hljs-regexp">/\(oo\)/gi</span>, <span class="hljs-string">'emoticon'</span>);
+myTokenizer.tokenize(<span class="hljs-string">'(oo)'</span>)
+<span class="hljs-comment">// -&gt; [ { value: '(oo)', tag: 'emoticon' } ]</span>
+<span class="hljs-comment">// Adding a regex that will match to a new tag</span>
+myTokenizer.addRegex(<span class="hljs-comment">//gi, 'custom', 'q);</span>
+myTokenizer.tokenize(<span class="hljs-string">'(oo)'</span>)
+<span class="hljs-comment">// -&gt; [ { value: '(oo)', tag: 'emoticon' } ]</span></pre>
     
   
 
