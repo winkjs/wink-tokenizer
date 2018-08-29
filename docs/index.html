@@ -8,6 +8,7 @@
   <link href='assets/style.css' type='text/css' rel='stylesheet' />
   <link href='assets/github.css' type='text/css' rel='stylesheet' />
   <link href='assets/split.css' type='text/css' rel='stylesheet' />
+  <meta name='description' content='Multilingual tokenizer that automatically tags each token with its type'>
 </head>
 <body class='documentation m0'>
     <div class='flex'>
@@ -113,14 +114,15 @@
       <div id='split-right' class='relative overflow-auto height-viewport-100'>
         
           
-            <div class='keyline-top-not py2'><section class='py2 clearfix'>
+            <div class='keyline-top-not py2'>
+  <section class='py2 clearfix'>
 
-  <h2 id='introduction' class='mt0'>
-    Introduction
-  </h2>
+    <h2 id='introduction' class='mt0'>
+      Introduction
+    </h2>
 
-  
-    <h1>wink-tokenizer</h1>
+    
+      <h1>wink-tokenizer</h1>
 <p>Multilingual tokenizer that automatically tags each token with its type</p>
 <h3><a href="https://travis-ci.org/winkjs/wink-tokenizer"><img src="https://api.travis-ci.org/winkjs/wink-tokenizer.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/winkjs/wink-tokenizer?branch=master"><img src="https://coveralls.io/repos/github/winkjs/wink-tokenizer/badge.svg?branch=master" alt="Coverage Status"></a> <a href="http://inch-ci.org/github/winkjs/wink-tokenizer"><img src="http://inch-ci.org/github/winkjs/wink-tokenizer.svg?branch=master" alt="Inline docs"></a> <a href="https://david-dm.org/winkjs/wink-tokenizer?type=dev"><img src="https://david-dm.org/winkjs/wink-tokenizer/dev-status.svg" alt="devDependencies Status"></a> <a href="https://gitter.im/winkjs/Lobby"><img src="https://img.shields.io/gitter/room/nwjs/nw.js.svg" alt="Gitter"></a></h3>
 <p><a href="http://winkjs.org/"><img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" ></a></p>
@@ -212,28 +214,207 @@ myTokenizer.tokenize( s );
 <p>It is licensed under the under the terms of the GNU Affero General Public License as published by the Free
 Software Foundation, version 3 of the License.</p>
 
-  
-</section>
-</div>
-          
-        
-          
-            <div class='keyline-top-not py2'><section class='py2 clearfix'>
-
-  <h2 id='creating-an-instance' class='mt0'>
-    Creating an Instance
-  </h2>
-
-  
     
+  </section>
+</div>
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='introduction'>
+      Introduction
+    </h3>
+    
+    
+  </div>
+  
+
+  <h1>wink-tokenizer</h1>
+<p>Multilingual tokenizer that automatically tags each token with its type</p>
+<h3><a href="https://travis-ci.org/winkjs/wink-tokenizer"><img src="https://api.travis-ci.org/winkjs/wink-tokenizer.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/winkjs/wink-tokenizer?branch=master"><img src="https://coveralls.io/repos/github/winkjs/wink-tokenizer/badge.svg?branch=master" alt="Coverage Status"></a> <a href="http://inch-ci.org/github/winkjs/wink-tokenizer"><img src="http://inch-ci.org/github/winkjs/wink-tokenizer.svg?branch=master" alt="Inline docs"></a> <a href="https://david-dm.org/winkjs/wink-tokenizer?type=dev"><img src="https://david-dm.org/winkjs/wink-tokenizer/dev-status.svg" alt="devDependencies Status"></a> <a href="https://gitter.im/winkjs/Lobby"><img src="https://img.shields.io/gitter/room/nwjs/nw.js.svg" alt="Gitter"></a></h3>
+<p><a href="http://winkjs.org/"><img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" ></a></p>
+<p>Tokenize sentences in Latin and Devanagari scripts using <strong><code>wink-tokenizer</code></strong>. It is a part of <a href="http://winkjs.org/">wink</a> — a growing family of high quality packages for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.</p>
+<p>Some of it's top feature are:</p>
+<ol>
+<li>
+<p>Support for English, French, German, Hindi, Sanskrit, Marathi and many more.</p>
+</li>
+<li>
+<p>Intelligent tokenization of sentence containing words in more than one language.</p>
+</li>
+<li>
+<p>Automatic detection &#x26; tagging of token's feature;</p>
+<ul>
+<li>These include word, punctuation, email, mention, hashtag, emoticon, and emoji etc.</li>
+</ul>
+</li>
+</ol>
+<h3>Installation</h3>
+<p>Use <a href="https://www.npmjs.com/package/wink-tokenizer">npm</a> to install:</p>
+<pre><code>npm install wink-tokenizer --save
+</code></pre>
+<h3>Getting Started</h3>
+<pre class='hljs'><span class="hljs-comment">// Load tokenizer.</span>
+<span class="hljs-keyword">var</span> tokenizer = <span class="hljs-built_in">require</span>( <span class="hljs-string">'wink-tokenizer'</span> );
+<span class="hljs-comment">// Create it's instance.</span>
+<span class="hljs-keyword">var</span> myTokenizer = tokenizer();
+
+<span class="hljs-comment">// Tokenize a tweet.</span>
+<span class="hljs-keyword">var</span> s = <span class="hljs-string">'@superman: hit me up on my email r2d2@gmail.com, 2 of us plan party🎉 tom at 3pm:) #fun'</span>;
+myTokenizer.tokenize( s );
+<span class="hljs-comment">// -&gt; [ { value: '@superman', tag: 'mention' },</span>
+<span class="hljs-comment">//      { value: ':', tag: 'punctuation' },</span>
+<span class="hljs-comment">//      { value: 'hit', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'me', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'up', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'on', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'my', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'email', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'r2d2@gmail.com', tag: 'email' },</span>
+<span class="hljs-comment">//      { value: ',', tag: 'punctuation' },</span>
+<span class="hljs-comment">//      { value: '2', tag: 'number' },</span>
+<span class="hljs-comment">//      { value: 'of', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'us', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'plan', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'party', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: '🎉', tag: 'emoji' },</span>
+<span class="hljs-comment">//      { value: 'tom', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'at', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: '3pm', tag: 'time' },</span>
+<span class="hljs-comment">//      { value: ':)', tag: 'emoticon' },</span>
+<span class="hljs-comment">//      { value: '#fun', tag: 'hashtag' } ]</span>
+
+<span class="hljs-comment">// Tokenize a French sentence.</span>
+s = <span class="hljs-string">'Mieux vaut prévenir que guérir:-)'</span>;
+myTokenizer.tokenize( s );
+<span class="hljs-comment">// -&gt; [ { value: 'Mieux', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'vaut', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'prévenir', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'que', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'guérir', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: ':-)', tag: 'emoticon' } ]</span>
+
+<span class="hljs-comment">// Tokenize a sentence containing Hindi and English.</span>
+s = <span class="hljs-string">'द्रविड़ ने टेस्ट में ३६ शतक जमाए, उनमें 21 विदेशी playground पर हैं।'</span>;
+myTokenizer.tokenize( s );
+<span class="hljs-comment">// -&gt; [ { value: 'द्रविड़', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'ने', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'टेस्ट', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'में', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: '३६', tag: 'number' },</span>
+<span class="hljs-comment">//      { value: 'शतक', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'जमाए', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: ',', tag: 'punctuation' },</span>
+<span class="hljs-comment">//      { value: 'उनमें', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: '21', tag: 'number' },</span>
+<span class="hljs-comment">//      { value: 'विदेशी', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'playground', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'पर', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: 'हैं', tag: 'word' },</span>
+<span class="hljs-comment">//      { value: '।', tag: 'punctuation' } ]</span></pre>
+<h3>Documentation</h3>
+<p>Check out the <a href="http://winkjs.org/wink-tokenizer/">tokenizer API documentation</a> to learn more.</p>
+<h3>Need Help?</h3>
+<p>If you spot a bug and the same has not yet been reported, raise a new <a href="https://github.com/winkjs/wink-tokenizer/issues">issue</a> or consider fixing it and sending a pull request.</p>
+<h3>Copyright &#x26; License</h3>
+<p><strong>wink-tokenizer</strong> is copyright 2017-18 <a href="http://graype.in/">GRAYPE Systems Private Limited</a>.</p>
+<p>It is licensed under the under the terms of the GNU Affero General Public License as published by the Free
+Software Foundation, version 3 of the License.</p>
+
+ 
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 </section>
-</div>
-          
+
         
           
-            <section class='p2 mb2 clearfix bg-white minishadow'>
+            <div class='keyline-top-not py2'>
+  <section class='py2 clearfix'>
+
+    <h2 id='creating-an-instance' class='mt0'>
+      Creating an Instance
+    </h2>
+
+    
+      
+
+    
+  </section>
+</div>
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='creating-an-instance'>
+      Creating an Instance
+    </h3>
+    
+    
+  </div>
+  
+
+  
+
+ 
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
@@ -248,8 +429,10 @@ Software Foundation, version 3 of the License.</p>
 
   <p>Creates an instance of <strong><code>wink-tokenizer</code></strong>.</p>
 
-
-  <div class='pre p1 fill-light mt0'>tokenizer(): methods</div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>tokenizer(): methods</div>
+   
   
   
 
@@ -295,25 +478,69 @@ and defining configuration, plugin etc.
   
 </section>
 
-          
         
           
-            <div class='keyline-top-not py2'><section class='py2 clearfix'>
+            <div class='keyline-top-not py2'>
+  <section class='py2 clearfix'>
 
-  <h2 id='api-methods' class='mt0'>
-    API Methods
-  </h2>
+    <h2 id='api-methods' class='mt0'>
+      API Methods
+    </h2>
+
+    
+      
+
+    
+  </section>
+</div>
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
+  <div class='clearfix'>
     
+    <h3 class='fl m0' id='api-methods'>
+      API Methods
+    </h3>
+    
+    
+  </div>
+  
+
+  
+
+ 
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 </section>
-</div>
-          
+
         
           
-            <section class='p2 mb2 clearfix bg-white minishadow'>
+          <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
@@ -330,8 +557,10 @@ and defining configuration, plugin etc.
 extracted by <a href="#tokenize"><code>tokenize()</code></a> method. Note by default, all types
 of tokens will be detected and tagged automatically.</p>
 
-
-  <div class='pre p1 fill-light mt0'>defineConfig(config: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>defineConfig(config: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
+   
   
   
 
@@ -667,10 +896,9 @@ or
   
 </section>
 
-          
         
           
-            <section class='p2 mb2 clearfix bg-white minishadow'>
+          <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
@@ -689,8 +917,10 @@ Common contractions and possessive nouns are split into 2 separate tokens;
 for example <strong>I'll</strong> splits as <code>'I'</code> and <code>'\'ll'</code> or <strong>won't</strong> splits as
 <code>'wo'</code> and <code>'n\'t'</code>.</p>
 
-
-  <div class='pre p1 fill-light mt0'>tokenize(sentence: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>></div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>tokenize(sentence: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>></div>
+   
   
   
 
@@ -762,10 +992,9 @@ myTokenizer.tokenize( s );
   
 </section>
 
-          
         
           
-            <section class='p2 mb2 clearfix bg-white minishadow'>
+          <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
@@ -785,8 +1014,10 @@ joining the unique code of each token's type. Refer to table given under
 <p>A finger print is extremely useful in spotting patterns present in the sentence
 using <code>regexes</code>, which is otherwise a complex and time consuming task.</p>
 
-
-  <div class='pre p1 fill-light mt0'>getTokensFP(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>getTokensFP(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+   
   
   
 
@@ -833,10 +1064,9 @@ myTokenizer.getTokensFP();
   
 </section>
 
-          
         
           
-            <section class='p2 mb2 clearfix bg-white minishadow'>
+          <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
@@ -854,8 +1084,10 @@ to an existing tag or it allows creation of a new tag along with its finger prin
 The uniqueness of the <a href="#defineconfig">finger prints</a> have to ensured by the user.</p>
 <p><em>The added regex(s) will supersede the internal parsing.</em></p>
 
-
-  <div class='pre p1 fill-light mt0'>addRegex(regex: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/RegExp">RegExp</a>, tag: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, fingerprintCode: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): void</div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>addRegex(regex: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/RegExp">RegExp</a>, tag: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, fingerprintCode: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): void</div>
+   
   
   
 
@@ -959,7 +1191,6 @@ myTokenizer.tokenize( <span class="hljs-string">'hello, how are you?'</span> );
   
 </section>
 
-          
         
       </div>
     </div>
