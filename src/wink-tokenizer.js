@@ -392,31 +392,56 @@ var tokenizer = function () {
     return fp.join( '' );
   }; // getFingerprint()
 
+  // ### addTag
   var addTag = function (name, fingerprintCode) {
     if (fingerPrintCodes[name]) {
       throw new Error( 'Tag ' + name + ' already exists' );
     }
 
     fingerPrintCodes[name] = fingerprintCode;
-  };
+  }; // addTag()
 
   // ### addRegex
   /**
-   * Allows to add a new regex that will map to a existing
-   * or new tag
-   * @param {RegExp} regex — The new regex.
-   * @param {string} tag — The tag that the new regex will match to.
-   * @param {string} [fingerprintCode] — Used if adding a new tag. Ignored if using an existing tag.
-   * @return {void}
+   * Adds a regex for parsing a new type of token. This regex can either be mapped
+   * to an existing tag or it allows creation of a new tag along with its finger print.
+   * The uniqueness of the [finger prints](#defineconfig) have to ensured by the user.
+   *
+   * *The added regex(s) will supersede the internal parsing.*
+   *
+   * @param {RegExp} regex — the new regular expression.
+   * @param {string} tag — tokens matching the `regex` will be assigned this tag.
+   * @param {string} [fingerprintCode=undefined] — required if adding a new
+   * tag; ignored if using an existing tag.
+   * @return {void} nothing!
    * @example
    * // Adding a regex for an existing tag
-   * myTokenizer.addRegex(/\(oo\)/gi, 'emoticon');
-   * myTokenizer.tokenize('(oo)')
-   * // -> [ { value: '(oo)', tag: 'emoticon' } ]
-   * // Adding a regex that will match to a new tag
-   * myTokenizer.addRegex(//gi, 'custom', 'q);
-   * myTokenizer.tokenize('(oo)')
-   * // -> [ { value: '(oo)', tag: 'emoticon' } ]
+   * myTokenizer.addRegex( /\(oo\)/gi, 'emoticon' );
+   * myTokenizer.tokenize( '(oo) Hi!' )
+   * // -> [ { value: '(oo)', tag: 'emoticon' },
+   * //      { value: 'Hi', tag: 'word' },
+   * //      { value: '!', tag: 'punctuation' } ]
+   *
+   * // Adding a regex to parse a new token type
+   * myTokenizer.addRegex( /hello/gi, 'greeting', 'g' );
+   * myTokenizer.tokenize( 'hello, how are you?' );
+   * // -> [ { value: 'hello', tag: 'greeting' },
+   * //      { value: ',', tag: 'punctuation' },
+   * //      { value: 'how', tag: 'word' },
+   * //      { value: 'are', tag: 'word' },
+   * //      { value: 'you', tag: 'word' },
+   * //      { value: '?', tag: 'punctuation' } ]
+   * // Notice how "hello" is now tagged as "greeting" and not as "word".
+   *
+   * // Using definConfig will reset the above!
+   * myTokenizer.defineConfig( { word: true } );
+   * myTokenizer.tokenize( 'hello, how are you?' );
+   * // -> [ { value: 'hello', tag: 'word' },
+   * //      { value: ',', tag: 'punctuation' },
+   * //      { value: 'how', tag: 'word' },
+   * //      { value: 'are', tag: 'word' },
+   * //      { value: 'you', tag: 'word' },
+   * //      { value: '?', tag: 'punctuation' } ]
   */
 
   var addRegex = function (regex, tag, fingerprintCode) {
@@ -427,7 +452,7 @@ var tokenizer = function () {
     }
 
     rgxs.unshift( { regex: regex, category: tag } );
-  };
+  }; // addRegex()
 
   methods.defineConfig = defineConfig;
   methods.tokenize = tokenize;
