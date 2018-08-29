@@ -14,8 +14,9 @@ Some of it's top feature are:
 
 1. Intelligent tokenization of sentence containing words in more than one language.
 
-1. Automatic detection & tagging of token's feature;
+1. Automatic detection & tagging of different types of tokens based on their features:
      - These include word, punctuation, email, mention, hashtag, emoticon, and emoji etc.
+     - User definable token types.
 
 
 ### Installation
