@@ -354,7 +354,12 @@ of tokens will be detected and tagged automatically.</p>
 <strong>14</strong>
  properties. A true value for a property ensures tokenization
 for that type of text; whereas false value will mean that the tokenization of that
-type of text will not be attempted.
+type of text will not be attempted. It also 
+<strong>resets</strong>
+ the effect of any previous
+call(s) to the 
+<a href="#addregex"><code>addRegex()</code></a>
+ API.
 <p><em>An empty config object is equivalent to splitting on spaces. Whatever tokens
 are created like this are tagged as <strong>alien</strong> and <strong><code>z</code></strong> is the
 <a href="#gettokensfp">finger print</a> code of this token type.</em></p>

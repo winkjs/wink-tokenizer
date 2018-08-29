@@ -84,6 +84,7 @@ var rgxsMaster = [
 ];
 
 // Used to generate finger print from the tokens.
+// NOTE: this variable is being reset in `defineConfig()`.
 var fingerPrintCodes = {
   emoticon: 'c',
   email: 'e',
@@ -263,7 +264,8 @@ var tokenizer = function () {
    * @param {object} config — It defines 0 or more properties from the list of
    * **14** properties. A true value for a property ensures tokenization
    * for that type of text; whereas false value will mean that the tokenization of that
-   * type of text will not be attempted.
+   * type of text will not be attempted. It also **resets** the effect of any previous
+   * call(s) to the [`addRegex()`](#addregex) API.
    *
    * *An empty config object is equivalent to splitting on spaces. Whatever tokens
    * are created like this are tagged as **alien** and **`z`** is the
@@ -312,6 +314,23 @@ var tokenizer = function () {
     rgxs.forEach( function ( rgx ) {
       uniqueCats[ rgx.category ] = true;
     } );
+    // Reset the `fingerPrintCodes` variable.
+    fingerPrintCodes = {
+      emoticon: 'c',
+      email: 'e',
+      emoji: 'j',
+      hashtag: 'h',
+      mention: 'm',
+      number: 'n',
+      ordinal: 'o',
+      quoted_phrase: 'q', // eslint-disable-line camelcase
+      currency: 'r',
+      // symbol: 's',
+      time: 't',
+      url: 'u',
+      word: 'w',
+      alien: 'z'
+    };
     return ( ( Object.keys( uniqueCats ) ).length );
   }; // defineConfig()
 
