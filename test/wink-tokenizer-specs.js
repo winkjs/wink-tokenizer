@@ -150,7 +150,8 @@ describe( 'wink tokenizer', function () {
     } ).to.throw('Tag emoticon already exists');
   } );
 
-  it( 'should tokenize a complex sentence when adding a custom regex with a new tag', function () {
+  it( 'should tokenize a complex sentence along with FP when adding a custom regex with a new tag', function () {
+    // Expected output with custom regex.
     var output = [ { value: 'I', tag: 'word' },
                    { value: '\'m', tag: 'word' },
                    { value: 'thinking', tag: 'word' },
@@ -163,8 +164,28 @@ describe( 'wink tokenizer', function () {
                    { value: '!', tag: 'punctuation' }
                   ];
 
+    // Expected output after a defineConfig() call.
+    var output1 = [ { value: 'I', tag: 'word' },
+                   { value: '\'m', tag: 'word' },
+                   { value: 'thinking', tag: 'word' },
+                   { value: 'why', tag: 'word' },
+                   { value: 'superman', tag: 'word' },
+                   { value: '\'s', tag: 'word' },
+                   { value: 'dead', tag: 'word' },
+                   { value: '?', tag: 'punctuation' },
+                   { value: '!', tag: 'punctuation' }
+                  ];
+    // Add custome regex/tag/fp.
     tokenizer.addRegex(/superman/gi, 'superman', 's');
+    // Test tokenization.
     expect( tokenizer.tokenize( 'I\'m thinking why superman\'s dead ?!' ) ).to.deep.equal( output );
+    // Test finger printing.
+    expect( tokenizer.getTokensFP() ).to.deep.equal( 'wwwws\'ww?!' );
+    // Call defineConfig to reset the above.
+    tokenizer.defineConfig( { word: true } );
+    // Repeat the above tests to confirm the effect of reset.
+    expect( tokenizer.tokenize( 'I\'m thinking why superman\'s dead ?!' ) ).to.deep.equal( output1 );
+    expect( tokenizer.getTokensFP() ).to.deep.equal( 'wwwwwww?!' );
   } );
 
   it( 'should tokenize a complex sentence with empty config', function () {
