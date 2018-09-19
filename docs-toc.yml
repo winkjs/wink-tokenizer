@@ -1,6 +1,0 @@
-toc:
-  - name: Introduction
-    file: README.md
-  - name: Creating an Instance
-  - tokenizer
-  - name: API Methods
