@@ -137,8 +137,8 @@ var tokenizer = function () {
    * `s'` forms and separates the possesive part from the word. Otherwise the
    * contraction is treated as a normal word and no splitting occurs.
    *
-   * @param {string} word — that could be a potential conraction.
-   * @param {object[]} tokens — where the outcome is pushed.
+   * @param {string} word that could be a potential conraction.
+   * @param {object[]} tokens where the outcome is pushed.
    * @return {object[]} updated tokens according to the `word.`
    * @private
   */
@@ -175,8 +175,8 @@ var tokenizer = function () {
    * tokenized in later rounds! The real tokens (i.e. matches) are pushed as
    * `object` and splits as `string`.
    *
-   * @param {string} text — unit that is to be tokenized.
-   * @param {object} rgxSplit — object containing the regex and it's category.
+   * @param {string} text unit that is to be tokenized.
+   * @param {object} rgxSplit object containing the regex and it's category.
    * @return {array} of tokens.
    * @private
   */
@@ -229,8 +229,8 @@ var tokenizer = function () {
    * empty, it simply splits the text on non-word characters instead of using
    * the `tokenizeTextUnit()` function.
    *
-   * @param {string} text — unit that is to be tokenized.
-   * @param {object} regexes — object containing the regex and it's category.
+   * @param {string} text unit that is to be tokenized.
+   * @param {object} regexes object containing the regex and it's category.
    * @return {undefined} nothing!
    * @private
   */
@@ -268,7 +268,7 @@ var tokenizer = function () {
    * of tokens will be detected and tagged automatically.
    *
    * @method Tokenizer.defineConfig
-   * @param {object} config — It defines 0 or more properties from the list of
+   * @param {object} config It defines 0 or more properties from the list of
    * **14** properties. A true value for a property ensures tokenization
    * for that type of text; whereas false value will mean that the tokenization of that
    * type of text will not be attempted. It also **resets** the effect of any previous
@@ -351,7 +351,7 @@ var tokenizer = function () {
    * `'wo'` and `'n\'t'`.
    *
    * @method Tokenizer.tokenize
-   * @param {string} sentence — the input sentence.
+   * @param {string} sentence the input sentence.
    * @return {object[]} of tokens; each one of them is an object with 2-keys viz.
    * `value` and its `tag` identifying the type of the token.
    * @example
@@ -419,9 +419,9 @@ var tokenizer = function () {
    * *The added regex(s) will supersede the internal parsing.*
    *
    * @method Tokenizer.addRegex
-   * @param {RegExp} regex — the new regular expression.
-   * @param {string} tag — tokens matching the `regex` will be assigned this tag.
-   * @param {string} [fingerprintCode=undefined] — required if adding a new
+   * @param {RegExp} regex the new regular expression.
+   * @param {string} tag tokens matching the `regex` will be assigned this tag.
+   * @param {string} [fingerprintCode=undefined] required if adding a new
    * tag; ignored if using an existing tag.
    * @return {void} nothing!
    * @example
