@@ -6,7 +6,7 @@ Multilingual tokenizer that automatically tags each token with its type
 
 [<img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" >](http://winkjs.org/)
 
-Tokenize sentences in Latin and Devanagari scripts using **`wink-tokenizer`**. Some of it's top feature are:
+Tokenize sentences in Latin and Devanagari scripts using **`wink-tokenizer`**. Some of it's top feature are outlined below:
 
 1. Support for English, French, German, Hindi, Sanskrit, Marathi and many more.
 
