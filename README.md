@@ -16,6 +16,8 @@ Tokenize sentences in Latin and Devanagari scripts using **`wink-tokenizer`**. S
      - These include word, punctuation, email, mention, hashtag, emoticon, and emoji etc.
      - User definable token types.
 
+1. High performance – tokenizes a typical english sentence at speed of over **2.4 million tokens/second** and a complex tweet containing hashtags, emoticons, emojis, mentions, e-mail at a speed of over **1.5 million tokens/second** (benchmarked on 2.2 GHz Intel Core i7 machine with 16GB RAM).
+
 
 ### Installation
 
