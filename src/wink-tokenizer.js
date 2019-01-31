@@ -46,7 +46,7 @@ var rgxEmail = /[-!#$%&'*+\/=?^\w{|}~](?:\.?[-!#$%&'*+\/=?^\w`{|}~])*@[a-z0-9](?
 // Bitcoin, Ruble, Indian Rupee, Other Rupee, Dollar, Pound, Yen, Euro, Wong.
 var rgxCurrency = /[\₿\₽\₹\₨\$\£\¥\€\₩]/g;
 // These include both the punctuations: Latin-1 & Devanagari.
-var rgxPunctuation = /[\’\'\‘\’\`\“\”\"\[\]\(\)\{\}\…\,\.\!\;\?\/\-\:\u0964\u0965]/g;
+var rgxPunctuation = /[\’\'\‘\’\`\“\”\"\[\]\(\)\{\}\…\,\.\!\;\?\-\:\u0964\u0965]/g;
 var rgxQuotedPhrase = /\"[^\"]*\"/g;
 // NOTE: URL will support only EN character set for now.
 var rgxURL = /(?:https?:\/\/)(?:[\da-z\.-]+)\.(?:[a-z\.]{2,6})(?:[\/\w\.\-\?#=]*)*\/?/gi;
@@ -58,7 +58,7 @@ var rgxWordL1 = /[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF][a-z\u00C0-\u00D6\u
 // Define [Devanagari Unicode Block](https://unicode.org/charts/PDF/U0900.pdf)
 var rgxWordDV = /[\u0900-\u094F\u0951-\u0963\u0970-\u097F]+/gi;
 // Symbols go here; including Om.
-var rgxSymbol = /[\u0950\~\@\#\%\^\+\=\*\|<>&]/g;
+var rgxSymbol = /[\u0950\~\@\#\%\^\+\=\*\|\/<>&]/g;
 // For detecting if the word is a potential contraction.
 var rgxContraction = /\'/;
 // Singular & Plural possessive
@@ -467,6 +467,8 @@ var tokenizer = function () {
     rgxs.unshift( { regex: regex, category: tag } );
   }; // addRegex()
 
+  // Set quoted_phrase as false becuase mostly it is not required.
+  defineConfig( { quoted_phrase: false } ); // eslint-disable-line camelcase
   methods.defineConfig = defineConfig;
   methods.tokenize = tokenize;
   methods.getTokensFP = getTokensFP;

@@ -409,7 +409,9 @@ describe( 'wink tokenizer', function () {
                    { value: 'वक्ते', tag: 'word' },
                    { value: ':', tag: 'punctuation' },
                    { value: '@hifrom_vinit', tag: 'mention' } ];
-    expect( t().tokenize( 'आजचे #ट्विटव्याख्यान #ट्विटरसंमेलन विषय: "छंद: एक आयुष्याची शैली" वेळ: रात्री. ९.०० ते १०.०० वक्ते: @hifrom_vinit' ) ).to.deep.equal( output );
+    const tknzr = t();
+    expect( tknzr.defineConfig( { quoted_phrase: true } ) ).to.equal( 14 ); // eslint-disable-line camelcase
+    expect( tknzr.tokenize( 'आजचे #ट्विटव्याख्यान #ट्विटरसंमेलन विषय: "छंद: एक आयुष्याची शैली" वेळ: रात्री. ९.०० ते १०.०० वक्ते: @hifrom_vinit' ) ).to.deep.equal( output );
   } );
 
   it( 'should tokenize different number formats & ordinals', function () {
@@ -452,5 +454,32 @@ describe( 'wink tokenizer', function () {
                    { value: 'Jamie', tag: 'word' },
                    { value: 'O\'Hara', tag: 'word' } ];
     expect( t().tokenize( 'We\'ll help you if you won\'t create trouble, Jamie O\'Hara' ) ).to.deep.equal( output );
+  } );
+
+  it( 'should tokenize quoted stuff correctly with defualt config', function () {
+    var output = [ { value: 'He', tag: 'word' },
+                   { value: 'said', tag: 'word' },
+                   { value: ',', tag: 'punctuation' },
+                   { value: '"', tag: 'punctuation' },
+                   { value: 'you', tag: 'word' },
+                   { value: 'are', tag: 'word' },
+                   { value: 'great', tag: 'word' },
+                   { value: '!', tag: 'punctuation' },
+                   { value: '"', tag: 'punctuation' } ];
+    expect( t().tokenize( 'He said, "you are great!"' ) ).to.deep.equal( output );
+  } );
+
+  it( 'should tokenize / as symbol', function () {
+    var output = [ { value: 'He', tag: 'word' },
+                   { value: 'said', tag: 'word' },
+                   { value: ',', tag: 'punctuation' },
+                   { value: '"', tag: 'punctuation' },
+                   { value: 'buy', tag: 'word' },
+                   { value: 'two', tag: 'word' },
+                   { value: '/', tag: 'symbol' },
+                   { value: 'three', tag: 'word' },
+                   { value: 'apples', tag: 'word' },
+                   { value: '"', tag: 'punctuation' } ];
+    expect( t().tokenize( 'He said, "buy two/three apples"' ) ).to.deep.equal( output );
   } );
 } );
