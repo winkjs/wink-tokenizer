@@ -1,7 +1,7 @@
 //     wink-tokenizer
 //     Multilingual tokenizer that automatically tags each token with its type.
 //
-//     Copyright (C) 2017-18  GRAYPE Systems Private Limited
+//     Copyright (C) 2017-19  GRAYPE Systems Private Limited
 //
 //     This file is part of “wink-tokenizer”.
 //
