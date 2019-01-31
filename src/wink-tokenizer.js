@@ -294,8 +294,8 @@ var tokenizer = function () {
    * @param {boolean} [config.ordinal=true] ordinals like **1st**, **2nd**, **3rd**, **4th** or **12th** or **91st** (**`o`**)
    * @param {boolean} [config.punctuation=true] common punctuation such as **`?`** or **`,`**
    * ( token becomes fingerprint )
-   * @param {boolean} [config.quoted_phrase=true] any **"quoted text"** in the sentence. (**`q`**)
-   * @param {boolean} [config.symbol=true] for example **`~`** or **`+`** or **`&`** or **`%`** ( token becomes fingerprint )
+   * @param {boolean} [config.quoted_phrase=false] any **"quoted text"** in the sentence. _Note: its default value is **false**._ (**`q`**)
+   * @param {boolean} [config.symbol=true] for example **`~`** or **`+`** or **`&`** or **`%`** or **`/`** ( token becomes fingerprint )
    * @param {boolean} [config.time=true] common representation of time such as **4pm** or **16:00 hours** (**`t`**)
    * @param {boolean} [config.mention=true] **@mention**  as in github or twitter (**`m`**)
    * @param {boolean} [config.url=true] URL such as **https://github.com** (**`u`**)
