@@ -351,6 +351,86 @@ contractions[ 'That\'re' ] = [ { value: 'That', tag: word }, { value: '\'re', ta
 // Let us!
 contractions[ 'let\'s' ] = [ { value: 'let', tag: word }, { value: '\'s', tag: word } ];
 contractions[ 'LET\'S' ] = [ { value: 'THAT', tag: word }, { value: '\'S', tag: word } ];
-contractions[ 'Let\'s' ] = [ { value: 'Let', tag: word }, { value: '\'s', lemma: 'us' } ];
+contractions[ 'Let\'s' ] = [ { value: 'Let', tag: word }, { value: '\'s', tag: word } ];
+
+contractions[ 'could\'ve' ] = [ { value: 'could', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'COULD\'VE' ] = [ { value: 'COULD', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'Could\'ve' ] = [ { value: 'Could', tag: word }, { value: '\'ve', tag: word } ];
+
+contractions[ 'should\'ve' ] = [ { value: 'should', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'SHOULD\'VE' ] = [ { value: 'SHOULD', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'Should\'ve' ] = [ { value: 'Should', tag: word }, { value: '\'ve', tag: word } ];
+
+contractions[ 'would\'ve' ] = [ { value: 'would', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'WOULD\'VE' ] = [ { value: 'WOULD', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'Would\'ve' ] = [ { value: 'Would', tag: word }, { value: '\'ve', tag: word } ];
+
+contractions[ 'i\'ll\'ve' ] = [ { value: 'i', tag: word }, { value: '\'ll', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'I\'LL\'VE' ] = [ { value: 'I', tag: word }, { value: '\'LL', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'I\'ll\'ve' ] = [ { value: 'I', tag: word }, { value: '\'ll', tag: word }, { value: '\'ve', tag: word } ];
+
+contractions[ 'you\'ll\'ve' ] = [ { value: 'you', tag: word }, { value: '\'ll', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'YOU\'LL\'VE' ] = [ { value: 'YOU', tag: word }, { value: '\'LL', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'You\'ll\'ve' ] = [ { value: 'You', tag: word }, { value: '\'ll', tag: word }, { value: '\'ve', tag: word } ];
+
+contractions[ 'they\'ll\'ve' ] = [ { value: 'they', tag: word }, { value: '\'ll', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'THEY\'LL\'VE' ] = [ { value: 'THEY', tag: word }, { value: '\'LL', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'They\'ll\'ve' ] = [ { value: 'They', tag: word }, { value: '\'ll', tag: word }, { value: '\'ve', tag: word } ];
+
+contractions[ 'it\'ll\'ve' ] = [ { value: 'it', tag: word }, { value: '\'ll', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'IT\'LL\'VE' ] = [ { value: 'IT', tag: word }, { value: '\'LL', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'It\'ll\'ve' ] = [ { value: 'It', tag: word }, { value: '\'ll', tag: word }, { value: '\'ve', tag: word } ];
+
+contractions[ 'he\'ll\'ve' ] = [ { value: 'he', tag: word }, { value: '\'ll', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'HE\'LL\'VE' ] = [ { value: 'HE', tag: word }, { value: '\'LL', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'He\'ll\'ve' ] = [ { value: 'He', tag: word }, { value: '\'ll', tag: word }, { value: '\'ve', tag: word } ];
+
+contractions[ 'she\'ll\'ve' ] = [ { value: 'she', tag: word }, { value: '\'ll', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'SHE\'LL\'VE' ] = [ { value: 'SHE', tag: word }, { value: '\'LL', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'She\'ll\'ve' ] = [ { value: 'She', tag: word }, { value: '\'ll', tag: word }, { value: '\'ve', tag: word } ];
+
+contractions[ 'shouldn\'t\'ve' ] = [ { value: 'should', tag: word }, { value: 'n\'t', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'SHOULDN\'T\'VE' ] = [ { value: 'SHOULD', tag: word }, { value: 'N\'T', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'Shouldn\'t\'ve' ] = [ { value: 'Should', tag: word }, { value: 'n\'t', tag: word }, { value: '\'ve', tag: word } ];
+
+contractions[ 'couldn\'t\'ve' ] = [ { value: 'could', tag: word }, { value: 'n\'t', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'COULDN\'T\'VE' ] = [ { value: 'COULD', tag: word }, { value: 'N\'T', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'Couldn\'t\'ve' ] = [ { value: 'Could', tag: word }, { value: 'n\'t', tag: word }, { value: '\'ve', tag: word } ];
+
+contractions[ 'wouldn\'t\'ve' ] = [ { value: 'would', tag: word }, { value: 'n\'t', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'WOULDN\'T\'VE' ] = [ { value: 'WOULD', tag: word }, { value: 'N\'T', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'Wouldn\'t\'ve' ] = [ { value: 'Would', tag: word }, { value: 'n\'t', tag: word }, { value: '\'ve', tag: word } ];
+
+contractions[ 'i\'d\'ve' ] = [ { value: 'i', tag: word }, { value: '\'d', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'I\'D\'VE' ] = [ { value: 'I', tag: word }, { value: '\'D', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'I\'d\'ve' ] = [ { value: 'I', tag: word }, { value: '\'d', tag: word }, { value: '\'ve', tag: word } ];
+
+contractions[ 'you\'d\'ve' ] = [ { value: 'you', tag: word }, { value: '\'d', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'YOU\'D\'VE' ] = [ { value: 'YOU', tag: word }, { value: '\'D', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'You\'d\'ve' ] = [ { value: 'You', tag: word }, { value: '\'d', tag: word }, { value: '\'ve', tag: word } ];
+
+contractions[ 'he\'d\'ve' ] = [ { value: 'he', tag: word }, { value: '\'d', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'HE\'D\'VE' ] = [ { value: 'HE', tag: word }, { value: '\'D', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'He\'d\'ve' ] = [ { value: 'He', tag: word }, { value: '\'d', tag: word }, { value: '\'ve', tag: word } ];
+
+contractions[ 'she\'d\'ve' ] = [ { value: 'she', tag: word }, { value: '\'d', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'SHE\'D\'VE' ] = [ { value: 'SHE', tag: word }, { value: '\'D', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'She\'d\'ve' ] = [ { value: 'She', tag: word }, { value: '\'d', tag: word }, { value: '\'ve', tag: word } ];
+
+contractions[ 'you\'d\'ve' ] = [ { value: 'you', tag: word }, { value: '\'d', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'YOU\'D\'VE' ] = [ { value: 'YOU', tag: word }, { value: '\'D', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'You\'d\'ve' ] = [ { value: 'You', tag: word }, { value: '\'d', tag: word }, { value: '\'ve', tag: word } ];
+
+contractions[ 'they\'d\'ve' ] = [ { value: 'they', tag: word }, { value: '\'d', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'THEY\'D\'VE' ] = [ { value: 'THEY', tag: word }, { value: '\'D', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'They\'d\'ve' ] = [ { value: 'They', tag: word }, { value: '\'d', tag: word }, { value: '\'ve', tag: word } ];
+
+contractions[ 'there\'d\'ve' ] = [ { value: 'there', tag: word }, { value: '\'d', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'THERE\'D\'VE' ] = [ { value: 'THERE', tag: word }, { value: '\'D', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'There\'d\'ve' ] = [ { value: 'There', tag: word }, { value: '\'d', tag: word }, { value: '\'ve', tag: word } ];
+
+contractions[ 'it\'d\'ve' ] = [ { value: 'it', tag: word }, { value: '\'d', tag: word }, { value: '\'ve', tag: word } ];
+contractions[ 'IT\'D\'VE' ] = [ { value: 'IT', tag: word }, { value: '\'D', tag: word }, { value: '\'VE', tag: word } ];
+contractions[ 'It\'d\'ve' ] = [ { value: 'It', tag: word }, { value: '\'d', tag: word }, { value: '\'ve', tag: word } ];
 
 module.exports = contractions;

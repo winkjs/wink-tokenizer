@@ -165,6 +165,7 @@ var tokenizer = function () {
       // Manage via lookup; ensure cloning!
       tokens.push( Object.assign( {}, ct[ 0 ] ) );
       tokens.push( Object.assign( {}, ct[ 1 ] ) );
+      if ( ct[ 2 ] ) tokens.push( Object.assign( {}, ct[ 2 ] ) );
     }
     return tokens;
   }; // manageContraction()

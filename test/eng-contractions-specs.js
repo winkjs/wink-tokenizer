@@ -34,6 +34,6 @@ var it = mocha.it;
 
 describe( 'english contractions', function () {
   it( 'should should be complete & accessible', function () {
-    expect( ( Object.keys( c ) ).length ).to.equal( 239 );
+    expect( ( Object.keys( c ) ).length ).to.equal( 296 );
   } );
 } );

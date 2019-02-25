@@ -452,8 +452,14 @@ describe( 'wink tokenizer', function () {
                    { value: 'trouble', tag: 'word' },
                    { value: ',', tag: 'punctuation' },
                    { value: 'Jamie', tag: 'word' },
-                   { value: 'O\'Hara', tag: 'word' } ];
-    expect( t().tokenize( 'We\'ll help you if you won\'t create trouble, Jamie O\'Hara' ) ).to.deep.equal( output );
+                   { value: 'O\'Hara', tag: 'word' },
+                   { value: '.', tag: 'punctuation' },
+                   { value: 'I', tag: 'word' },
+                   { value: '\'d', tag: 'word' },
+                   { value: '\'ve', tag: 'word' },
+                   { value: 'liked', tag: 'word' },
+                 ];
+    expect( t().tokenize( 'We\'ll help you if you won\'t create trouble, Jamie O\'Hara. I\'d\'ve liked' ) ).to.deep.equal( output );
   } );
 
   it( 'should tokenize quoted stuff correctly with defualt config', function () {
