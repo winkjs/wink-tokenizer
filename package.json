@@ -41,13 +41,13 @@
   "homepage": "http://winkjs.org/",
   "devDependencies": {
     "chai": "^4.2.0",
-    "coveralls": "^3.0.2",
+    "coveralls": "^3.0.3",
     "docdash": "winkjs/docdash",
     "docker": "^1.0.0",
-    "eslint": "^5.8.0",
+    "eslint": "^5.16.0",
     "istanbul": "^0.4.5",
     "jsdoc": "^3.5.5",
-    "mocha": "^5.2.0",
+    "mocha": "^6.1.3",
     "mocha-lcov-reporter": "^1.3.0"
   },
   "runkitExampleFilename": "./runkit/example.js"
