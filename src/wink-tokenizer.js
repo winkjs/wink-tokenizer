@@ -33,37 +33,37 @@ var rgxOrdinalL1 = /1\dth|[04-9]th|1st|2nd|3rd|[02-9]1st|[02-9]2nd|[02-9]3rd|[02
 // numbers are also detected as numbers only. These regex will therefore detected
 // 8.8.8.8 or 12-12-1924 or 1,1,1,1.00 or 1/4 or 1/4/66/777 as numbers.
 // Latin-1 Numbers.
-var rgxNumberL1 = /\d+\/\d+|\d(?:[\.\,\-\/]?\d)*(?:\.\d+)?/g;
+var rgxNumberL1 = /\d+\/\d+|\d(?:[\.,-\/]?\d)*(?:\.\d+)?/g;
 // Devanagari Numbers.
-var rgxNumberDV = /[\u0966-\u096F]+\/[\u0966-\u096F]+|[\u0966-\u096F](?:[\.\,\-\/]?[\u0966-\u096F])*(?:\.[\u0966-\u096F]+)?/g;
-var rgxMention = /\@\w+/g;
+var rgxNumberDV = /[\u0966-\u096F]+\/[\u0966-\u096F]+|[\u0966-\u096F](?:[\.,-\/]?[\u0966-\u096F])*(?:\.[\u0966-\u096F]+)?/g;
+var rgxMention = /@\w+/g;
 // Latin-1 Hashtags.
-var rgxHashtagL1 = /\#[a-z][a-z0-9]*/gi;
+var rgxHashtagL1 = /#[a-z][a-z0-9]*/gi;
 // Devanagari Hashtags; include Latin-1 as well.
-var rgxHashtagDV = /\#[\u0900-\u0963\u0970-\u097F][\u0900-\u0963\u0970-\u097F\u0966-\u096F0-9]*/gi;
+var rgxHashtagDV = /#[\u0900-\u0963\u0970-\u097F][\u0900-\u0963\u0970-\u097F\u0966-\u096F0-9]*/gi;
 // EMail is EN character set.
 var rgxEmail = /[-!#$%&'*+\/=?^\w{|}~](?:\.?[-!#$%&'*+\/=?^\w`{|}~])*@[a-z0-9](?:-?\.?[a-z0-9])*(?:\.[a-z](?:-?[a-z0-9])*)+/gi;
 // Bitcoin, Ruble, Indian Rupee, Other Rupee, Dollar, Pound, Yen, Euro, Wong.
-var rgxCurrency = /[\₿\₽\₹\₨\$\£\¥\€\₩]/g;
+var rgxCurrency = /[₿₽₹₨$£¥€₩]/g;
 // These include both the punctuations: Latin-1 & Devanagari.
-var rgxPunctuation = /[\’\'\‘\’\`\“\”\"\[\]\(\)\{\}\…\,\.\!\;\?\-\:\u0964\u0965]/g;
-var rgxQuotedPhrase = /\"[^\"]*\"/g;
+var rgxPunctuation = /[’'‘’`“”"\[\]\(\){}…,\.!;\?\-:\u0964\u0965]/g;
+var rgxQuotedPhrase = /"[^"]*"/g;
 // NOTE: URL will support only EN character set for now.
 var rgxURL = /(?:https?:\/\/)(?:[\da-z\.-]+)\.(?:[a-z\.]{2,6})(?:[\/\w\.\-\?#=]*)*\/?/gi;
 var rgxEmoji = /[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u26FF]|[\u2700-\u27BF]/g;
-var rgxEmoticon = /:-?[dps\*\/\[\]\{\}\(\)]|;-?[/(/)d]|<3/gi;
+var rgxEmoticon = /:-?[dps\*\/\[\]{}\(\)]|;-?[/(/)d]|<3/gi;
 var rgxTime = /(?:\d|[01]\d|2[0-3]):?(?:[0-5][0-9])?\s?(?:[ap]\.?m\.?|hours|hrs)/gi;
 // Inlcude [Latin-1 Supplement Unicode Block](https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block))
-var rgxWordL1 = /[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF][a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\']*/gi;
+var rgxWordL1 = /[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF][a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF']*/gi;
 // Define [Devanagari Unicode Block](https://unicode.org/charts/PDF/U0900.pdf)
 var rgxWordDV = /[\u0900-\u094F\u0951-\u0963\u0970-\u097F]+/gi;
 // Symbols go here; including Om.
-var rgxSymbol = /[\u0950\~\@\#\%\^\+\=\*\|\/<>&]/g;
+var rgxSymbol = /[\u0950~@#%\^\+=\*\|\/<>&]/g;
 // For detecting if the word is a potential contraction.
-var rgxContraction = /\'/;
+var rgxContraction = /'/;
 // Singular & Plural possessive
-var rgxPosSingular = /([a-z]+)(\'s)$/i;
-var rgxPosPlural = /([a-z]+s)(\')$/i;
+var rgxPosSingular = /([a-z]+)('s)$/i;
+var rgxPosPlural = /([a-z]+s)(')$/i;
 // Regexes and their categories; used for tokenizing via match/split. The
 // sequence is *critical* for correct tokenization.
 var rgxsMaster = [
