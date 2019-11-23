@@ -34,6 +34,10 @@
   ((window.gitter = {}).chat = {}).options = {
     room: 'winkjs/Lobby'
   };
+  window.onload = function () {
+      document.querySelector('.gitter-open-chat-button').innerText = 'Need help?'
+      document.querySelector('.gitter-open-chat-button').style.display = 'block';
+  }
 </script>
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 <script>try{Typekit.load({ async: true });}catch(e){}</script>
@@ -68,7 +72,13 @@ body {
 .navbar a {
   color: #fff;
   line-height: 60px;
+  margin-left: 0;
+}
+
+.navbar a.navbar-brand {
   margin-left: 20px;
+  display: block;
+  min-width: 40px;
 }
 
 .navbar-right {
@@ -87,10 +97,6 @@ body {
 }
 
 /* Override docdash */
-nav {
-  top: 80px;
-}
-
 #main {
   margin-top: 30px;
 }
@@ -98,6 +104,7 @@ nav {
 /* Gitter */
 .gitter-open-chat-button {
   background: #6C307D;
+  display: none;
 }
 
 .gitter-open-chat-button:hover {
@@ -118,6 +125,16 @@ window.addEventListener('DOMContentLoaded', function () {
       window.scrollTo( 0, (window.pageYOffset || document.documentElement.scrollTop) - 72);
     }, 0)
   }
+
+  document.getElementById('toc-button').addEventListener('click', function () {
+      if (document.getElementById('side-nav').className === '') {
+        document.getElementById('side-nav').className = 'is-open';
+        document.getElementById('toc-button-img').setAttribute('src','./close.svg');
+      } else {
+        document.getElementById('side-nav').className = '';
+        document.getElementById('toc-button-img').setAttribute('src','./menu.svg');
+      }
+  })
 });
 
 window.addEventListener( 'hashchange', function (e) {
@@ -139,38 +156,34 @@ function openMember() {
       <div class="navbar-header">
         <a href="https://winkjs.org/" title="wink" class="navbar-brand">
           <img src="https://winkjs.org/images/logo.svg">
-          wink
+          <span>wink</span>
         </a>
       </div>
-      <ul class="nav navbar-nav navbar-right collapse navbar-collapse" id="main-nav">
-        <li><a href="https://winkjs.org/packages.html" class="">Packages</a></li>
-        <li><a href="https://winkjs.org/blog.html" class="">Blog</a></li>
-        <li><a href="http://github.com/winkjs">Github</a></li>
-        <li><a href="https://twitter.com/winkjs_org">Twitter</a></li>
-        <li><a href="https://winkjs.org/about.html" class="">About</a></li>
-      </ul>
+      <div class="sausage-links">
+        <ul class="nav navbar-nav navbar-right collapse navbar-collapse" id="main-nav">
+          <li><a href="https://winkjs.org/packages.html" class="">Packages</a></li>
+          <li><a href="https://winkjs.org/showcase.html" class="">Showcase</a></li>
+          <li><a href="https://winkjs.org/blog.html" class="">Blog</a></li>
+          <li><a href="http://github.com/winkjs">Github</a></li>
+          <li><a href="https://winkjs.org/about.html" class="">About</a></li>
+        </div>
+      </nav>
     </div>
 </header>
 
+<div id="toc-button">
+  <img src="./menu.svg" alt="" id="toc-button-img">
+</div>
 
-<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-<label for="nav-trigger" class="navicon-button x">
-  <div class="navicon"></div>
-</label>
 
-<label for="nav-trigger" class="overlay"></label>
+<div class="content-container">
+  <div class="main-container">
+    <div id="main">
+        
+        <h1 class="page-title">Tokenizer</h1>
+        
 
-<nav >
-    
-    <h2><a href="index.html">Summary</a></h2><h2><a href="https://github.com/winkjs/wink-tokenizer" target="_blank" >Github</a></h2><h3>Classes</h3><ul><li><a href="Tokenizer.html">Tokenizer</a><ul class='methods'><li data-type='method'><a href="Tokenizer.html#addRegex">addRegex</a></li><li data-type='method'><a href="Tokenizer.html#defineConfig">defineConfig</a></li><li data-type='method'><a href="Tokenizer.html#getTokensFP">getTokensFP</a></li><li data-type='method'><a href="Tokenizer.html#tokenize">tokenize</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#tokenizer">tokenizer</a></li></ul>
-</nav>
-
-<div id="main">
-    
-    <h1 class="page-title">Tokenizer</h1>
-    
-
-    
+        
 
 
 
@@ -179,9 +192,9 @@ function openMember() {
 
 <header>
     
-        <h2>
+        <!--<h2>
         Tokenizer
-        </h2>
+        </h2>-->
         
             <div class="class-description"><p>Tokenizer class</p></div>
         
@@ -196,7 +209,7 @@ function openMember() {
     
 
     
-    
+
     
 
      
@@ -213,7 +226,10 @@ function openMember() {
 
     
 
-    <h4 class="name" id="addRegex"><span class="type-signature"></span>addRegex<span class="signature">(regex, tag, fingerprintCode<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="addRegex">
+      addRegex
+    </h4>
+    <div class="name-signature"><span class="type-signature"></span>addRegex<span class="signature">(regex, tag, fingerprintCode<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {void}</span></div
 
     
 
@@ -222,12 +238,12 @@ function openMember() {
 
 <dl class="details">
 
-    
+    <!--
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="wink-tokenizer.js.html">wink-tokenizer.js</a>, <a href="wink-tokenizer.js.html#line418">line 418</a>
     </li></ul></dd>
-    
+    -->
 
     
 
@@ -312,7 +328,7 @@ myTokenizer.tokenize( 'hello, how are you?' );
 
 
 
-    <h5>Parameters:</h5>
+    <h5>Parameters</h5>
     
 
 <table class="params">
@@ -339,13 +355,14 @@ myTokenizer.tokenize( 'hello, how are you?' );
 
         <tr>
             
-                <td class="name"><code>regex</code></td>
+                <td class="name">regex</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">RegExp</span>
+
 
 
             
@@ -370,13 +387,14 @@ myTokenizer.tokenize( 'hello, how are you?' );
 
         <tr>
             
-                <td class="name"><code>tag</code></td>
+                <td class="name">tag</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">string</span>
+
 
 
             
@@ -401,13 +419,14 @@ myTokenizer.tokenize( 'hello, how are you?' );
 
         <tr>
             
-                <td class="name"><code>fingerprintCode</code></td>
+                <td class="name">fingerprintCode</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">string</span>
+
 
 
             
@@ -450,7 +469,7 @@ tag; ignored if using an existing tag.</p></td>
 
 
 
-<h5>Returns:</h5>
+<h5>Returns</h5>
 
         
 <div class="param-desc">
@@ -468,6 +487,7 @@ tag; ignored if using an existing tag.</p></td>
 <span class="param-type">void</span>
 
 
+
     </dd>
 </dl>
 
@@ -475,12 +495,17 @@ tag; ignored if using an existing tag.</p></td>
 
 
 
+<hr>
+
         
             
 
     
 
-    <h4 class="name" id="defineConfig"><span class="type-signature"></span>defineConfig<span class="signature">(config)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    <h4 class="name" id="defineConfig">
+      defineConfig
+    </h4>
+    <div class="name-signature"><span class="type-signature"></span>defineConfig<span class="signature">(config)</span><span class="type-signature"> &rarr; {number}</span></div
 
     
 
@@ -489,12 +514,12 @@ tag; ignored if using an existing tag.</p></td>
 
 <dl class="details">
 
-    
+    <!--
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="wink-tokenizer.js.html">wink-tokenizer.js</a>, <a href="wink-tokenizer.js.html#line268">line 268</a>
     </li></ul></dd>
-    
+    -->
 
     
 
@@ -557,7 +582,7 @@ var myTokenizer.defineConfig( {} );
 
 
 
-    <h5>Parameters:</h5>
+    <h5>Parameters</h5>
     
 
 <table class="params">
@@ -582,13 +607,14 @@ var myTokenizer.defineConfig( {} );
 
         <tr>
             
-                <td class="name"><code>config</code></td>
+                <td class="name">config</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">object</span>
+
 
 
             
@@ -638,13 +664,14 @@ token of that type.</p>
 
         <tr>
             
-                <td class="name"><code>currency</code></td>
+                <td class="name">currency</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">boolean</span>
+
 
 
             
@@ -665,7 +692,7 @@ token of that type.</p>
             
                 <td class="default">
                 
-                    <code>true</code>
+                    true
                 
                 </td>
             
@@ -677,13 +704,14 @@ token of that type.</p>
 
         <tr>
             
-                <td class="name"><code>email</code></td>
+                <td class="name">email</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">boolean</span>
+
 
 
             
@@ -704,7 +732,7 @@ token of that type.</p>
             
                 <td class="default">
                 
-                    <code>true</code>
+                    true
                 
                 </td>
             
@@ -716,13 +744,14 @@ token of that type.</p>
 
         <tr>
             
-                <td class="name"><code>emoji</code></td>
+                <td class="name">emoji</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">boolean</span>
+
 
 
             
@@ -743,7 +772,7 @@ token of that type.</p>
             
                 <td class="default">
                 
-                    <code>true</code>
+                    true
                 
                 </td>
             
@@ -755,13 +784,14 @@ token of that type.</p>
 
         <tr>
             
-                <td class="name"><code>emoticon</code></td>
+                <td class="name">emoticon</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">boolean</span>
+
 
 
             
@@ -782,7 +812,7 @@ token of that type.</p>
             
                 <td class="default">
                 
-                    <code>true</code>
+                    true
                 
                 </td>
             
@@ -794,13 +824,14 @@ token of that type.</p>
 
         <tr>
             
-                <td class="name"><code>hashtag</code></td>
+                <td class="name">hashtag</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">boolean</span>
+
 
 
             
@@ -821,7 +852,7 @@ token of that type.</p>
             
                 <td class="default">
                 
-                    <code>true</code>
+                    true
                 
                 </td>
             
@@ -833,13 +864,14 @@ token of that type.</p>
 
         <tr>
             
-                <td class="name"><code>number</code></td>
+                <td class="name">number</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">boolean</span>
+
 
 
             
@@ -860,7 +892,7 @@ token of that type.</p>
             
                 <td class="default">
                 
-                    <code>true</code>
+                    true
                 
                 </td>
             
@@ -873,13 +905,14 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
 
         <tr>
             
-                <td class="name"><code>ordinal</code></td>
+                <td class="name">ordinal</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">boolean</span>
+
 
 
             
@@ -900,7 +933,7 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
             
                 <td class="default">
                 
-                    <code>true</code>
+                    true
                 
                 </td>
             
@@ -912,13 +945,14 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
 
         <tr>
             
-                <td class="name"><code>punctuation</code></td>
+                <td class="name">punctuation</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">boolean</span>
+
 
 
             
@@ -939,7 +973,7 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
             
                 <td class="default">
                 
-                    <code>true</code>
+                    true
                 
                 </td>
             
@@ -952,13 +986,14 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
 
         <tr>
             
-                <td class="name"><code>quoted_phrase</code></td>
+                <td class="name">quoted_phrase</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">boolean</span>
+
 
 
             
@@ -979,7 +1014,7 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
             
                 <td class="default">
                 
-                    <code>false</code>
+                    false
                 
                 </td>
             
@@ -991,13 +1026,14 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
 
         <tr>
             
-                <td class="name"><code>symbol</code></td>
+                <td class="name">symbol</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">boolean</span>
+
 
 
             
@@ -1018,7 +1054,7 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
             
                 <td class="default">
                 
-                    <code>true</code>
+                    true
                 
                 </td>
             
@@ -1030,13 +1066,14 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
 
         <tr>
             
-                <td class="name"><code>time</code></td>
+                <td class="name">time</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">boolean</span>
+
 
 
             
@@ -1057,7 +1094,7 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
             
                 <td class="default">
                 
-                    <code>true</code>
+                    true
                 
                 </td>
             
@@ -1069,13 +1106,14 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
 
         <tr>
             
-                <td class="name"><code>mention</code></td>
+                <td class="name">mention</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">boolean</span>
+
 
 
             
@@ -1096,7 +1134,7 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
             
                 <td class="default">
                 
-                    <code>true</code>
+                    true
                 
                 </td>
             
@@ -1108,13 +1146,14 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
 
         <tr>
             
-                <td class="name"><code>url</code></td>
+                <td class="name">url</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">boolean</span>
+
 
 
             
@@ -1135,7 +1174,7 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
             
                 <td class="default">
                 
-                    <code>true</code>
+                    true
                 
                 </td>
             
@@ -1147,13 +1186,14 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
 
         <tr>
             
-                <td class="name"><code>word</code></td>
+                <td class="name">word</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">boolean</span>
+
 
 
             
@@ -1174,7 +1214,7 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
             
                 <td class="default">
                 
-                    <code>true</code>
+                    true
                 
                 </td>
             
@@ -1208,7 +1248,7 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
 
 
 
-<h5>Returns:</h5>
+<h5>Returns</h5>
 
         
 <div class="param-desc">
@@ -1226,6 +1266,7 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
 <span class="param-type">number</span>
 
 
+
     </dd>
 </dl>
 
@@ -1233,12 +1274,17 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
 
 
 
+<hr>
+
         
             
 
     
 
-    <h4 class="name" id="getTokensFP"><span class="type-signature"></span>getTokensFP<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="getTokensFP">
+      getTokensFP
+    </h4>
+    <div class="name-signature"><span class="type-signature"></span>getTokensFP<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></div
 
     
 
@@ -1247,12 +1293,12 @@ or <strong>1/4</strong> and numerals containing &quot;<strong><code>, - / .</cod
 
 <dl class="details">
 
-    
+    <!--
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="wink-tokenizer.js.html">wink-tokenizer.js</a>, <a href="wink-tokenizer.js.html#line382">line 382</a>
     </li></ul></dd>
-    
+    -->
 
     
 
@@ -1330,7 +1376,7 @@ myTokenizer.getTokensFP();
 
 
 
-<h5>Returns:</h5>
+<h5>Returns</h5>
 
         
 <div class="param-desc">
@@ -1348,6 +1394,7 @@ myTokenizer.getTokensFP();
 <span class="param-type">string</span>
 
 
+
     </dd>
 </dl>
 
@@ -1355,12 +1402,17 @@ myTokenizer.getTokensFP();
 
 
 
+<hr>
+
         
             
 
     
 
-    <h4 class="name" id="tokenize"><span class="type-signature"></span>tokenize<span class="signature">(sentence)</span><span class="type-signature"> &rarr; {Array.&lt;object>}</span></h4>
+    <h4 class="name" id="tokenize">
+      tokenize
+    </h4>
+    <div class="name-signature"><span class="type-signature"></span>tokenize<span class="signature">(sentence)</span><span class="type-signature"> &rarr; {Array.&lt;object>}</span></div
 
     
 
@@ -1369,12 +1421,12 @@ myTokenizer.getTokensFP();
 
 <dl class="details">
 
-    
+    <!--
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="wink-tokenizer.js.html">wink-tokenizer.js</a>, <a href="wink-tokenizer.js.html#line349">line 349</a>
     </li></ul></dd>
-    
+    -->
 
     
 
@@ -1445,7 +1497,7 @@ myTokenizer.tokenize( s );
 
 
 
-    <h5>Parameters:</h5>
+    <h5>Parameters</h5>
     
 
 <table class="params">
@@ -1470,13 +1522,14 @@ myTokenizer.tokenize( s );
 
         <tr>
             
-                <td class="name"><code>sentence</code></td>
+                <td class="name">sentence</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">string</span>
+
 
 
             
@@ -1508,7 +1561,7 @@ myTokenizer.tokenize( s );
 
 
 
-<h5>Returns:</h5>
+<h5>Returns</h5>
 
         
 <div class="param-desc">
@@ -1527,12 +1580,15 @@ myTokenizer.tokenize( s );
 <span class="param-type">Array.&lt;object></span>
 
 
+
     </dd>
 </dl>
 
     
 
 
+
+<hr>
 
         
     
@@ -1548,18 +1604,40 @@ myTokenizer.tokenize( s );
 
 
 
-    
+        
+    </div>
+  </div>
+
+  <nav  id="side-nav">
+      
+      <h2><a href="index.html">Summary</a></h2><h2><a href="https://github.com/winkjs/wink-tokenizer" target="_blank" >Github</a></h2><h3>Classes</h3><ul><li><a href="Tokenizer.html">Tokenizer</a><ul class='methods'><li data-type='method'><a href="Tokenizer.html#addRegex">addRegex</a></li><li data-type='method'><a href="Tokenizer.html#defineConfig">defineConfig</a></li><li data-type='method'><a href="Tokenizer.html#getTokensFP">getTokensFP</a></li><li data-type='method'><a href="Tokenizer.html#tokenize">tokenize</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#tokenizer">tokenizer</a></li></ul>
+  </nav>
 </div>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Apr 16 2019 13:39:09 GMT+0530 (India Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Nov 23 2019 14:57:32 GMT+0530 (IST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
 <script src="scripts/linenumber.js"></script>
 
 
+
+<script src="https://embed.runkit.com"></script>
+<script type="text/javascript">
+  var els = document.getElementsByClassName("runkit");
+
+  Array.prototype.forEach.call(els, function(el) {
+    // Do stuff here
+    var source = el.innerHTML;
+    el.innerHTML = '';
+    var n = RunKit.createNotebook( {
+      element: el,
+      source: source
+    } );
+  });
+</script>
 </body>
 </html>

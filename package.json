@@ -42,7 +42,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "coveralls": "^3.0.3",
-    "docdash": "winkjs/docdash",
+    "docdash": "github:winkjs/docdash",
     "docker": "^1.0.0",
     "eslint": "^5.16.0",
     "istanbul": "^0.4.5",
