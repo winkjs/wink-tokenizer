@@ -488,4 +488,11 @@ describe( 'wink tokenizer', function () {
                    { value: '"', tag: 'punctuation' } ];
     expect( t().tokenize( 'He said, "buy two/three apples"' ) ).to.deep.equal( output );
   } );
+
+  it( 'should tokenize combined emojis ', function () {
+    var output = [ { value: '👩🏿', tag: 'emoji' },
+                   { value: '↔️', tag: 'emoji' },
+                   { value: '🕵🏽', tag: 'emoji' } ];
+    expect( t().tokenize( '👩🏿↔️🕵🏽' ) ).to.deep.equal( output );
+  } );
 } );

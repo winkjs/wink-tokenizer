@@ -24,6 +24,7 @@
 //     DEALINGS IN THE SOFTWARE.
 
 //
+var emojiRegex = require( 'emoji-regex' );
 var contractions = require( './eng-contractions.js' );
 var rgxSpaces = /\s+/g;
 // Ordinals only for Latin like 1st, 2nd or 12th or 33rd.
@@ -50,7 +51,7 @@ var rgxPunctuation = /[’'‘’`“”"\[\]\(\){}…,\.!;\?\-:\u0964\u0965]/g;
 var rgxQuotedPhrase = /"[^"]*"/g;
 // NOTE: URL will support only EN character set for now.
 var rgxURL = /(?:https?:\/\/)(?:[\da-z\.-]+)\.(?:[a-z\.]{2,6})(?:[\/\w\.\-\?#=]*)*\/?/gi;
-var rgxEmoji = /[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u26FF]|[\u2700-\u27BF]/g;
+var rgxEmoji = emojiRegex();
 var rgxEmoticon = /:-?[dps\*\/\[\]{}\(\)]|;-?[/(/)d]|<3/gi;
 var rgxTime = /(?:\d|[01]\d|2[0-3]):?(?:[0-5][0-9])?\s?(?:[ap]\.?m\.?|hours|hrs)/gi;
 // Inlcude [Latin-1 Supplement Unicode Block](https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block))
