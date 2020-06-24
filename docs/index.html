@@ -205,25 +205,35 @@ function openMember() {
 
 
     <section class="readme">
-        <article><h1>wink-tokenizer</h1><p>Multilingual tokenizer that automatically tags each token with its type</p>
-<h3><a href="https://travis-ci.org/winkjs/wink-tokenizer"><img src="https://api.travis-ci.org/winkjs/wink-tokenizer.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/winkjs/wink-tokenizer?branch=master"><img src="https://coveralls.io/repos/github/winkjs/wink-tokenizer/badge.svg?branch=master" alt="Coverage Status"></a> <a href="http://inch-ci.org/github/winkjs/wink-tokenizer"><img src="http://inch-ci.org/github/winkjs/wink-tokenizer.svg?branch=master" alt="Inline docs"></a> <a href="https://david-dm.org/winkjs/wink-tokenizer?type=dev"><img src="https://david-dm.org/winkjs/wink-tokenizer/dev-status.svg" alt="devDependencies Status"></a> <a href="https://gitter.im/winkjs/Lobby"><img src="https://img.shields.io/gitter/room/nwjs/nw.js.svg" alt="Gitter"></a></h3><p><a href="http://winkjs.org/"><img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" ></a></p>
+        <article><h1>wink-tokenizer</h1>
+<p>Multilingual tokenizer that automatically tags each token with its type</p>
+<h3><a href="https://travis-ci.org/winkjs/wink-tokenizer"><img src="https://api.travis-ci.org/winkjs/wink-tokenizer.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/winkjs/wink-tokenizer?branch=master"><img src="https://coveralls.io/repos/github/winkjs/wink-tokenizer/badge.svg?branch=master" alt="Coverage Status"></a> <a href="http://inch-ci.org/github/winkjs/wink-tokenizer"><img src="http://inch-ci.org/github/winkjs/wink-tokenizer.svg?branch=master" alt="Inline docs"></a> <a href="https://david-dm.org/winkjs/wink-tokenizer?type=dev"><img src="https://david-dm.org/winkjs/wink-tokenizer/dev-status.svg" alt="devDependencies Status"></a> <a href="https://gitter.im/winkjs/Lobby"><img src="https://img.shields.io/gitter/room/nwjs/nw.js.svg" alt="Gitter"></a></h3>
+<p><a href="http://winkjs.org/"><img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" ></a></p>
 <p>Tokenize sentences in Latin and Devanagari scripts using <strong><code>wink-tokenizer</code></strong>. Some of it's top feature are outlined below:</p>
 <ol>
-<li><p>Support for English, French, German, Hindi, Sanskrit, Marathi and many more.</p>
+<li>
+<p>Support for English, French, German, Hindi, Sanskrit, Marathi and many more.</p>
 </li>
-<li><p>Intelligent tokenization of sentence containing words in more than one language.</p>
+<li>
+<p>Intelligent tokenization of sentence containing words in more than one language.</p>
 </li>
-<li><p>Automatic detection &amp; tagging of different types of tokens based on their features:</p>
+<li>
+<p>Automatic detection &amp; tagging of different types of tokens based on their features:</p>
 <ul>
 <li>These include word, punctuation, email, mention, hashtag, emoticon, and emoji etc.</li>
 <li>User definable token types.</li>
 </ul>
 </li>
-<li><p>High performance – tokenizes a typical english sentence at speed of over <strong>2.4 million tokens/second</strong> and a complex tweet containing hashtags, emoticons, emojis, mentions, e-mail at a speed of over <strong>1.5 million tokens/second</strong> (benchmarked on 2.2 GHz Intel Core i7 machine with 16GB RAM).</p>
+<li>
+<p>High performance – tokenizes a typical english sentence at speed of over <strong>2.4 million tokens/second</strong> and a complex tweet containing hashtags, emoticons, emojis, mentions, e-mail at a speed of over <strong>1.5 million tokens/second</strong> (benchmarked on 2.2 GHz Intel Core i7 machine with 16GB RAM).</p>
 </li>
 </ol>
-<h3>Installation</h3><p>Use <a href="https://www.npmjs.com/package/wink-tokenizer">npm</a> to install:</p>
-<pre class="prettyprint source"><code>npm install wink-tokenizer --save</code></pre><h3>Getting Started</h3><pre class="prettyprint source lang-javascript"><code>// Load tokenizer.
+<h3>Installation</h3>
+<p>Use <a href="https://www.npmjs.com/package/wink-tokenizer">npm</a> to install:</p>
+<pre><code>npm install wink-tokenizer --save
+</code></pre>
+<h3>Getting Started</h3>
+<pre class="prettyprint source lang-javascript"><code>// Load tokenizer.
 var tokenizer = require( 'wink-tokenizer' );
 // Create it's instance.
 var myTokenizer = tokenizer();
@@ -280,10 +290,16 @@ myTokenizer.tokenize( s );
 //      { value: 'playground', tag: 'word' },
 //      { value: 'पर', tag: 'word' },
 //      { value: 'हैं', tag: 'word' },
-//      { value: '।', tag: 'punctuation' } ]</code></pre><h3>Documentation</h3><p>Check out the <a href="http://winkjs.org/wink-tokenizer/">tokenizer API documentation</a> to learn more.</p>
-<h3>Need Help?</h3><p>If you spot a bug and the same has not yet been reported, raise a new <a href="https://github.com/winkjs/wink-tokenizer/issues">issue</a> or consider fixing it and sending a pull request.</p>
-<h3>About wink</h3><p><a href="http://winkjs.org/">Wink</a> is a family of open source packages for <strong>Statistical Analysis</strong>, <strong>Natural Language Processing</strong> and <strong>Machine Learning</strong> in NodeJS. The code is <strong>thoroughly documented</strong> for easy human comprehension and has a <strong>test coverage of ~100%</strong> for reliability to build production grade solutions.</p>
-<h3>Copyright &amp; License</h3><p><strong>wink-tokenizer</strong> is copyright 2017-19 <a href="http://graype.in/">GRAYPE Systems Private Limited</a>.</p>
+//      { value: '।', tag: 'punctuation' } ]
+</code></pre>
+<h3>Documentation</h3>
+<p>Check out the <a href="http://winkjs.org/wink-tokenizer/">tokenizer API documentation</a> to learn more.</p>
+<h3>Need Help?</h3>
+<p>If you spot a bug and the same has not yet been reported, raise a new <a href="https://github.com/winkjs/wink-tokenizer/issues">issue</a> or consider fixing it and sending a pull request.</p>
+<h3>About wink</h3>
+<p><a href="http://winkjs.org/">Wink</a> is a family of open source packages for <strong>Statistical Analysis</strong>, <strong>Natural Language Processing</strong> and <strong>Machine Learning</strong> in NodeJS. The code is <strong>thoroughly documented</strong> for easy human comprehension and has a <strong>test coverage of ~100%</strong> for reliability to build production grade solutions.</p>
+<h3>Copyright &amp; License</h3>
+<p><strong>wink-tokenizer</strong> is copyright 2017-19 <a href="http://graype.in/">GRAYPE Systems Private Limited</a>.</p>
 <p>It is licensed under the terms of the MIT License.</p></article>
     </section>
 
@@ -306,7 +322,7 @@ myTokenizer.tokenize( s );
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Nov 23 2019 14:57:32 GMT+0530 (IST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Wed Jun 24 2020 13:39:45 GMT+0530 (India Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
