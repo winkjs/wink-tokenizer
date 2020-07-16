@@ -44,7 +44,7 @@
     "coveralls": "^3.1.0",
     "docdash": "github:winkjs/docdash",
     "docker": "^1.0.0",
-    "eslint": "^7.3.1",
+    "eslint": "^7.4.0",
     "istanbul": "^0.4.5",
     "jsdoc": "^3.6.4",
     "mocha": "^8.0.1",
