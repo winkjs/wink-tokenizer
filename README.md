@@ -18,6 +18,10 @@ Tokenize sentences in Latin and Devanagari scripts using **`wink-tokenizer`**. S
 
 1. High performance – tokenizes a typical english sentence at speed of over **2.4 million tokens/second** and a complex tweet containing hashtags, emoticons, emojis, mentions, e-mail at a speed of over **1.5 million tokens/second** (benchmarked on 2.2 GHz Intel Core i7 machine with 16GB RAM).
 
+<table><tr><td>
+    <h4>Use <a href="https://github.com/winkjs/wink-nlp">wink-nlp</a> if your are looking for an integrated NLP package✨</h4>
+    <a href="https://github.com/winkjs/wink-nlp">WinkNLP</a> is a <b>developer friendly</b> JavaScript library for Natural Language Processing. Designed specifically to make development of NLP solutions <b>easier</b> and <b>faster</b>, winkNLP is optimized for the right balance of performance and accuracy. The package can handle large amount of raw text at speeds <a href="https://github.com/winkjs/wink-nlp#speed--accuracy">over 525,000 tokens/second</a> for the <a href="https://winkjs.org/wink-nlp/processing-pipeline.html">entire NLP pipeline</a>.
+</td></tr></table>
 
 ### Installation
 
