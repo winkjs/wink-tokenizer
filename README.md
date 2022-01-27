@@ -2,7 +2,7 @@
 
 Multilingual tokenizer that automatically tags each token with its type
 
-### [![Build Status](https://api.travis-ci.org/winkjs/wink-tokenizer.svg?branch=master)](https://travis-ci.org/winkjs/wink-tokenizer) [![Coverage Status](https://coveralls.io/repos/github/winkjs/wink-tokenizer/badge.svg?branch=master)](https://coveralls.io/github/winkjs/wink-tokenizer?branch=master) [![Inline docs](http://inch-ci.org/github/winkjs/wink-tokenizer.svg?branch=master)](http://inch-ci.org/github/winkjs/wink-tokenizer) [![devDependencies Status](https://david-dm.org/winkjs/wink-tokenizer/dev-status.svg)](https://david-dm.org/winkjs/wink-tokenizer?type=dev) [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/winkjs/Lobby)
+### [![Build Status](https://api.travis-ci.org/winkjs/wink-tokenizer.svg?branch=master)](https://travis-ci.org/winkjs/wink-tokenizer) [![Coverage Status](https://coveralls.io/repos/github/winkjs/wink-tokenizer/badge.svg?branch=master)](https://coveralls.io/github/winkjs/wink-tokenizer?branch=master) [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/winkjs/Lobby)
 
 [<img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" >](http://winkjs.org/)
 
