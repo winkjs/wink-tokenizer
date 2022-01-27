@@ -5,4 +5,5 @@ node_js:
 
 script:
   - npm run pretest
-  - npm run coveralls
+  - npm run test
+  - npm run coverage
