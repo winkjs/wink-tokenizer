@@ -39,9 +39,10 @@ var rgxNumberL1 = /\d+\/\d+|\d(?:[\.,-\/]?\d)*(?:\.\d+)?/g;
 var rgxNumberDV = /[\u0966-\u096F]+\/[\u0966-\u096F]+|[\u0966-\u096F](?:[\.,-\/]?[\u0966-\u096F])*(?:\.[\u0966-\u096F]+)?/g;
 var rgxMention = /@\w+/g;
 // Latin-1 Hashtags.
-var rgxHashtagL1 = /#[a-z][a-z0-9]*/gi;
-// Devanagari Hashtags; include Latin-1 as well.
-var rgxHashtagDV = /#[\u0900-\u0963\u0970-\u097F][\u0900-\u0963\u0970-\u097F\u0966-\u096F0-9]*/gi;
+// Include entire Latin-1 script and not just English alphas.
+var rgxHashtagL1 = /#[a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF_][a-z0-9\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF_]*/gi;
+// Devanagari Hashtags
+var rgxHashtagDV = /#[\u0900-\u0963\u0970-\u097F_][\u0900-\u0963\u0970-\u097F\u0966-\u096F0-9_]*/gi;
 // EMail is EN character set.
 var rgxEmail = /[-!#$%&'*+\/=?^\w{|}~](?:\.?[-!#$%&'*+\/=?^\w`{|}~])*@[a-z0-9](?:-?\.?[a-z0-9])*(?:\.[a-z](?:-?[a-z0-9])*)+/gi;
 // Bitcoin, Ruble, Indian Rupee, Other Rupee, Dollar, Pound, Yen, Euro, Wong.
